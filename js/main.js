@@ -800,6 +800,60 @@ function triggerConfetti() {
   }
 }
 
+// ========================================================
+// VIDEO LIGHTBOX / POP-UP MODAL (VIDEO DỌC 9:16)
+// ========================================================
+function openVideoModal() {
+  const modal = document.getElementById("video-modal");
+  const modalVideo = document.getElementById("modal-tea-video");
+  const previewVideo = document.getElementById("preview-tea-video");
+  if (!modal) return;
+
+  modal.classList.remove("hidden");
+  document.body.classList.add("overflow-hidden");
+
+  if (previewVideo) {
+    previewVideo.pause();
+  }
+  if (modalVideo) {
+    modalVideo.currentTime = 0;
+    modalVideo.play().catch(() => {});
+  }
+}
+
+function closeVideoModal() {
+  const modal = document.getElementById("video-modal");
+  const modalVideo = document.getElementById("modal-tea-video");
+  const previewVideo = document.getElementById("preview-tea-video");
+  if (!modal) return;
+
+  modal.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+
+  if (modalVideo) {
+    modalVideo.pause();
+  }
+  if (previewVideo) {
+    previewVideo.play().catch(() => {});
+  }
+}
+
+function handleVideoModalBackdropClick(event) {
+  if (event.target.id === "video-modal") {
+    closeVideoModal();
+  }
+}
+
+// Phím Escape đóng tất cả modal
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeVideoModal();
+    closeDealModal();
+    if (typeof closeCheckoutModal === "function") closeCheckoutModal();
+    if (typeof closeSuccessModal === "function") closeSuccessModal();
+  }
+});
+
 // DOM Ready
 document.addEventListener("DOMContentLoaded", () => {
   renderMenu("all", "");

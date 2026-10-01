@@ -422,43 +422,71 @@
         </p>
       </div>
 
-      <!-- Grid 2 Cột Media: Video Pha Trà Thực Tế & Ảnh Không Gian Quán -->
+      <!-- Grid 2 Cột Media: Video Pha Trà Dọc (9:16) & Ảnh Không Gian Quán -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-10">
         
-        <!-- Cột 1 (6 cols): Video Thực Tế Pha Chế Cốt Trà -->
-        <div class="lg:col-span-6" data-aos="fade-right">
-          <div class="relative rounded-3xl overflow-hidden shadow-xl border-2 border-amber-300 bg-slate-950 group">
-            <video autoplay muted loop playsinline controls class="w-full h-[360px] sm:h-[420px] object-cover">
-              <source src="assets/make-tea.webm" type="video/webm">
-              <source src="assets/Lê Mê - Make Tea2.webm" type="video/webm">
-              Trình duyệt của bạn không hỗ trợ video HTML5.
-            </video>
+        <!-- Cột 1 (5 cols): Khung Bo Dọc Cho Video Pha Chế (Dạng Phone / Reel 9:16) -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center" data-aos="fade-right">
+          <!-- Card Video Dọc (Bấm để xem pop-up) -->
+          <div onclick="openVideoModal()" 
+               class="relative w-full max-w-[280px] sm:max-w-[310px] aspect-[9/16] rounded-[2.5rem] p-2 bg-gradient-to-b from-amber-300 via-sky-400 to-[#0672ba] shadow-2xl group cursor-pointer hover:-translate-y-1 transition-all duration-300">
             
-            <!-- Video Badge Top-Left -->
-            <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-amber-300/70 text-xs font-bold text-[#fde68a] flex items-center gap-2 shadow-md pointer-events-none">
-              <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-              <span>🎥 Video Pha Chế Trà Thực Tế</span>
-            </div>
+            <!-- Vỏ trong điện thoại / khung video dọc -->
+            <div class="relative w-full h-full rounded-[2rem] overflow-hidden bg-slate-950 shadow-inner flex items-center justify-center">
+              
+              <!-- Video Preview Tự Chạy Lặp (Muted) -->
+              <video id="preview-tea-video" autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <source src="assets/make-tea.webm" type="video/webm">
+                <source src="assets/Lê Mê - Make Tea2.webm" type="video/webm">
+              </video>
 
-            <!-- Video Overlay Bottom Caption -->
-            <div class="absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md text-white p-3.5 rounded-2xl flex items-center justify-between border border-amber-200/30 pointer-events-none">
-              <div>
-                <p class="font-quicksand font-bold text-sm text-[#fde68a]">Nghệ Thuật Pha Cốt Trà Lê Mê</p>
-                <p class="text-xs text-slate-200">Trà nguyên lá ủ lạnh đậm vị, đánh bọt thủ công chuẩn gu</p>
+              <!-- Gradient Overlay bảo vệ tương phản -->
+              <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 pointer-events-none"></div>
+
+              <!-- Badge Đỉnh: Video Dọc Thực Tế -->
+              <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10 pointer-events-none">
+                <div class="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-amber-300/60 text-[10px] font-bold text-[#fde68a] flex items-center gap-1.5 shadow">
+                  <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                  <span>Video Dọc 9:16</span>
+                </div>
+                <span class="bg-[#0672ba]/80 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-white border border-white/20">
+                  Lê Mê 🧋
+                </span>
               </div>
-              <span class="text-xs bg-[#0672ba] text-[#fde68a] px-3 py-1 rounded-xl font-bold border border-amber-300/40">100% Thủ Công</span>
+
+              <!-- Nút Play Nổi Bật Ở Giữa (Hiệu ứng hover phóng to) -->
+              <div class="absolute inset-0 flex flex-col items-center justify-center z-10 p-4 text-center">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-[#0672ba]/90 text-[#fde68a] border-2 border-amber-300 shadow-2xl flex items-center justify-center text-2xl group-hover:scale-115 group-hover:bg-[#0672ba] transition-all duration-300">
+                  ▶
+                </div>
+                <div class="mt-3 px-3.5 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md text-xs font-bold text-[#fde68a] border border-amber-300/80 shadow-lg group-hover:bg-[#0672ba] group-hover:text-white transition">
+                  Ấn để phóng to xem 🎦
+                </div>
+              </div>
+
+              <!-- Caption Đáy Video -->
+              <div class="absolute bottom-3.5 left-3.5 right-3.5 z-10 pointer-events-none text-left">
+                <p class="font-quicksand font-bold text-xs text-[#fde68a] drop-shadow">Quy Trình Pha Trà Thủ Công</p>
+                <p class="text-[10px] text-slate-200 drop-shadow line-clamp-1">Ủ trà nguyên lá chuẩn 85°C • Đậm vị Lê Mê</p>
+              </div>
+
             </div>
           </div>
+
+          <p class="mt-3 text-[11px] text-slate-500 font-medium text-center flex items-center gap-1">
+            <span>👆</span> <i>Bấm vào khung video để mở pop-up xem trọn vẹn</i>
+          </p>
         </div>
 
-        <!-- Cột 2 (6 cols): Ảnh Thực Tế Không Gian Quán -->
-        <div class="lg:col-span-6" data-aos="fade-left">
+        <!-- Cột 2 (7 cols): Ảnh Thực Tế Không Gian Quán & Giới Thiệu -->
+        <div class="lg:col-span-7 space-y-4" data-aos="fade-left">
+          
           <div class="relative rounded-3xl overflow-hidden shadow-xl border-2 border-amber-200 bg-slate-50 group">
             <img src="assets/store-interior.png" alt="Không gian quán trà sữa Lê Mê Ngọc Hồi" 
-                 class="w-full h-[360px] sm:h-[420px] object-cover group-hover:scale-102 transition duration-500">
+                 class="w-full h-[320px] sm:h-[380px] object-cover group-hover:scale-102 transition duration-500">
             
             <!-- Badge Top-Left -->
-            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-amber-300 text-xs font-bold text-[#0672ba] flex items-center gap-2 shadow-md">
+            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-amber-300 text-xs font-bold text-[#0672ba] flex items-center gap-2 shadow-md">
               <span>🏠 Góc Quán Ngọc Hồi</span>
             </div>
 
@@ -468,9 +496,26 @@
                 <p class="font-quicksand font-bold text-sm text-[#fde68a]">Không Gian Quán Lê Mê</p>
                 <p class="text-xs text-slate-200">Quầy bar gỗ ấm áp, ghế nệm xanh signature & góc check-in xinh xắn</p>
               </div>
-              <a href="#contact" class="text-xs bg-[#0672ba] hover:bg-[#055c99] text-[#fde68a] px-3 py-1.5 rounded-xl font-bold transition">Ghé chill ngay</a>
+              <a href="#contact" class="text-xs bg-[#0672ba] hover:bg-[#055c99] text-[#fde68a] px-3.5 py-1.5 rounded-xl font-bold transition">Ghé chill ngay</a>
             </div>
           </div>
+
+          <!-- Card Bổ Trợ Về Quán -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border-2 border-amber-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+            <div class="space-y-0.5">
+              <h4 class="font-quicksand font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                <span>📍</span> Lê Mê - Trà Sữa Đậm Vị (Ngọc Hồi, Hà Nội)
+              </h4>
+              <p class="text-xs text-slate-600">
+                Mở cửa: <b>08:30 - 22:30</b> hàng ngày • Wifi căng đét & điều hòa mát lạnh
+              </p>
+            </div>
+            <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
+               class="px-3.5 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs shadow-xs transition flex items-center gap-1.5 whitespace-nowrap">
+              <span>🛵</span> Đặt ShopeeFood
+            </a>
+          </div>
+
         </div>
 
       </div>
@@ -1089,6 +1134,52 @@
           Áp Dụng Mã Ngay Tại Menu 🧋
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       VIDEO LIGHTBOX / POP-UP MODAL (XEM VIDEO DỌC 9:16)
+       ======================================================== -->
+  <div id="video-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4" onclick="handleVideoModalBackdropClick(event)">
+    <div class="relative bg-slate-950 rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-300 max-w-sm w-full flex flex-col items-center">
+      
+      <!-- Close Button -->
+      <button onclick="closeVideoModal()" 
+              class="absolute top-3.5 right-3.5 z-30 w-9 h-9 rounded-full bg-black/75 hover:bg-red-600 text-white flex items-center justify-center font-bold text-sm border border-white/20 transition shadow-lg" 
+              aria-label="Đóng video">
+        ✕
+      </button>
+
+      <!-- Header trong Modal -->
+      <div class="w-full bg-gradient-to-b from-slate-950 via-slate-950/80 to-transparent p-4 absolute top-0 left-0 right-0 z-20 flex items-center gap-2.5 pointer-events-none">
+        <img src="assets/logo.png" alt="Lê Mê Logo" class="w-8 h-8 rounded-lg border border-amber-300">
+        <div>
+          <h4 class="font-quicksand font-bold text-xs text-[#fde68a]">Lê Mê - Pha Trà Thủ Công</h4>
+          <p class="text-[10px] text-slate-300">Trà Sữa Đậm Vị • Ngọc Hồi</p>
+        </div>
+      </div>
+
+      <!-- Khung Video Dọc 9:16 -->
+      <div class="w-full aspect-[9/16] max-h-[78vh] bg-black flex items-center justify-center relative">
+        <video id="modal-tea-video" controls playsinline class="w-full h-full object-contain">
+          <source src="assets/make-tea.webm" type="video/webm">
+          <source src="assets/Lê Mê - Make Tea2.webm" type="video/webm">
+          Trình duyệt của bạn không hỗ trợ video HTML5.
+        </video>
+      </div>
+
+      <!-- Footer trong Modal -->
+      <div class="w-full p-3 bg-slate-900 border-t border-slate-800 flex items-center justify-between text-xs">
+        <div class="text-[11px] text-slate-300">
+          🍃 <span class="font-bold text-[#fde68a]">100% Trà nguyên lá</span> ủ lạnh
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="#menu" onclick="closeVideoModal()" class="px-3 py-1.5 rounded-xl bg-[#0672ba] hover:bg-[#055c99] text-[#fde68a] font-bold text-xs transition">
+            Xem Menu 🧋
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
