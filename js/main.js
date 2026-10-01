@@ -227,20 +227,20 @@ function renderMenu(filter = "all", searchQuery = "") {
   if (filtered.length === 0) {
     container.innerHTML = `
       <div class="col-span-full py-16 text-center">
-        <div class="w-16 h-16 mx-auto mb-3 bg-sky-50 text-sky-600 rounded-full flex items-center justify-center text-2xl font-bold">🧋</div>
+        <div class="w-16 h-16 mx-auto mb-3 bg-amber-100 text-[#0672ba] rounded-full flex items-center justify-center text-2xl font-bold">🧋</div>
         <h3 class="text-lg font-bold font-quicksand text-slate-800 mb-1">Không tìm thấy món phù hợp</h3>
         <p class="text-slate-500 text-xs max-w-sm mx-auto">Bạn thử tìm với từ khóa "cốt trà", "trà sữa", "matcha" hoặc bấm xem tất cả nhé.</p>
-        <button onclick="resetMenuFilter()" class="mt-4 px-5 py-2 bg-sky-600 text-white rounded-full font-bold text-xs shadow-sm hover:bg-sky-700 transition">Xem tất cả menu</button>
+        <button onclick="resetMenuFilter()" class="mt-4 px-5 py-2.5 bg-[#0672ba] text-[#fde68a] rounded-full font-bold text-xs shadow-sm hover:bg-[#055c99] transition">Xem tất cả menu</button>
       </div>
     `;
     return;
   }
 
   container.innerHTML = filtered.map((product) => `
-    <div class="group bg-white rounded-2xl p-4 border border-slate-100 shadow-card-clean hover:border-sky-200 transition-all duration-300 flex flex-col justify-between">
+    <div class="group bg-white rounded-3xl p-4 border-2 border-amber-200/80 shadow-card-clean hover:border-[#0672ba] transition-all duration-300 flex flex-col justify-between">
       <div>
         <!-- Image Container -->
-        <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-slate-50 mb-3.5 cursor-pointer" onclick="openProductModal(${product.id})">
+        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-amber-50 mb-3.5 cursor-pointer" onclick="openProductModal(${product.id})">
           <img src="${product.image}" alt="${product.name}" 
                loading="lazy"
                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -253,35 +253,35 @@ function renderMenu(filter = "all", searchQuery = "") {
 
         <!-- Category & Rating -->
         <div class="flex items-center justify-between text-xs mb-1.5">
-          <span class="font-medium text-sky-600 bg-sky-50 px-2 py-0.5 rounded">${product.categoryName}</span>
-          <span class="text-amber-500 font-semibold text-xs flex items-center gap-1">
+          <span class="font-bold text-[#0672ba] bg-amber-100/90 px-2 py-0.5 rounded-md border border-amber-200">${product.categoryName}</span>
+          <span class="text-amber-500 font-bold text-xs flex items-center gap-1">
             <span>★</span> ${product.rating}
           </span>
         </div>
 
         <!-- Title -->
-        <h3 class="text-base font-bold font-quicksand text-slate-800 mb-1 group-hover:text-sky-600 transition-colors cursor-pointer" onclick="openProductModal(${product.id})">
+        <h3 class="text-base font-bold font-quicksand text-slate-900 mb-1 group-hover:text-[#0672ba] transition-colors cursor-pointer" onclick="openProductModal(${product.id})">
           ${product.name}
         </h3>
 
         <!-- Description -->
-        <p class="text-xs text-slate-500 line-clamp-2 mb-3 leading-relaxed">
+        <p class="text-xs text-slate-600 line-clamp-2 mb-3 leading-relaxed">
           ${product.description}
         </p>
       </div>
 
       <!-- Price & Actions -->
-      <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-auto">
+      <div class="pt-3 border-t border-amber-100 flex items-center justify-between mt-auto">
         <div>
-          <span class="text-[11px] text-slate-400 block">Giá từ</span>
-          <span class="text-base sm:text-lg font-bold font-quicksand text-sky-600">${formatVND(product.price)}</span>
+          <span class="text-[11px] text-slate-400 block font-medium">Giá từ</span>
+          <span class="text-base sm:text-lg font-bold font-quicksand text-[#0672ba]">${formatVND(product.price)}</span>
         </div>
 
         <div class="flex items-center gap-2">
-          <button onclick="openProductModal(${product.id})" class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-sky-50 hover:text-sky-600 transition text-xs font-semibold">
+          <button onclick="openProductModal(${product.id})" class="px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-[#0672ba] transition text-xs font-bold border border-amber-200">
             Tùy chọn
           </button>
-          <button onclick="addToCart(${product.id})" title="Thêm vào giỏ" class="w-9 h-9 rounded-xl bg-sky-600 hover:bg-sky-700 text-white flex items-center justify-center font-bold text-base shadow-sm transition active:scale-90">
+          <button onclick="addToCart(${product.id})" title="Thêm vào giỏ" class="w-9 h-9 rounded-xl bg-[#0672ba] hover:bg-[#055c99] text-[#fde68a] flex items-center justify-center font-bold text-base shadow-xs transition active:scale-90">
             +
           </button>
         </div>
@@ -292,13 +292,13 @@ function renderMenu(filter = "all", searchQuery = "") {
 
 function resetMenuFilter() {
   document.querySelectorAll(".menu-tab-btn").forEach(btn => {
-    btn.classList.remove("active-tab", "bg-sky-600", "text-white");
-    btn.classList.add("bg-white", "text-slate-700", "border-slate-200");
+    btn.classList.remove("active-tab", "bg-[#0672ba]", "text-[#fde68a]");
+    btn.classList.add("bg-white", "text-slate-700", "border-amber-200");
   });
   const allBtn = document.querySelector('[data-filter="all"]');
   if (allBtn) {
-    allBtn.classList.add("active-tab", "bg-sky-600", "text-white");
-    allBtn.classList.remove("bg-white", "text-slate-700", "border-slate-200");
+    allBtn.classList.add("active-tab", "bg-[#0672ba]", "text-[#fde68a]");
+    allBtn.classList.remove("bg-white", "text-slate-700", "border-amber-200");
   }
   const searchInput = document.getElementById("menu-search");
   if (searchInput) searchInput.value = "";
@@ -809,11 +809,11 @@ document.addEventListener("DOMContentLoaded", () => {
   filterTabs.forEach(btn => {
     btn.addEventListener("click", () => {
       filterTabs.forEach(b => {
-        b.classList.remove("active-tab", "bg-sky-600", "text-white", "shadow-sm");
-        b.classList.add("bg-white", "text-slate-700", "border-slate-200");
+        b.classList.remove("active-tab", "bg-[#0672ba]", "text-[#fde68a]");
+        b.classList.add("bg-white", "text-slate-700", "border-amber-200");
       });
-      btn.classList.add("active-tab", "bg-sky-600", "text-white", "shadow-sm");
-      btn.classList.remove("bg-white", "text-slate-700", "border-slate-200");
+      btn.classList.add("active-tab", "bg-[#0672ba]", "text-[#fde68a]");
+      btn.classList.remove("bg-white", "text-slate-700", "border-amber-200");
 
       const filter = btn.getAttribute("data-filter") || "all";
       const searchInput = document.getElementById("menu-search");
