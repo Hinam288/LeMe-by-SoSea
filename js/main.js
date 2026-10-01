@@ -832,15 +832,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const header = document.getElementById("main-header");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 30) {
-      header.classList.add("glass-nav", "shadow-sm");
-      header.classList.remove("bg-transparent");
-    } else {
-      header.classList.remove("glass-nav", "shadow-sm");
-      header.classList.add("bg-transparent");
-    }
-  });
+  if (header) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        header.classList.add("shadow-xl");
+      } else {
+        header.classList.remove("shadow-xl");
+      }
+    });
+  }
 
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
