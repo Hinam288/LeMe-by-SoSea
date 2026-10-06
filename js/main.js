@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Lê Mê - Trà Sữa Đậm Vị
  * Theme: Lê Mê Blue & Butter Yellow
  */
@@ -160,22 +160,22 @@ function renderMenu(filter = "all") {
   const filtered = filter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
 
   container.innerHTML = filtered.map(product => `
-    <div class="group bg-white rounded-3xl p-3.5 border border-amber-100 card-soft flex flex-col">
-      <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-amber-50 mb-3 cursor-pointer" onclick="handleProductClick(${product.id})">
+    <div class="group bg-white rounded-3xl p-3.5 border border-[#e4e8d8] card-soft flex flex-col">
+      <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3 cursor-pointer" onclick="handleProductClick(${product.id})">
         <img src="${product.image}" alt="${product.name}" loading="lazy"
              style="object-position: ${product.imagePos};"
              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-        ${product.badge ? `<span class="absolute top-2.5 left-2.5 text-xs font-bold px-2.5 py-1 rounded-full bg-white/95 text-[#0672ba] shadow-sm">${product.badge}</span>` : ""}
+        ${product.badge ? `<span class="absolute top-2.5 left-2.5 text-xs font-bold px-2.5 py-1 rounded-full bg-white/95 text-[#3a5a40] shadow-sm">${product.badge}</span>` : ""}
       </div>
 
-      <span class="text-xs font-semibold text-[#0672ba] mb-1">${product.categoryName}</span>
+      <span class="text-xs font-semibold text-[#3a5a40] mb-1">${product.categoryName}</span>
       <h3 class="text-base font-bold font-quicksand text-slate-900 mb-1">${product.name}</h3>
       <p class="text-sm text-slate-500 leading-relaxed mb-3 line-clamp-2">${product.description}</p>
 
-      <div class="mt-auto pt-3 border-t border-amber-100 flex items-center justify-between">
-        <span class="text-lg font-bold font-quicksand text-[#0672ba]">${formatVND(product.price)}</span>
+      <div class="mt-auto pt-3 border-t border-[#e4e8d8] flex items-center justify-between">
+        <span class="text-lg font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
         <button onclick="handleProductClick(${product.id})" title="Thêm vào giỏ" aria-label="Thêm ${product.name} vào giỏ"
-                class="w-10 h-10 rounded-full bg-[#0672ba] hover:bg-amber-400 text-[#fde68a] hover:text-slate-900 flex items-center justify-center font-bold text-xl transition active:scale-90">
+                class="w-10 h-10 rounded-full bg-[#3a5a40] hover:bg-[#d4b872] text-[#e9edc9] hover:text-slate-900 flex items-center justify-center font-bold text-xl transition active:scale-90">
           +
         </button>
       </div>
@@ -225,7 +225,7 @@ function updateCartUI() {
           <h4 class="font-bold font-quicksand text-sm text-slate-800 truncate">${item.name}</h4>
           ${item.sugar ? `<p class="text-xs text-slate-500">${item.sugar} • ${item.ice}</p>` : ""}
           <div class="flex items-center justify-between mt-1">
-            <span class="text-sm font-bold text-[#0672ba]">${formatVND(item.price)}</span>
+            <span class="text-sm font-bold text-[#3a5a40]">${formatVND(item.price)}</span>
             <div class="flex items-center bg-white rounded-lg border border-slate-200 overflow-hidden">
               <button onclick="updateItemQuantity('${item.cartKey}', -1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold" aria-label="Bớt">−</button>
               <span class="w-7 text-center text-sm font-bold text-slate-800">${item.quantity}</span>
@@ -255,7 +255,7 @@ function showToast(message, type = "info") {
   if (!container) return;
 
   const styles = {
-    success: "bg-white border-l-4 border-[#0672ba] text-slate-800",
+    success: "bg-white border-l-4 border-[#3a5a40] text-slate-800",
     info: "bg-white border-l-4 border-amber-400 text-slate-800"
   };
 
@@ -281,7 +281,7 @@ function optionButtons(groupId, values, activeValue) {
     <div class="flex flex-wrap gap-2" id="${groupId}">
       ${values.map(v => `
         <button type="button" data-val="${v}"
-                class="modal-opt-btn py-1.5 px-3 rounded-lg border text-sm ${v === activeValue ? 'active border-[#0672ba] bg-sky-50 text-[#0672ba] font-bold' : 'border-slate-200 text-slate-700'}">
+                class="modal-opt-btn py-1.5 px-3 rounded-lg border text-sm ${v === activeValue ? 'active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold' : 'border-slate-200 text-slate-700'}">
           ${v}
         </button>
       `).join("")}
@@ -307,10 +307,10 @@ function openProductModal(productId) {
       </div>
 
       <div class="w-full sm:w-7/12 flex flex-col">
-        <span class="text-xs font-semibold text-[#0672ba] mb-1">${product.categoryName}</span>
+        <span class="text-xs font-semibold text-[#3a5a40] mb-1">${product.categoryName}</span>
         <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-1">${product.name}</h3>
         <p class="text-sm text-slate-500 mb-3">${product.description}</p>
-        <div class="text-xl font-bold font-quicksand text-[#0672ba] mb-4">${formatVND(product.price)}</div>
+        <div class="text-xl font-bold font-quicksand text-[#3a5a40] mb-4">${formatVND(product.price)}</div>
 
         <div class="space-y-4">
           <div>
@@ -323,7 +323,7 @@ function openProductModal(productId) {
           </div>
         </div>
 
-        <button onclick="confirmModalAddToCart()" class="mt-5 w-full py-3 rounded-xl bg-[#0672ba] hover:bg-[#055c99] text-[#fde68a] font-quicksand font-bold text-sm transition">
+        <button onclick="confirmModalAddToCart()" class="mt-5 w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-sm transition">
           Thêm vào giỏ
         </button>
       </div>
@@ -342,10 +342,10 @@ function setupModalOptionListeners() {
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         buttons.forEach(b => {
-          b.classList.remove("active", "border-[#0672ba]", "bg-sky-50", "text-[#0672ba]", "font-bold");
+          b.classList.remove("active", "border-[#3a5a40]", "bg-[#f0f2eb]", "text-[#3a5a40]", "font-bold");
           b.classList.add("border-slate-200", "text-slate-700");
         });
-        btn.classList.add("active", "border-[#0672ba]", "bg-sky-50", "text-[#0672ba]", "font-bold");
+        btn.classList.add("active", "border-[#3a5a40]", "bg-[#f0f2eb]", "text-[#3a5a40]", "font-bold");
         btn.classList.remove("border-slate-200", "text-slate-700");
       });
     });
@@ -514,10 +514,10 @@ document.addEventListener("DOMContentLoaded", () => {
   filterTabs.forEach(btn => {
     btn.addEventListener("click", () => {
       filterTabs.forEach(b => {
-        b.classList.remove("bg-[#0672ba]", "text-[#fde68a]");
+        b.classList.remove("bg-[#3a5a40]", "text-[#e9edc9]");
         b.classList.add("text-slate-600");
       });
-      btn.classList.add("bg-[#0672ba]", "text-[#fde68a]");
+      btn.classList.add("bg-[#3a5a40]", "text-[#e9edc9]");
       btn.classList.remove("text-slate-600");
       renderMenu(btn.getAttribute("data-filter") || "all");
     });
@@ -545,3 +545,4 @@ document.addEventListener("DOMContentLoaded", () => {
     AOS.init({ once: true, duration: 600, offset: 40, easing: "ease-out-cubic" });
   }
 });
+
