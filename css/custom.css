@@ -124,3 +124,26 @@ html {
   transform: translateX(0%);
 }
 
+/* Keep dialog content reachable on short screens and with the keyboard open. */
+[role="dialog"]:not(.cart-drawer) > div {
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.cart-drawer { height: 100dvh; }
+.cart-drawer > .overflow-y-auto { min-height: 0; }
+:focus-visible { outline: 3px solid #b58935; outline-offset: 3px; }
+#success-customer-name, #success-customer-phone { min-width: 0; overflow-wrap: anywhere; }
+#toast-container { max-width: calc(100vw - 3rem); }
+@media (max-width: 639px) {
+  input, textarea { font-size: 16px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+

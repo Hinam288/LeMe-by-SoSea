@@ -1,0 +1,14 @@
+{
+  "name": "leme-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/input.css -o ./css/tailwind.css --minify",
+    "check": "node --check js/main.js",
+    "test": "node tests/browser.cjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17",
+    "playwright": "1.62.1"
+  }
+}

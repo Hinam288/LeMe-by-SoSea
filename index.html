@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
@@ -21,26 +21,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            quicksand: ['Quicksand', 'sans-serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/tailwind.css">
   <link rel="stylesheet" href="css/custom.css">
 </head>
 <body class="bg-[#fbfbf9] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-[#3a5a40] selection:text-[#e9edc9]">
 
-  <div id="toast-container"></div>
+  <div id="toast-container" role="status" aria-live="polite"></div>
 
   <!-- ========================================================
        1. HEADER - logo chính giữa, menu chia 2 bên
@@ -55,7 +41,7 @@
           <a href="#menu" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Menu</a>
           <a href="#about" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Về Lê Mê</a>
         </nav>
-        <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition" aria-label="Mở menu">
+        <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="w-5 h-5 text-[#e9edc9]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -116,7 +102,7 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
       <!-- Nội dung -->
-      <div class="space-y-6 text-center lg:text-left" data-aos="fade-right">
+      <div class="space-y-6 text-center lg:text-left">
         <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40]">Trà Sữa Đậm Vị • Ngọc Hồi</p>
 
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-quicksand text-slate-900 leading-tight">
@@ -142,10 +128,10 @@
       </div>
 
       <!-- Ảnh + motion -->
-      <div class="relative flex items-center justify-center" data-aos="fade-left" data-aos-duration="900">
+      <div class="relative flex items-center justify-center">
         <div class="relative z-10 w-full max-w-sm animate-float">
           <div class="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
-            <img src="assets/open.jpg" alt="Quán Lê Mê - Trà Sữa Đậm Vị" class="w-full aspect-[4/5] object-cover">
+            <img src="assets/open.jpg" alt="Quán Lê Mê - Trà Sữa Đậm Vị" fetchpriority="high" class="w-full aspect-[4/5] object-cover">
           </div>
         </div>
 
@@ -176,13 +162,14 @@
        3. MENU
        ======================================================== -->
   <section id="menu" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-8">
-    <div class="text-center max-w-xl mx-auto mb-10" data-aos="fade-up">
+    <div class="text-center max-w-xl mx-auto mb-10">
       <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Menu</p>
       <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Món ngon tại Lê Mê</h2>
-      <p class="text-slate-600">Chọn món, thêm vào giỏ và gửi đơn cho quán qua Zalo.</p>
+      <p class="text-slate-600">Chọn món, soạn đơn rồi gửi cho quán qua Zalo hoặc Messenger để xác nhận.</p>
+      <p class="text-sm text-slate-500 mt-2">Giá tham khảo; quán sẽ xác nhận món, giá và phí giao hàng trước khi nhận đơn.</p>
     </div>
 
-    <div class="flex justify-center mb-8" data-aos="fade-up">
+    <div class="flex justify-center mb-8">
       <div class="inline-flex flex-wrap justify-center gap-1 p-1.5 bg-white border border-[#e4e8d8] rounded-2xl shadow-sm">
         <button data-filter="all" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm bg-[#3a5a40] text-[#e9edc9] transition">Tất cả</button>
         <button data-filter="milktea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition">Trà sữa & Matcha</button>
@@ -192,6 +179,7 @@
     </div>
 
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    <noscript><p>Bạn bật JavaScript để xem menu và soạn đơn, hoặc <a href="https://shopeefood.shopee.vn/u/frCAhCm" class="underline">đặt trên ShopeeFood</a>.</p></noscript>
   </section>
 
   <!-- ========================================================
@@ -200,7 +188,7 @@
   <section id="about" class="py-16 sm:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-8">
 
-      <div class="text-center max-w-xl mx-auto mb-12" data-aos="fade-up">
+      <div class="text-center max-w-xl mx-auto mb-12">
         <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Về Lê Mê</p>
         <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Không gian & cốt trà</h2>
         <p class="text-slate-600">Trà pha tại quán mỗi ngày, trong một góc nhỏ ấm áp để bạn ngồi chill cùng bạn bè.</p>
@@ -209,13 +197,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
         <!-- Video dọc 9:16 -->
-        <div class="lg:col-span-5 flex flex-col items-center" data-aos="fade-right">
+        <div class="lg:col-span-5 flex flex-col items-center">
           <button type="button" onclick="openVideoModal()" aria-label="Xem video pha trà"
                   class="relative w-full max-w-[300px] aspect-[9/16] rounded-[2.25rem] p-1.5 bg-gradient-to-b from-[#d4b872] to-[#3a5a40] shadow-xl group hover:-translate-y-1 transition-transform duration-300">
             <div class="relative w-full h-full rounded-[1.9rem] overflow-hidden bg-slate-950">
-              <video id="preview-tea-video" autoplay muted loop playsinline class="w-full h-full object-cover">
-                <source src="assets/make-tea.webm" type="video/webm">
-              </video>
+              <img src="assets/single-bottle.jpg" alt="Cốt trà Lê Mê — mở video pha trà" loading="lazy" decoding="async" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 pointer-events-none"></div>
 
               <div class="absolute inset-0 flex items-center justify-center">
@@ -229,9 +215,9 @@
         </div>
 
         <!-- Ảnh quán + 3 điểm nổi bật -->
-        <div class="lg:col-span-7 space-y-6" data-aos="fade-left">
+        <div class="lg:col-span-7 space-y-6">
           <div class="rounded-3xl overflow-hidden shadow-lg">
-            <img src="assets/store-interior.png" alt="Không gian quán Lê Mê" class="w-full h-[300px] sm:h-[380px] object-cover">
+            <img src="assets/store-interior.png" alt="Không gian quán Lê Mê" loading="lazy" decoding="async" class="w-full h-[300px] sm:h-[380px] object-cover">
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -258,14 +244,14 @@
        5. GÓC "MÊ" - đề xuất thật từ Fanpage
        ======================================================== -->
   <section id="reviews" class="py-16 sm:py-24 max-w-5xl mx-auto px-4 sm:px-8">
-    <div class="text-center max-w-xl mx-auto mb-10" data-aos="fade-up">
+    <div class="text-center max-w-xl mx-auto mb-10">
       <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Góc "Mê"</p>
       <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Khách nói gì về Lê Mê</h2>
       <p class="text-slate-600">Đề xuất từ khách hàng trên Fanpage Facebook của quán.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      <figure class="bg-white rounded-3xl p-6 border border-[#e4e8d8] card-soft" data-aos="fade-up" data-aos-delay="100">
+      <figure class="bg-white rounded-3xl p-6 border border-[#e4e8d8] card-soft">
         <blockquote class="text-lg font-medium text-slate-800 leading-relaxed mb-5">
           “siêu đậm vị trà 🍃”
         </blockquote>
@@ -278,7 +264,7 @@
         </figcaption>
       </figure>
 
-      <figure class="bg-white rounded-3xl p-6 border border-[#e4e8d8] card-soft" data-aos="fade-up" data-aos-delay="200">
+      <figure class="bg-white rounded-3xl p-6 border border-[#e4e8d8] card-soft">
         <blockquote class="text-lg font-medium text-slate-800 leading-relaxed mb-5">
           “Trà sữa ngon mà không gian quán còn đẹp và chill nữa, sẽ quay lại shop hihi 🥰”
         </blockquote>
@@ -330,6 +316,7 @@
           <p class="font-bold text-[#e9edc9] uppercase tracking-wider">Liên hệ</p>
           <ul class="space-y-2.5 text-[#fbfbf9]/90">
             <li>📍 Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi</li>
+            <li><a href="https://maps.app.goo.gl/WT7h43BGyJvyZQHWA" target="_blank" rel="noopener noreferrer" class="inline-block rounded-xl bg-white/10 px-4 py-2.5 font-semibold hover:bg-white/20">Chỉ đường trên Google Maps ↗</a></li>
             <li>📞 <a href="tel:0362126184" class="hover:text-[#e9edc9] font-semibold">036 212 6184</a> · <a href="tel:0869256962" class="hover:text-[#e9edc9] font-semibold">0869 256 962</a></li>
             <li>✉️ <a href="mailto:vuhaiyen067@gmail.com" class="hover:text-[#e9edc9]">vuhaiyen067@gmail.com</a></li>
             <li>⏰ 9:00 – 22:00 hàng ngày</li>
@@ -359,13 +346,14 @@
        ======================================================== -->
   <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="drawer-backdrop fixed inset-0 bg-black/40 z-50"></div>
 
-  <div id="cart-drawer" class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[390px] bg-white z-50 shadow-2xl flex flex-col">
+  <div id="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng" aria-hidden="true" tabindex="-1" inert class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[390px] bg-white z-50 shadow-2xl flex flex-col">
     <div class="p-4 border-b border-[#e4e8d8] flex items-center justify-between">
       <h3 class="font-bold font-quicksand text-lg text-slate-900">Giỏ hàng</h3>
       <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng giỏ hàng">✕</button>
     </div>
 
     <div class="px-4 py-2.5 bg-[#f0f2eb] text-sm text-slate-700">Freeship trong bán kính 2km</div>
+    <button id="resume-order-btn" onclick="showOrderDraft()" class="hidden m-4 p-3 rounded-xl border border-[#3a5a40] text-[#3a5a40] font-semibold text-sm">Mở lại bản soạn đơn gần nhất</button>
 
     <div class="flex-1 overflow-y-auto p-4 space-y-2.5">
       <div id="cart-empty-state" class="py-14 text-center space-y-3">
@@ -384,15 +372,16 @@
       </div>
       <p class="text-xs text-slate-500">Ngoài 2km quán sẽ báo thêm phí ship.</p>
       <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition">
-        Đặt hàng
+        Soạn đơn giao hàng
       </button>
+      <button onclick="clearCart()" class="w-full py-2 text-sm text-slate-500 underline">Xóa các món trong giỏ</button>
     </div>
   </div>
 
   <!-- ========================================================
        POP-UP CHỌN ĐƯỜNG / ĐÁ
        ======================================================== -->
-  <div id="product-detail-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeProductModal()">
+  <div id="product-detail-modal" role="dialog" aria-modal="true" aria-label="Chọn đường và đá" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeProductModal()">
     <div class="relative bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl">
       <button onclick="closeProductModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng">✕</button>
       <div id="product-modal-content"></div>
@@ -402,11 +391,11 @@
   <!-- ========================================================
        POP-UP ĐẶT HÀNG
        ======================================================== -->
-  <div id="checkout-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeCheckoutModal()">
+  <div id="checkout-modal" role="dialog" aria-modal="true" aria-label="Soạn đơn giao hàng" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeCheckoutModal()">
     <div class="relative bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl">
       <button onclick="closeCheckoutModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng">✕</button>
 
-      <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-4">Đặt giao hàng</h3>
+      <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-4">Soạn đơn giao hàng</h3>
 
       <div class="p-3.5 bg-[#f0f2eb] rounded-xl text-sm mb-4 space-y-1">
         <div class="flex justify-between">
@@ -420,26 +409,27 @@
         <p class="text-xs text-slate-500 pt-1">Freeship trong 2km. Xa hơn quán sẽ báo phí khi xác nhận.</p>
       </div>
 
-      <form onsubmit="handleCheckoutSubmit(event)" class="space-y-3 text-sm">
+      <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-3 text-sm">
         <div>
           <label for="order-name" class="block font-semibold text-slate-700 mb-1">Họ tên *</label>
-          <input type="text" id="order-name" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-name" autocomplete="name" maxlength="100" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-phone" class="block font-semibold text-slate-700 mb-1">Số điện thoại *</label>
-          <input type="tel" id="order-phone" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="tel" id="order-phone" autocomplete="tel" inputmode="tel" maxlength="25" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-address" class="block font-semibold text-slate-700 mb-1">Địa chỉ nhận hàng *</label>
-          <input type="text" id="order-address" required placeholder="Số nhà, ngõ, đường..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-address" autocomplete="street-address" maxlength="300" required placeholder="Số nhà, ngõ, đường..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-note" class="block font-semibold text-slate-700 mb-1">Ghi chú</label>
-          <input type="text" id="order-note" placeholder="Không bắt buộc" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-note" maxlength="500" placeholder="Không bắt buộc" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <button type="submit" class="w-full mt-2 py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition">
-          Tạo đơn & gửi cho quán
+          Soạn nội dung đơn
         </button>
+        <p class="text-xs text-slate-500">Bước tiếp theo: sao chép, dán và gửi cho quán qua Zalo hoặc Messenger. Bản soạn được giữ trong tab này khi tải lại trang; bạn có thể xóa sau khi gửi.</p>
       </form>
     </div>
   </div>
@@ -447,27 +437,31 @@
   <!-- ========================================================
        POP-UP ĐƠN ĐÃ TẠO
        ======================================================== -->
-  <div id="order-success-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4">
+  <div id="order-success-modal" role="dialog" aria-modal="true" aria-label="Nội dung đơn chờ gửi" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4">
     <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl text-center">
-      <h3 class="text-2xl font-bold font-quicksand text-slate-900 mb-1">Đã tạo đơn!</h3>
-      <p class="text-sm text-slate-500 mb-4">Nội dung đơn đã được sao chép. Bạn gửi cho quán qua Zalo hoặc Messenger để quán xác nhận nhé.</p>
+      <h3 class="text-2xl font-bold font-quicksand text-slate-900 mb-1">Đơn đang chờ bạn gửi</h3>
+      <p class="text-sm text-slate-600 mb-4">Quán chưa nhận được đơn. Bạn gửi nội dung qua Zalo hoặc Messenger và chờ quán xác nhận nhé.</p>
 
       <div class="bg-[#f0f2eb] rounded-2xl p-4 text-left text-sm mb-4 space-y-1.5">
         <div class="flex justify-between gap-4"><span class="text-slate-500">Khách hàng</span><span id="success-customer-name" class="font-semibold text-slate-800"></span></div>
         <div class="flex justify-between gap-4"><span class="text-slate-500">SĐT</span><span id="success-customer-phone" class="font-semibold text-slate-800"></span></div>
-        <div class="flex justify-between gap-4"><span class="text-slate-500">Địa chỉ</span><span id="success-customer-address" class="font-semibold text-slate-800 text-right truncate max-w-[220px]"></span></div>
+        <div class="flex justify-between gap-4"><span class="text-slate-500">Địa chỉ</span><span id="success-customer-address" class="font-semibold text-slate-800 text-right break-words min-w-0"></span></div>
         <div class="flex justify-between gap-4 pt-1.5 border-t border-[#d4d9c7] font-bold text-[#3a5a40]"><span>Tạm tính</span><span id="success-order-total"></span></div>
       </div>
 
+      <label for="generated-order-text" class="block text-left text-sm font-semibold mb-2">Nội dung gửi cho quán</label>
+      <textarea id="generated-order-text" readonly rows="6" class="w-full rounded-xl border border-slate-200 p-3 text-sm text-left"></textarea>
+      <p id="copy-order-status" role="status" aria-live="polite" class="text-sm text-slate-600 my-3"></p>
       <div class="space-y-2">
         <a href="https://zalo.me/0362126184" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-3 rounded-xl bg-[#0068ff] hover:bg-[#0052cc] text-white font-quicksand font-bold transition">Gửi qua Zalo</a>
+           class="block w-full py-3 rounded-xl bg-[#0068ff] hover:bg-[#0052cc] text-white font-quicksand font-bold transition">Mở Zalo để dán và gửi</a>
         <a href="https://m.me/61590901593823" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-3 rounded-xl bg-[#0084ff] hover:bg-[#0070db] text-white font-quicksand font-bold transition">Gửi qua Messenger</a>
+           class="block w-full py-3 rounded-xl bg-[#0084ff] hover:bg-[#0070db] text-white font-quicksand font-bold transition">Mở Messenger để dán và gửi</a>
         <div class="flex gap-2 pt-1">
           <button onclick="copyGeneratedOrderText()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Sao chép lại</button>
           <button onclick="closeSuccessModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Đóng</button>
         </div>
+        <button onclick="discardOrderDraft()" class="w-full py-2 text-sm text-slate-500 underline">Xóa bản soạn này</button>
       </div>
     </div>
   </div>
@@ -475,11 +469,11 @@
   <!-- ========================================================
        POP-UP VIDEO DỌC 9:16
        ======================================================== -->
-  <div id="video-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleVideoModalBackdropClick(event)">
+  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Video pha trà tại quán" tabindex="-1" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleVideoModalBackdropClick(event)">
     <div class="relative w-full max-w-sm rounded-3xl overflow-hidden bg-black border-2 border-[#d4b872] shadow-2xl">
       <button onclick="closeVideoModal()" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center text-sm font-bold border border-white/20 transition shadow-lg" aria-label="Đóng video">✕</button>
       <div class="w-full aspect-[9/16] max-h-[82vh] bg-black flex items-center justify-center">
-        <video id="modal-tea-video" controls playsinline class="w-full h-full object-contain bg-black">
+        <video id="modal-tea-video" controls playsinline preload="none" class="w-full h-full object-contain bg-black">
           <source src="assets/make-tea.webm" type="video/webm">
           Trình duyệt của bạn không hỗ trợ video.
         </video>
@@ -499,8 +493,6 @@
     </a>
   </div>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
-

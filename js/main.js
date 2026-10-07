@@ -1,6 +1,6 @@
 ﻿/**
  * Lê Mê - Trà Sữa Đậm Vị
- * Theme: Lê Mê Blue & Butter Yellow
+ * Theme: Xanh rêu & Kem
  */
 
 // --- 1. MENU ---
@@ -70,6 +70,8 @@ const PRODUCTS = [
 ];
 
 const SHIPPING_NOTE = "Freeship trong bán kính 2km. Xa hơn quán sẽ báo phí khi xác nhận đơn.";
+const SUGAR_OPTIONS = ["100% đường", "70% đường", "50% đường", "30% đường", "Không đường"];
+const ICE_OPTIONS = ["100% đá", "70% đá", "50% đá", "Ít đá", "Không đá"];
 
 // --- 2. CART STATE ---
 let cart = [];
@@ -77,7 +79,18 @@ let cart = [];
 function loadCartFromStorage() {
   try {
     const saved = localStorage.getItem("leme_cart_v2");
-    if (saved) cart = JSON.parse(saved);
+    const parsed = saved ? JSON.parse(saved) : [];
+    cart = [];
+    if (Array.isArray(parsed)) parsed.forEach(item => {
+      const product = PRODUCTS.find(p => p.id === item?.id);
+      if (!product || !Number.isInteger(item.quantity) || item.quantity < 1) return;
+      const sugar = product.hasOptions ? (SUGAR_OPTIONS.includes(item.sugar) ? item.sugar : "70% đường") : "";
+      const ice = product.hasOptions ? (ICE_OPTIONS.includes(item.ice) ? item.ice : "70% đá") : "";
+      const cartKey = `${product.id}-${sugar}-${ice}`;
+      const existing = cart.find(entry => entry.cartKey === cartKey);
+      if (existing) existing.quantity = Math.min(99, existing.quantity + item.quantity);
+      else cart.push({ ...product, sugar, ice, cartKey, quantity: Math.min(99, item.quantity) });
+    });
   } catch (e) {
     cart = [];
   }
@@ -85,7 +98,11 @@ function loadCartFromStorage() {
 }
 
 function saveCartToStorage() {
-  localStorage.setItem("leme_cart_v2", JSON.stringify(cart));
+  try {
+    localStorage.setItem("leme_cart_v2", JSON.stringify(cart));
+  } catch {
+    showToast("Không lưu được giỏ hàng trên thiết bị này. Bạn giữ trang mở đến khi gửi đơn nhé.");
+  }
   updateCartUI();
 }
 
@@ -100,7 +117,7 @@ function addToCart(productId, options = {}) {
   const existing = cart.find(item => item.cartKey === cartKey);
 
   if (existing) {
-    existing.quantity += 1;
+    existing.quantity = Math.min(99, existing.quantity + 1);
   } else {
     cart.push({
       cartKey,
@@ -123,7 +140,7 @@ function addToCart(productId, options = {}) {
 function updateItemQuantity(cartKey, delta) {
   const item = cart.find(i => i.cartKey === cartKey);
   if (!item) return;
-  item.quantity += delta;
+  item.quantity = Math.min(99, item.quantity + delta);
   if (item.quantity <= 0) {
     cart = cart.filter(i => i.cartKey !== cartKey);
   }
@@ -161,12 +178,12 @@ function renderMenu(filter = "all") {
 
   container.innerHTML = filtered.map(product => `
     <div class="group bg-white rounded-3xl p-3.5 border border-[#e4e8d8] card-soft flex flex-col">
-      <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3 cursor-pointer" onclick="handleProductClick(${product.id})">
-        <img src="${product.image}" alt="${product.name}" loading="lazy"
+      <button type="button" aria-label="Chọn ${product.name}" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3 cursor-pointer" onclick="handleProductClick(${product.id})">
+        <img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async"
              style="object-position: ${product.imagePos};"
              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         ${product.badge ? `<span class="absolute top-2.5 left-2.5 text-xs font-bold px-2.5 py-1 rounded-full bg-white/95 text-[#3a5a40] shadow-sm">${product.badge}</span>` : ""}
-      </div>
+      </button>
 
       <span class="text-xs font-semibold text-[#3a5a40] mb-1">${product.categoryName}</span>
       <h3 class="text-base font-bold font-quicksand text-slate-900 mb-1">${product.name}</h3>
@@ -280,7 +297,7 @@ function optionButtons(groupId, values, activeValue) {
   return `
     <div class="flex flex-wrap gap-2" id="${groupId}">
       ${values.map(v => `
-        <button type="button" data-val="${v}"
+        <button type="button" data-val="${v}" aria-pressed="${v === activeValue}"
                 class="modal-opt-btn py-1.5 px-3 rounded-lg border text-sm ${v === activeValue ? 'active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold' : 'border-slate-200 text-slate-700'}">
           ${v}
         </button>
@@ -315,11 +332,11 @@ function openProductModal(productId) {
         <div class="space-y-4">
           <div>
             <label class="font-bold text-sm text-slate-800 block mb-1.5">Độ ngọt</label>
-            ${optionButtons("option-sugar-group", ["100% đường", "70% đường", "50% đường", "30% đường", "Không đường"], "70% đường")}
+            ${optionButtons("option-sugar-group", SUGAR_OPTIONS, "70% đường")}
           </div>
           <div>
             <label class="font-bold text-sm text-slate-800 block mb-1.5">Lượng đá</label>
-            ${optionButtons("option-ice-group", ["100% đá", "70% đá", "50% đá", "Ít đá", "Không đá"], "70% đá")}
+            ${optionButtons("option-ice-group", ICE_OPTIONS, "70% đá")}
           </div>
         </div>
 
@@ -332,6 +349,7 @@ function openProductModal(productId) {
 
   setupModalOptionListeners();
   modal.classList.remove("hidden");
+  activateDialog(modal);
 }
 
 function setupModalOptionListeners() {
@@ -342,10 +360,12 @@ function setupModalOptionListeners() {
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         buttons.forEach(b => {
+          b.setAttribute("aria-pressed", "false");
           b.classList.remove("active", "border-[#3a5a40]", "bg-[#f0f2eb]", "text-[#3a5a40]", "font-bold");
           b.classList.add("border-slate-200", "text-slate-700");
         });
         btn.classList.add("active", "border-[#3a5a40]", "bg-[#f0f2eb]", "text-[#3a5a40]", "font-bold");
+        btn.setAttribute("aria-pressed", "true");
         btn.classList.remove("border-slate-200", "text-slate-700");
       });
     });
@@ -367,6 +387,7 @@ function confirmModalAddToCart() {
 function closeProductModal() {
   const modal = document.getElementById("product-detail-modal");
   if (modal) modal.classList.add("hidden");
+  deactivateDialog(modal);
   activeModalProduct = null;
 }
 
@@ -378,7 +399,10 @@ function toggleCartDrawer(open = true) {
 
   backdrop.classList.toggle("open", open);
   drawer.classList.toggle("open", open);
-  document.body.style.overflow = open ? "hidden" : "";
+  drawer.inert = !open;
+  drawer.setAttribute("aria-hidden", String(!open));
+  if (open) activateDialog(drawer);
+  else deactivateDialog(drawer);
 }
 
 // --- 7. CHECKOUT ---
@@ -396,18 +420,73 @@ function openCheckoutModal() {
   document.getElementById("checkout-summary-subtotal").textContent = formatVND(getSubtotal());
 
   modal.classList.remove("hidden");
+  activateDialog(modal);
 }
 
 function closeCheckoutModal() {
   const modal = document.getElementById("checkout-modal");
   if (modal) modal.classList.add("hidden");
+  deactivateDialog(modal);
 }
 
 let lastGeneratedOrderMessage = "";
+let lastOrderDraft = null;
+const DRAFT_KEY = "leme_order_draft_v1";
+
+function loadOrderDraft() {
+  try {
+    const draft = JSON.parse(sessionStorage.getItem(DRAFT_KEY));
+    if (draft && ["name", "phone", "address", "message"].every(key => typeof draft[key] === "string") &&
+        Number.isFinite(draft.subtotal) && draft.subtotal >= 0) {
+      lastOrderDraft = draft;
+      lastGeneratedOrderMessage = draft.message;
+      document.getElementById("resume-order-btn")?.classList.remove("hidden");
+    }
+  } catch { /* A blocked store must not stop ordering. */ }
+}
+
+function showOrderDraft() {
+  if (!lastOrderDraft) return;
+  toggleCartDrawer(false);
+  const draft = lastOrderDraft;
+  document.getElementById("success-customer-name").textContent = draft.name;
+  document.getElementById("success-customer-phone").textContent = draft.phone;
+  document.getElementById("success-customer-address").textContent = draft.address;
+  document.getElementById("success-order-total").textContent = formatVND(draft.subtotal);
+  document.getElementById("generated-order-text").value = draft.message;
+  document.getElementById("copy-order-status").textContent = "Sao chép nội dung bên dưới, mở Zalo hoặc Messenger rồi dán và gửi cho quán.";
+  const modal = document.getElementById("order-success-modal");
+  modal.classList.remove("hidden");
+  activateDialog(modal);
+}
+
+function discardOrderDraft() {
+  closeSuccessModal();
+  lastOrderDraft = null;
+  lastGeneratedOrderMessage = "";
+  try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* Optional storage. */ }
+  document.getElementById("resume-order-btn")?.classList.add("hidden");
+  document.getElementById("checkout-form")?.reset();
+  document.getElementById("generated-order-text").value = "";
+  ["success-customer-name", "success-customer-phone", "success-customer-address", "success-order-total"]
+    .forEach(id => { document.getElementById(id).textContent = ""; });
+  showToast("Đã xóa bản soạn. Các món trong giỏ vẫn được giữ lại.");
+}
+
+function validateCheckout() {
+  const name = document.getElementById("order-name");
+  const phone = document.getElementById("order-phone");
+  const address = document.getElementById("order-address");
+  const normalizedPhone = phone.value.replace(/[\s().-]/g, "").replace(/^\+84/, "0");
+  name.setCustomValidity(name.value.trim() ? "" : "Bạn nhập họ tên nhé.");
+  phone.setCustomValidity(/^0[0-9]{9,10}$/.test(normalizedPhone) ? "" : "Nhập số điện thoại gồm 10–11 chữ số, bắt đầu bằng 0 hoặc +84.");
+  address.setCustomValidity(address.value.trim() ? "" : "Bạn nhập địa chỉ nhận hàng nhé.");
+  return document.getElementById("checkout-form").reportValidity();
+}
 
 function handleCheckoutSubmit(e) {
   e.preventDefault();
-  if (cart.length === 0) return;
+  if (cart.length === 0 || !validateCheckout()) return;
 
   const name = document.getElementById("order-name")?.value.trim() || "Khách hàng";
   const phone = document.getElementById("order-phone")?.value.trim() || "";
@@ -434,46 +513,51 @@ Ship: ${SHIPPING_NOTE}
 
 Quán xác nhận đơn giúp em nhé!`;
 
-  navigator.clipboard.writeText(lastGeneratedOrderMessage).catch(() => {});
-
+  lastOrderDraft = { name, phone, address, subtotal, message: lastGeneratedOrderMessage };
+  let saved = true;
+  try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(lastOrderDraft)); }
+  catch { saved = false; }
+  document.getElementById("resume-order-btn")?.classList.remove("hidden");
   closeCheckoutModal();
-
-  const successModal = document.getElementById("order-success-modal");
-  if (successModal) {
-    document.getElementById("success-customer-name").textContent = name;
-    document.getElementById("success-customer-phone").textContent = phone;
-    document.getElementById("success-customer-address").textContent = address;
-    document.getElementById("success-order-total").textContent = formatVND(subtotal);
-    successModal.classList.remove("hidden");
-  }
-
-  clearCart();
+  showOrderDraft();
+  if (!saved) showToast("Không lưu được bản soạn. Bạn sao chép và gửi cho quán trước khi tải lại trang nhé.");
+  copyGeneratedOrderText();
 }
 
-function copyGeneratedOrderText() {
-  if (!lastGeneratedOrderMessage) return;
-  navigator.clipboard.writeText(lastGeneratedOrderMessage).then(() => {
-    showToast("Đã sao chép đơn hàng. Bạn dán vào Zalo hoặc Messenger nhé.", "success");
-  }).catch(() => {
-    showToast("Chưa sao chép được, bạn thử lại nhé.", "info");
-  });
+async function copyGeneratedOrderText() {
+  const message = lastGeneratedOrderMessage;
+  if (!message) return;
+  const status = document.getElementById("copy-order-status");
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+    await navigator.clipboard.writeText(message);
+    if (message !== lastGeneratedOrderMessage) return;
+    status.textContent = "Đã sao chép. Bạn mở Zalo hoặc Messenger, dán nội dung rồi bấm gửi cho quán nhé.";
+  } catch {
+    if (message !== lastGeneratedOrderMessage) return;
+    status.textContent = "Chưa sao chép tự động được. Bạn chọn nội dung bên dưới để sao chép thủ công rồi gửi cho quán.";
+    const field = document.getElementById("generated-order-text");
+    if (!document.getElementById("order-success-modal").classList.contains("hidden")) {
+      field.focus();
+      field.select();
+    }
+  }
 }
 
 function closeSuccessModal() {
   const modal = document.getElementById("order-success-modal");
   if (modal) modal.classList.add("hidden");
+  deactivateDialog(modal);
 }
 
 // --- 8. VIDEO POP-UP (video dọc 9:16) ---
 function openVideoModal() {
   const modal = document.getElementById("video-modal");
   const modalVideo = document.getElementById("modal-tea-video");
-  const previewVideo = document.getElementById("preview-tea-video");
   if (!modal) return;
 
   modal.classList.remove("hidden");
-  document.body.classList.add("overflow-hidden");
-  previewVideo?.pause();
+  activateDialog(modal);
   if (modalVideo) {
     modalVideo.currentTime = 0;
     modalVideo.play().catch(() => {});
@@ -485,17 +569,64 @@ function closeVideoModal() {
   if (!modal || modal.classList.contains("hidden")) return;
 
   modal.classList.add("hidden");
-  document.body.classList.remove("overflow-hidden");
+  deactivateDialog(modal);
   document.getElementById("modal-tea-video")?.pause();
-  document.getElementById("preview-tea-video")?.play().catch(() => {});
 }
 
 function handleVideoModalBackdropClick(event) {
   if (event.target.id === "video-modal") closeVideoModal();
 }
 
-// Phím Esc đóng mọi pop-up
+// Shared focus and scroll handling for drawers and dialogs.
+let activeDialog = null;
+let dialogTrigger = null;
+let previousBodyOverflow = "";
+let inertBackground = [];
+
+function getDialogControls(dialog) {
+  return [...dialog.querySelectorAll('a[href], button, input, textarea, select, video[controls], [tabindex="0"]')]
+    .filter(element => !element.disabled && element.getClientRects().length > 0);
+}
+
+function activateDialog(dialog) {
+  if (!dialog || activeDialog === dialog) return;
+  if (activeDialog) deactivateDialog(activeDialog);
+  dialogTrigger = document.activeElement;
+  previousBodyOverflow = document.body.style.overflow;
+  activeDialog = dialog;
+  document.body.style.overflow = "hidden";
+  inertBackground = [...document.body.children].filter(element =>
+    element !== dialog && element.id !== "cart-backdrop" && element.id !== "toast-container" &&
+    !["SCRIPT", "STYLE"].includes(element.tagName)
+  ).map(element => ({ element, wasInert: element.inert }));
+  inertBackground.forEach(({ element }) => { element.inert = true; });
+  (getDialogControls(dialog)[0] || dialog).focus({ preventScroll: true });
+}
+
+function deactivateDialog(dialog) {
+  if (!dialog || activeDialog !== dialog) return;
+  activeDialog = null;
+  document.body.style.overflow = previousBodyOverflow;
+  inertBackground.forEach(({ element, wasInert }) => { element.inert = wasInert; });
+  inertBackground = [];
+  if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
+  dialogTrigger = null;
+}
+
+// Keep keyboard navigation inside the active dialog.
 document.addEventListener("keydown", (e) => {
+  if (e.key === "Tab" && activeDialog) {
+    const controls = getDialogControls(activeDialog);
+    const first = controls[0] || activeDialog;
+    const last = controls[controls.length - 1] || activeDialog;
+    if (e.shiftKey && (document.activeElement === first || !controls.includes(document.activeElement))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !controls.includes(document.activeElement))) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
   if (e.key !== "Escape") return;
   closeVideoModal();
   closeProductModal();
@@ -508,16 +639,23 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   renderMenu("all");
   loadCartFromStorage();
+  loadOrderDraft();
+  document.querySelectorAll("#checkout-form input").forEach(input => {
+    input.addEventListener("input", () => input.setCustomValidity(""));
+  });
 
   // Tab lọc menu
   const filterTabs = document.querySelectorAll(".menu-tab-btn");
   filterTabs.forEach(btn => {
+    btn.setAttribute("aria-pressed", String(btn.getAttribute("data-filter") === "all"));
     btn.addEventListener("click", () => {
       filterTabs.forEach(b => {
+        b.setAttribute("aria-pressed", "false");
         b.classList.remove("bg-[#3a5a40]", "text-[#e9edc9]");
         b.classList.add("text-slate-600");
       });
       btn.classList.add("bg-[#3a5a40]", "text-[#e9edc9]");
+      btn.setAttribute("aria-pressed", "true");
       btn.classList.remove("text-slate-600");
       renderMenu(btn.getAttribute("data-filter") || "all");
     });
@@ -535,14 +673,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+    mobileMenuBtn.addEventListener("click", () => {
+      const hidden = mobileMenu.classList.toggle("hidden");
+      mobileMenuBtn.setAttribute("aria-expanded", String(!hidden));
+    });
     mobileMenu.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+      });
     });
   }
 
-  if (typeof AOS !== "undefined") {
-    AOS.init({ once: true, duration: 600, offset: 40, easing: "ease-out-cubic" });
-  }
 });
 
