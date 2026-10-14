@@ -2,7 +2,7 @@
 <html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi</title>
 
   <meta name="description" content="Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi. Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai. Mở cửa 9:00 - 22:00 hàng ngày.">
@@ -23,6 +23,8 @@
 
   <link rel="stylesheet" href="css/tailwind.css">
   <link rel="stylesheet" href="css/custom.css">
+  <!-- Lenis Smooth Inertial Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 <body class="bg-[#fbfbf9] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-[#3a5a40] selection:text-[#e9edc9]">
 
@@ -115,12 +117,15 @@
         </p>
 
         <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-          <a href="#menu" class="px-7 py-3.5 rounded-2xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition active:scale-95">
+          <a href="#menu" class="px-7 py-3.5 rounded-2xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition active:scale-95 shadow-md">
             Xem menu
           </a>
+          <button type="button" onclick="openRandomizerModal()" class="px-5 py-3.5 rounded-2xl bg-[#f0f2eb] hover:bg-[#e4e8d8] text-[#3a5a40] font-quicksand font-bold transition active:scale-95 border border-[#d4b872]/50 shadow-sm inline-flex items-center gap-2">
+            <span class="animate-dice-shake text-base">🎲</span> Hôm nay uống gì?
+          </button>
           <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
-             class="px-7 py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold transition active:scale-95">
-            Đặt ShopeeFood
+             class="px-6 py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold transition active:scale-95">
+            ShopeeFood
           </a>
         </div>
 
@@ -162,19 +167,20 @@
        3. MENU
        ======================================================== -->
   <section id="menu" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-8">
-    <div class="text-center max-w-xl mx-auto mb-10">
+    <div class="text-center max-w-xl mx-auto mb-6">
       <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Menu</p>
       <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Món ngon tại Lê Mê</h2>
       <p class="text-slate-600">Chọn món, soạn đơn rồi gửi cho quán qua Zalo hoặc Messenger để xác nhận.</p>
       <p class="text-sm text-slate-500 mt-2">Giá tham khảo; quán sẽ xác nhận món, giá và phí giao hàng trước khi nhận đơn.</p>
     </div>
 
-    <div class="flex justify-center mb-8">
-      <div class="inline-flex flex-wrap justify-center gap-1 p-1.5 bg-white border border-[#e4e8d8] rounded-2xl shadow-sm">
-        <button data-filter="all" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm bg-[#3a5a40] text-[#e9edc9] transition">Tất cả</button>
-        <button data-filter="milktea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition">Trà sữa & Matcha</button>
-        <button data-filter="fruittea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition">Trà hoa quả</button>
-        <button data-filter="bottle" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition">Cốt trà đóng chai</button>
+    <!-- Thanh lọc danh mục Sticky -->
+    <div id="sticky-tabs-container" class="sticky-menu-tabs flex justify-center mb-8">
+      <div class="inline-flex flex-wrap justify-center gap-1 p-1.5 bg-white/95 border border-[#e4e8d8] rounded-2xl shadow-sm">
+        <button data-filter="all" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm bg-[#3a5a40] text-[#e9edc9] transition active:scale-95">Tất cả</button>
+        <button data-filter="milktea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà sữa & Matcha</button>
+        <button data-filter="fruittea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà hoa quả</button>
+        <button data-filter="bottle" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Cốt trà đóng chai</button>
       </div>
     </div>
 
@@ -482,13 +488,90 @@
   </div>
 
   <!-- ========================================================
+       POP-UP HÔM NAY UỐNG GÌ? (RANDOMIZER)
+       ======================================================== -->
+  <div id="randomizer-modal" role="dialog" aria-modal="true" aria-label="Hôm nay uống gì?" tabindex="-1"
+       class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+       onclick="if(event.target===this) closeRandomizerModal()">
+    <div class="relative bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center border-2 border-[#d4b872]/60 overflow-hidden">
+      <!-- Background subtle glow -->
+      <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#e9edc9]/50 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-[#3a5a40]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <button onclick="closeRandomizerModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold transition" aria-label="Đóng">✕</button>
+
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#f0f2eb] text-3xl mb-3 shadow-inner">
+        <span id="randomizer-dice-icon" class="animate-dice-shake">🎲</span>
+      </div>
+
+      <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-1">Hôm nay uống gì?</h3>
+      <p class="text-xs text-slate-500 mb-5">Đang phân vân? Để Lê Mê gieo quẻ chọn ly trà hợp tâm trạng bạn nhất nhé!</p>
+
+      <!-- Slot result card -->
+      <div id="randomizer-card" class="bg-[#fbfbf9] rounded-2xl p-3.5 border border-[#e4e8d8] mb-5 shadow-sm text-left">
+        <div class="flex items-center gap-3">
+          <img id="randomizer-img" src="assets/drinks.jpg" alt="Món gợi ý" class="w-16 h-16 rounded-xl object-cover border border-[#d4b872]/40 shadow-sm flex-shrink-0" style="object-position: center;">
+          <div class="min-w-0 flex-1">
+            <span id="randomizer-mood" class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#3a5a40]/10 text-[#3a5a40] mb-1">⚡ Nạp năng lượng</span>
+            <h4 id="randomizer-name" class="font-bold font-quicksand text-slate-900 text-base truncate">Trà Sữa Lê Mê</h4>
+            <p id="randomizer-spec" class="text-xs text-slate-500">70% đường • 70% đá</p>
+            <p id="randomizer-price" class="text-sm font-bold font-quicksand text-[#3a5a40] mt-0.5">35.000đ</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="space-y-2">
+        <button id="randomizer-add-btn" onclick="addRandomizerDrinkToCart()" type="button"
+                class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-sm transition active:scale-95 shadow-md flex items-center justify-center gap-2">
+          <span>Uống luôn món này</span>
+          <span class="text-base">🛒</span>
+        </button>
+        <button onclick="spinRandomizer()" type="button"
+                class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-quicksand font-bold text-sm transition active:scale-95 flex items-center justify-center gap-1.5">
+          <span>Quay lại ly khác</span>
+          <span>🎲</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MOBILE BOTTOM DOCK (Thanh điều hướng nhanh ngón tay cái)
+       ======================================================== -->
+  <aside id="mobile-dock" aria-label="Thao tác nhanh"
+         class="lg:hidden fixed bottom-3 left-3 right-3 z-40 max-w-md mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-[#e4e8d8] p-2 flex items-center justify-between mobile-bottom-dock transition-transform duration-300">
+    <a href="#menu" class="flex flex-col items-center justify-center px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition" title="Xem menu">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+      <span class="text-[11px] font-bold font-quicksand">Menu</span>
+    </a>
+
+    <button onclick="openRandomizerModal()" type="button" class="flex flex-col items-center justify-center px-3.5 py-1.5 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition" title="Lê Mê chọn hộ">
+      <span class="text-base leading-tight mb-0.5">🎲</span>
+      <span class="text-[11px] font-bold font-quicksand">Uống gì?</span>
+    </button>
+
+    <button id="mobile-dock-cart" onclick="toggleCartDrawer(true)" type="button"
+            class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#3a5a40] text-[#e9edc9] font-quicksand font-bold text-xs shadow-md active:scale-95 transition"
+            aria-label="Xem giỏ hàng">
+      <div class="relative flex items-center justify-center">
+        <svg class="w-4 h-4 text-[#e9edc9]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+        <span class="cart-counter-badge hidden absolute -top-2 -right-2.5 min-w-[16px] h-[16px] px-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
+      </div>
+      <span id="mobile-dock-cart-text">Giỏ hàng (0đ)</span>
+    </button>
+  </aside>
+
+  <!-- ========================================================
        NÚT LIÊN HỆ NỔI
        ======================================================== -->
-  <div class="fixed bottom-5 left-5 z-40 flex items-center gap-2">
+  <div class="fixed bottom-20 left-4 sm:bottom-5 sm:left-5 z-40 flex items-center gap-2">
     <a href="tel:0362126184" title="Gọi 036 212 6184" aria-label="Gọi cho quán"
-       class="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg flex items-center justify-center text-lg transition hover:scale-105">📞</a>
+       class="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg flex items-center justify-center text-lg transition hover:scale-105 active:scale-95">📞</a>
     <a href="https://m.me/61590901593823" target="_blank" rel="noopener noreferrer" title="Nhắn tin Facebook" aria-label="Nhắn tin Facebook"
-       class="w-12 h-12 rounded-full bg-[#0084ff] hover:bg-[#0070db] text-white shadow-lg flex items-center justify-center transition hover:scale-105">
+       class="w-12 h-12 rounded-full bg-[#0084ff] hover:bg-[#0070db] text-white shadow-lg flex items-center justify-center transition hover:scale-105 active:scale-95">
       <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.43 3.12 7.14.16.14.26.35.26.57l-.07 1.77c-.03.8.76 1.36 1.48 1.05l1.97-.87c.18-.08.38-.1.58-.04.85.24 1.74.37 2.66.37 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm1.09 13.07l-2.57-2.74-5.01 2.74c-.38.21-.83-.19-.66-.6l5.37-5.71 2.57 2.74 5.01-2.74c.38-.21.83.19.66.6l-5.37 5.71z"/></svg>
     </a>
   </div>

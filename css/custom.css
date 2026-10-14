@@ -1,4 +1,4 @@
-﻿/* Lê Mê - Trà Sữa Đậm Vị | Blue #3a5a40 & Butter Yellow #e9edc9 */
+/* Lê Mê - Trà Sữa Đậm Vị | Blue #3a5a40 & Butter Yellow #e9edc9 */
 
 :root {
   --brand-blue: #3a5a40;
@@ -138,6 +138,99 @@ html {
 @media (max-width: 639px) {
   input, textarea { font-size: 16px !important; }
 }
+
+/* ========================================================
+   LENIS SMOOTH SCROLL
+   ======================================================== */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ========================================================
+   FLY TO CART ANIMATION
+   ======================================================== */
+.flying-cart-item {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  background-size: cover;
+  background-position: center;
+  border: 2.5px solid #d4b872;
+  box-shadow: 0 10px 25px -5px rgba(40, 62, 44, 0.35);
+  z-index: 99999;
+  pointer-events: none;
+  transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.65s ease;
+}
+
+/* ========================================================
+   STICKY MENU TABS
+   ======================================================== */
+.sticky-menu-tabs {
+  position: sticky;
+  top: 68px;
+  z-index: 30;
+  padding: 0.6rem 0;
+  background: rgba(251, 251, 249, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+}
+.sticky-menu-tabs.is-stuck {
+  box-shadow: 0 8px 20px -8px rgba(40, 62, 44, 0.12);
+  border-bottom: 1px solid rgba(228, 232, 216, 0.8);
+}
+
+/* ========================================================
+   MOBILE BOTTOM DOCK
+   ======================================================== */
+.mobile-bottom-dock {
+  box-shadow: 0 8px 32px rgba(40, 62, 44, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* ========================================================
+   RANDOMIZER ANIMATIONS
+   ======================================================== */
+@keyframes shakeDice {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-15deg) scale(1.15); }
+  50% { transform: rotate(15deg) scale(1.2); }
+  75% { transform: rotate(-8deg) scale(1.1); }
+}
+.animate-dice-shake {
+  display: inline-block;
+  animation: shakeDice 0.4s ease-in-out infinite;
+}
+
+@keyframes slotSpin {
+  0% { transform: translateY(12px) scale(0.95); opacity: 0.3; filter: blur(2px); }
+  50% { transform: translateY(-4px) scale(1.02); opacity: 0.8; filter: blur(0.5px); }
+  100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+}
+.animate-slot-item {
+  animation: slotSpin 0.18s ease-out;
+}
+
+@keyframes cartBounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.28) rotate(-6deg); }
+  65% { transform: scale(1.18) rotate(4deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.cart-bounce-effect {
+  animation: cartBounce 0.45s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after {
@@ -146,4 +239,5 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
 

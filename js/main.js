@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Lê Mê - Trà Sữa Đậm Vị
  * Theme: Xanh rêu & Kem
  */
@@ -106,7 +106,114 @@ function saveCartToStorage() {
   updateCartUI();
 }
 
-function addToCart(productId, options = {}) {
+// --- AUDIO SYNTHESIZER (Web Audio API) ---
+let audioCtx = null;
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) audioCtx = new AudioContextClass();
+  }
+  if (audioCtx && audioCtx.state === "suspended") {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
+}
+
+function playPopSound() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(540, now);
+    osc.frequency.exponentialRampToValueAtTime(920, now + 0.08);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } catch (e) {}
+}
+
+function playTickSound() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(420, now);
+    gain.gain.setValueAtTime(0.08, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.04);
+  } catch (e) {}
+}
+
+function playChimeSound() {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const t = ctx.currentTime + idx * 0.07;
+      osc.type = "triangle";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.12, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(t);
+      osc.stop(t + 0.28);
+    });
+  } catch (e) {}
+}
+
+// --- FLY TO CART ANIMATION ---
+function triggerFlyToCart(sourceEl, imgSrc) {
+  if (!sourceEl) return;
+  const mobileDock = document.getElementById("mobile-dock-cart");
+  const headerCart = document.getElementById("cart-toggle-btn");
+  const isMobile = window.innerWidth < 1024 && mobileDock && mobileDock.offsetParent !== null;
+  const targetCart = isMobile ? mobileDock : headerCart;
+  if (!targetCart) return;
+
+  const startRect = sourceEl.getBoundingClientRect();
+  const targetRect = targetCart.getBoundingClientRect();
+
+  const fly = document.createElement("div");
+  fly.className = "flying-cart-item";
+  fly.style.backgroundImage = `url('${imgSrc || "assets/logo.png"}')`;
+  const startX = startRect.left + startRect.width / 2 - 24;
+  const startY = startRect.top + startRect.height / 2 - 24;
+  fly.style.left = `${startX}px`;
+  fly.style.top = `${startY}px`;
+  document.body.appendChild(fly);
+
+  const deltaX = targetRect.left + targetRect.width / 2 - 24 - startX;
+  const deltaY = targetRect.top + targetRect.height / 2 - 24 - startY;
+
+  requestAnimationFrame(() => {
+    fly.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.2)`;
+    fly.style.opacity = "0.2";
+  });
+
+  setTimeout(() => {
+    fly.remove();
+    bounceCartButton();
+    playPopSound();
+  }, 650);
+}
+
+function addToCart(productId, options = {}, sourceEl = null) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
@@ -134,7 +241,13 @@ function addToCart(productId, options = {}) {
 
   saveCartToStorage();
   showToast(`Đã thêm <b>${product.name}</b> vào giỏ`, "success");
-  bounceCartButton();
+
+  if (sourceEl) {
+    triggerFlyToCart(sourceEl, product.image);
+  } else {
+    bounceCartButton();
+    playPopSound();
+  }
 }
 
 function updateItemQuantity(cartKey, delta) {
@@ -144,6 +257,7 @@ function updateItemQuantity(cartKey, delta) {
   if (item.quantity <= 0) {
     cart = cart.filter(i => i.cartKey !== cartKey);
   }
+  playPopSound();
   saveCartToStorage();
 }
 
@@ -177,11 +291,11 @@ function renderMenu(filter = "all") {
   const filtered = filter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
 
   container.innerHTML = filtered.map(product => `
-    <div class="group bg-white rounded-3xl p-3.5 border border-[#e4e8d8] card-soft flex flex-col">
-      <button type="button" aria-label="Chọn ${product.name}" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3 cursor-pointer" onclick="handleProductClick(${product.id})">
+    <div class="group bg-white rounded-3xl p-3.5 border border-[#e4e8d8] card-soft flex flex-col" data-product-id="${product.id}">
+      <button type="button" aria-label="Chọn ${product.name}" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3 cursor-pointer" onclick="handleProductClick(${product.id}, event)">
         <img src="${product.image}" alt="${product.name}" loading="lazy" decoding="async"
              style="object-position: ${product.imagePos};"
-             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+             class="product-card-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         ${product.badge ? `<span class="absolute top-2.5 left-2.5 text-xs font-bold px-2.5 py-1 rounded-full bg-white/95 text-[#3a5a40] shadow-sm">${product.badge}</span>` : ""}
       </button>
 
@@ -191,7 +305,7 @@ function renderMenu(filter = "all") {
 
       <div class="mt-auto pt-3 border-t border-[#e4e8d8] flex items-center justify-between">
         <span class="text-lg font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
-        <button onclick="handleProductClick(${product.id})" title="Thêm vào giỏ" aria-label="Thêm ${product.name} vào giỏ"
+        <button onclick="handleProductClick(${product.id}, event)" title="Thêm vào giỏ" aria-label="Thêm ${product.name} vào giỏ"
                 class="w-10 h-10 rounded-full bg-[#3a5a40] hover:bg-[#d4b872] text-[#e9edc9] hover:text-slate-900 flex items-center justify-center font-bold text-xl transition active:scale-90">
           +
         </button>
@@ -201,24 +315,40 @@ function renderMenu(filter = "all") {
 }
 
 // Món có tùy chọn (đường/đá) thì mở bảng chọn, món đóng chai thêm thẳng vào giỏ
-function handleProductClick(productId) {
+function handleProductClick(productId, event = null) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
+
+  const targetEl = event?.currentTarget || event?.target;
+  const card = targetEl?.closest?.(".group");
+  const imgEl = card?.querySelector?.(".product-card-img") || targetEl;
+
   if (product.hasOptions) {
+    playTickSound();
     openProductModal(productId);
   } else {
-    addToCart(productId);
+    addToCart(productId, {}, imgEl);
   }
 }
 
 function updateCartUI() {
   const totalCount = getItemCount();
+  const subtotal = getSubtotal();
+
   document.querySelectorAll(".cart-counter-badge").forEach(badge => {
     badge.textContent = totalCount;
     badge.classList.toggle("hidden", totalCount === 0);
   });
 
-  const subtotal = getSubtotal();
+  const mobileDockText = document.getElementById("mobile-dock-cart-text");
+  if (mobileDockText) {
+    if (totalCount === 0) {
+      mobileDockText.textContent = "Giỏ hàng (0đ)";
+    } else {
+      mobileDockText.textContent = `${totalCount} món • ${formatVND(subtotal)}`;
+    }
+  }
+
   const cartList = document.getElementById("cart-items-list");
   const cartSubtotalEl = document.getElementById("cart-subtotal");
   const emptyCartState = document.getElementById("cart-empty-state");
@@ -244,9 +374,9 @@ function updateCartUI() {
           <div class="flex items-center justify-between mt-1">
             <span class="text-sm font-bold text-[#3a5a40]">${formatVND(item.price)}</span>
             <div class="flex items-center bg-white rounded-lg border border-slate-200 overflow-hidden">
-              <button onclick="updateItemQuantity('${item.cartKey}', -1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold" aria-label="Bớt">−</button>
+              <button onclick="updateItemQuantity('${item.cartKey}', -1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Bớt">−</button>
               <span class="w-7 text-center text-sm font-bold text-slate-800">${item.quantity}</span>
-              <button onclick="updateItemQuantity('${item.cartKey}', 1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold" aria-label="Thêm">+</button>
+              <button onclick="updateItemQuantity('${item.cartKey}', 1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Thêm">+</button>
             </div>
           </div>
         </div>
@@ -260,10 +390,15 @@ function updateCartUI() {
 
 function bounceCartButton() {
   const btn = document.getElementById("cart-toggle-btn");
-  if (btn) {
-    btn.classList.add("scale-110");
-    setTimeout(() => btn.classList.remove("scale-110"), 200);
-  }
+  const mobileDockBtn = document.getElementById("mobile-dock-cart");
+  [btn, mobileDockBtn].forEach(el => {
+    if (el) {
+      el.classList.remove("cart-bounce-effect");
+      void el.offsetWidth;
+      el.classList.add("cart-bounce-effect");
+      setTimeout(() => el.classList.remove("cart-bounce-effect"), 500);
+    }
+  });
 }
 
 // --- 4. TOAST ---
@@ -359,6 +494,7 @@ function setupModalOptionListeners() {
     const buttons = group.querySelectorAll(".modal-opt-btn");
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
+        playTickSound();
         buttons.forEach(b => {
           b.setAttribute("aria-pressed", "false");
           b.classList.remove("active", "border-[#3a5a40]", "bg-[#f0f2eb]", "text-[#3a5a40]", "font-bold");
@@ -376,11 +512,12 @@ function confirmModalAddToCart() {
   if (!activeModalProduct) return;
   const sugarBtn = document.querySelector("#option-sugar-group .modal-opt-btn.active");
   const iceBtn = document.querySelector("#option-ice-group .modal-opt-btn.active");
+  const modalImg = document.querySelector("#product-modal-content img");
 
   addToCart(activeModalProduct.id, {
     sugar: sugarBtn ? sugarBtn.getAttribute("data-val") : "70% đường",
     ice: iceBtn ? iceBtn.getAttribute("data-val") : "70% đá"
-  });
+  }, modalImg);
   closeProductModal();
 }
 
@@ -520,6 +657,7 @@ Quán xác nhận đơn giúp em nhé!`;
   document.getElementById("resume-order-btn")?.classList.remove("hidden");
   closeCheckoutModal();
   showOrderDraft();
+  playChimeSound();
   if (!saved) showToast("Không lưu được bản soạn. Bạn sao chép và gửi cho quán trước khi tải lại trang nhé.");
   copyGeneratedOrderText();
 }
@@ -577,11 +715,146 @@ function handleVideoModalBackdropClick(event) {
   if (event.target.id === "video-modal") closeVideoModal();
 }
 
+// --- 9. RANDOMIZER: "HÔM NAY UỐNG GÌ?" ---
+const RANDOMIZER_PRESETS = [
+  {
+    productId: 1,
+    name: "Trà Sữa Lê Mê",
+    mood: "⚡ Cần nạp năng lượng sau deadline",
+    sugar: "70% đường",
+    ice: "70% đá",
+    image: "assets/drinks.jpg",
+    imagePos: "70% 35%",
+    price: 35000
+  },
+  {
+    productId: 2,
+    name: "Matcha Phân Tầng",
+    mood: "🍃 Muốn một ngày nhẹ nhàng, bình yên",
+    sugar: "50% đường",
+    ice: "50% đá",
+    image: "assets/drinks.jpg",
+    imagePos: "80% 80%",
+    price: 42000
+  },
+  {
+    productId: 3,
+    name: "Trà Hoa Quả",
+    mood: "🍊 Thanh mát giải nhiệt tức thì",
+    sugar: "70% đường",
+    ice: "70% đá",
+    image: "assets/drinks.jpg",
+    imagePos: "25% 60%",
+    price: 38000
+  },
+  {
+    productId: 4,
+    name: "Cốt Trà Sữa Đóng Chai",
+    mood: "🏠 Thích chill một mình tại nhà",
+    sugar: "",
+    ice: "",
+    image: "assets/single-bottle.jpg",
+    imagePos: "center",
+    price: 45000
+  },
+  {
+    productId: 5,
+    name: "Set 4 Chai Cốt Trà Sữa",
+    mood: "🎁 Chia sẻ cùng hội bạn thân",
+    sugar: "",
+    ice: "",
+    image: "assets/bottles-lineup.jpg",
+    imagePos: "center",
+    price: 165000
+  }
+];
+
+let currentRandomDrink = null;
+let isSpinning = false;
+
+function openRandomizerModal() {
+  const modal = document.getElementById("randomizer-modal");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  activateDialog(modal);
+  spinRandomizer();
+}
+
+function closeRandomizerModal() {
+  const modal = document.getElementById("randomizer-modal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  modal.classList.add("hidden");
+  deactivateDialog(modal);
+}
+
+function spinRandomizer() {
+  if (isSpinning) return;
+  isSpinning = true;
+
+  const card = document.getElementById("randomizer-card");
+  const addBtn = document.getElementById("randomizer-add-btn");
+  if (addBtn) addBtn.disabled = true;
+
+  let count = 0;
+  const totalTicks = 8;
+  const interval = setInterval(() => {
+    count++;
+    const pick = RANDOMIZER_PRESETS[Math.floor(Math.random() * RANDOMIZER_PRESETS.length)];
+    renderRandomizerResult(pick);
+    playTickSound();
+    card?.classList.add("animate-slot-item");
+    setTimeout(() => card?.classList.remove("animate-slot-item"), 120);
+
+    if (count >= totalTicks) {
+      clearInterval(interval);
+      let finalPick;
+      do {
+        finalPick = RANDOMIZER_PRESETS[Math.floor(Math.random() * RANDOMIZER_PRESETS.length)];
+      } while (RANDOMIZER_PRESETS.length > 1 && finalPick === currentRandomDrink);
+
+      currentRandomDrink = finalPick;
+      renderRandomizerResult(finalPick);
+      playChimeSound();
+      isSpinning = false;
+      if (addBtn) addBtn.disabled = false;
+    }
+  }, 110);
+}
+
+function renderRandomizerResult(drink) {
+  if (!drink) return;
+  const img = document.getElementById("randomizer-img");
+  const mood = document.getElementById("randomizer-mood");
+  const name = document.getElementById("randomizer-name");
+  const spec = document.getElementById("randomizer-spec");
+  const price = document.getElementById("randomizer-price");
+
+  if (img) {
+    img.src = drink.image;
+    img.style.objectPosition = drink.imagePos;
+  }
+  if (mood) mood.textContent = drink.mood;
+  if (name) name.textContent = drink.name;
+  if (spec) spec.textContent = drink.sugar ? `${drink.sugar} • ${drink.ice}` : "Rót ra đá là uống liền";
+  if (price) price.textContent = formatVND(drink.price);
+}
+
+function addRandomizerDrinkToCart() {
+  if (!currentRandomDrink || isSpinning) return;
+  const modalImg = document.getElementById("randomizer-img");
+  addToCart(currentRandomDrink.productId, {
+    sugar: currentRandomDrink.sugar,
+    ice: currentRandomDrink.ice
+  }, modalImg);
+  closeRandomizerModal();
+}
+
 // Shared focus and scroll handling for drawers and dialogs.
 let activeDialog = null;
 let dialogTrigger = null;
 let previousBodyOverflow = "";
 let inertBackground = [];
+let lenisInstance = null;
 
 function getDialogControls(dialog) {
   return [...dialog.querySelectorAll('a[href], button, input, textarea, select, video[controls], [tabindex="0"]')]
@@ -595,6 +868,7 @@ function activateDialog(dialog) {
   previousBodyOverflow = document.body.style.overflow;
   activeDialog = dialog;
   document.body.style.overflow = "hidden";
+  lenisInstance?.stop();
   inertBackground = [...document.body.children].filter(element =>
     element !== dialog && element.id !== "cart-backdrop" && element.id !== "toast-container" &&
     !["SCRIPT", "STYLE"].includes(element.tagName)
@@ -607,6 +881,7 @@ function deactivateDialog(dialog) {
   if (!dialog || activeDialog !== dialog) return;
   activeDialog = null;
   document.body.style.overflow = previousBodyOverflow;
+  lenisInstance?.start();
   inertBackground.forEach(({ element, wasInert }) => { element.inert = wasInert; });
   inertBackground = [];
   if (dialogTrigger?.isConnected) dialogTrigger.focus({ preventScroll: true });
@@ -632,10 +907,11 @@ document.addEventListener("keydown", (e) => {
   closeProductModal();
   closeCheckoutModal();
   closeSuccessModal();
+  closeRandomizerModal();
   toggleCartDrawer(false);
 });
 
-// --- 9. INIT ---
+// --- 10. INIT ---
 document.addEventListener("DOMContentLoaded", () => {
   renderMenu("all");
   loadCartFromStorage();
@@ -644,11 +920,56 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", () => input.setCustomValidity(""));
   });
 
+  // Lenis Smooth Inertial Scroll
+  if (typeof Lenis !== "undefined") {
+    try {
+      lenisInstance = new Lenis({
+        duration: 1.15,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: "vertical",
+        smoothWheel: true,
+        touchMultiplier: 1.4,
+      });
+
+      function raf(time) {
+        lenisInstance.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Smooth scroll on anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+          const href = this.getAttribute("href");
+          if (href && href !== "#") {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              lenisInstance.scrollTo(target, { offset: -70 });
+            }
+          }
+        });
+      });
+    } catch (e) {
+      console.warn("Lenis init fallback", e);
+    }
+  }
+
+  // Sticky Category Tabs shadow trigger
+  const stickyTabs = document.getElementById("sticky-tabs-container");
+  if (stickyTabs) {
+    window.addEventListener("scroll", () => {
+      const rect = stickyTabs.getBoundingClientRect();
+      stickyTabs.classList.toggle("is-stuck", rect.top <= 72);
+    }, { passive: true });
+  }
+
   // Tab lọc menu
   const filterTabs = document.querySelectorAll(".menu-tab-btn");
   filterTabs.forEach(btn => {
     btn.setAttribute("aria-pressed", String(btn.getAttribute("data-filter") === "all"));
     btn.addEventListener("click", () => {
+      playTickSound();
       filterTabs.forEach(b => {
         b.setAttribute("aria-pressed", "false");
         b.classList.remove("bg-[#3a5a40]", "text-[#e9edc9]");
@@ -684,6 +1005,5 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
-
 });
 
