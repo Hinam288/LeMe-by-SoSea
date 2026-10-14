@@ -231,6 +231,134 @@ html.lenis, html.lenis body {
   animation: cartBounce 0.45s cubic-bezier(0.17, 0.89, 0.32, 1.28);
 }
 
+/* ========================================================
+   QUÁN LÊN ĐÈN (NIGHT AMBIENCE MODE)
+   ======================================================== */
+body.night-mode {
+  --brand-blue: #233928;
+  --brand-blue-dark: #152218;
+  --brand-yellow: #fde68a;
+  --bg-warm: #131d16;
+  background-color: #131d16 !important;
+  color: #f0f3eb !important;
+}
+body.night-mode #main-header {
+  background-color: #162419 !important;
+  border-bottom-color: #d4b872 !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5) !important;
+}
+body.night-mode .bg-white {
+  background-color: #1c2a1f !important;
+  color: #f0f3eb !important;
+}
+body.night-mode .text-slate-900,
+body.night-mode .text-slate-800 {
+  color: #f7faf3 !important;
+}
+body.night-mode .text-slate-600,
+body.night-mode .text-slate-500 {
+  color: #b8c2ad !important;
+}
+body.night-mode .bg-\[\#fbfbf9\],
+body.night-mode .bg-\[\#FEF9E7\],
+body.night-mode .bg-slate-50 {
+  background-color: #17241a !important;
+}
+body.night-mode .bg-\[\#f0f2eb\],
+body.night-mode .bg-amber-50 {
+  background-color: #233426 !important;
+  color: #f0f3eb !important;
+}
+body.night-mode .border-\[\#e4e8d8\],
+body.night-mode .border-amber-100,
+body.night-mode .border-slate-200 {
+  border-color: #2b3e30 !important;
+}
+body.night-mode .sticky-menu-tabs {
+  background: rgba(19, 29, 22, 0.95) !important;
+  border-bottom-color: #2b3e30 !important;
+}
+body.night-mode .mobile-bottom-dock {
+  background-color: rgba(22, 34, 25, 0.96) !important;
+  border-color: #314837 !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5) !important;
+}
+body.night-mode .polaroid-card {
+  background-color: #f9f9f5 !important;
+}
+body.night-mode .polaroid-card .polaroid-text {
+  color: #1e293b !important;
+}
+
+/* ========================================================
+   LÊ MÊ STORIES
+   ======================================================== */
+.story-ring {
+  background: linear-gradient(135deg, #d4b872 0%, #3a5a40 50%, #e9edc9 100%);
+  padding: 2.5px;
+  border-radius: 9999px;
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.story-ring:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 16px rgba(212, 184, 114, 0.55);
+}
+.story-ring.watched {
+  background: #cbd5e1;
+}
+
+.story-progress-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+  flex: 1;
+}
+.story-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: width 0.05s linear;
+}
+
+/* ========================================================
+   POLAROID PHOTO WALL
+   ======================================================== */
+.polaroid-card {
+  background: #ffffff;
+  padding: 12px 12px 28px 12px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px -8px rgba(40, 62, 44, 0.16), 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  position: relative;
+  cursor: pointer;
+}
+.polaroid-card:hover {
+  transform: translateY(-8px) scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 20px 40px -10px rgba(40, 62, 44, 0.28), 0 6px 16px rgba(0, 0, 0, 0.08);
+  z-index: 20;
+}
+.washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 22px;
+  background: rgba(212, 184, 114, 0.55);
+  border-left: 2px dashed rgba(255, 255, 255, 0.5);
+  border-right: 2px dashed rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+  z-index: 10;
+}
+.washi-tape-alt {
+  background: rgba(163, 177, 138, 0.6);
+  transform: translateX(-50%) rotate(2deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after {
@@ -239,5 +367,6 @@ html.lenis, html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
 
 

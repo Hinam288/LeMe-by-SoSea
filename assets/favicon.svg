@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3A5A40" />
+      <stop offset="100%" stop-color="#283E2C" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="100%" stop-color="#D4B872" />
+    </linearGradient>
+    <linearGradient id="teaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E9EDC9" />
+      <stop offset="100%" stop-color="#D4B872" />
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#cupGrad)" stroke="url(#goldGrad)" stroke-width="4" filter="url(#softShadow)" />
+
+  <!-- Straw -->
+  <path d="M72 16 L80 14 L68 54 L60 56 Z" fill="url(#goldGrad)" rx="2" />
+
+  <!-- Tea Cup Body -->
+  <path d="M34 46 L42 100 C43 105 48 108 54 108 L74 108 C80 108 85 105 86 100 L94 46 Z" fill="#FBFBF9" stroke="url(#goldGrad)" stroke-width="3" />
+
+  <!-- Tea Liquid Fill inside cup -->
+  <path d="M38 58 L43 96 C44 99 47 101 52 101 L76 101 C81 101 84 99 85 96 L90 58 Q64 64 38 58 Z" fill="url(#teaGrad)" opacity="0.85" />
+
+  <!-- Boba Pearls -->
+  <circle cx="50" cy="92" r="4.5" fill="#283E2C" />
+  <circle cx="64" cy="94" r="4.5" fill="#283E2C" />
+  <circle cx="78" cy="91" r="4.5" fill="#283E2C" />
+  <circle cx="57" cy="84" r="4" fill="#283E2C" />
+  <circle cx="71" cy="83" r="4" fill="#283E2C" />
+
+  <!-- Tea Leaf Badge on Cup -->
+  <path d="M64 63 C58 60 56 68 64 74 C72 68 70 60 64 63 Z" fill="#3A5A40" />
+  <path d="M64 65 L64 72" stroke="url(#goldGrad)" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Cup Rim Lid -->
+  <rect x="30" y="42" width="68" height="7" rx="3.5" fill="url(#goldGrad)" />
+</svg>

@@ -908,14 +908,210 @@ document.addEventListener("keydown", (e) => {
   closeCheckoutModal();
   closeSuccessModal();
   closeRandomizerModal();
+  closeStoryViewer();
   toggleCartDrawer(false);
 });
+
+// --- 11. NIGHT AMBIENCE MODE (QUÁN LÊN ĐÈN) ---
+function setNightModeUI(isNight) {
+  document.body.classList.toggle("night-mode", isNight);
+  const headerIcon = document.getElementById("theme-toggle-icon");
+  const mobileIcon = document.getElementById("mobile-theme-icon");
+  if (headerIcon) headerIcon.textContent = isNight ? "🌙" : "💡";
+  if (mobileIcon) mobileIcon.textContent = isNight ? "🌙" : "💡";
+}
+
+function toggleNightMode() {
+  const isNight = !document.body.classList.contains("night-mode");
+  setNightModeUI(isNight);
+  localStorage.setItem("leme_night_mode", isNight ? "1" : "0");
+  playPopSound();
+  showToast(isNight ? "Đã bật đèn quán (Chế độ chill đêm ✨)" : "Đã chuyển sang chế độ ban ngày ☀️", "info");
+}
+
+function initNightMode() {
+  const saved = localStorage.getItem("leme_night_mode");
+  if (saved !== null) {
+    setNightModeUI(saved === "1");
+  } else {
+    const hour = new Date().getHours();
+    if (hour >= 18 || hour < 6) {
+      setNightModeUI(true);
+    }
+  }
+}
+
+// --- 12. LÊ MÊ STORIES ---
+const STORIES_DATA = [
+  {
+    type: "video",
+    src: "assets/make-tea.webm",
+    title: "Pha trà tươi tại quán",
+    time: "Vừa đăng",
+    caption: "Cốt trà được ủ và nấu mới mỗi ngày theo công thức riêng của Lê Mê 🍵",
+    ctaTarget: "#menu"
+  },
+  {
+    type: "image",
+    src: "assets/store-interior.png",
+    title: "Góc quán chill Ngọc Hồi",
+    time: "1 giờ trước",
+    caption: "Không gian ấm cúng, nhạc êm và góc ngồi chill lý tưởng 🌿",
+    ctaTarget: "#about"
+  },
+  {
+    type: "image",
+    src: "assets/bottles-lineup.jpg",
+    title: "Set 4 chai cốt trà sữa",
+    time: "Hôm nay",
+    caption: "Đóng chai thủy tinh tiện lợi, bảo quản lạnh uống dần hoặc làm quà biếu 🧋",
+    ctaTarget: "#menu"
+  },
+  {
+    type: "image",
+    src: "assets/open.jpg",
+    title: "Freeship dưới 2km",
+    time: "Hôm nay",
+    caption: "Quán mở từ 9:00 - 22:00, nhận đơn và ship tận nhà siêu tốc 🛵",
+    ctaTarget: "#menu"
+  },
+  {
+    type: "image",
+    src: "assets/facebook-reviews.png",
+    title: "Feedback từ khách yêu",
+    time: "Hôm qua",
+    caption: "Cảm ơn mọi người đã luôn ủng hộ vị trà đậm đà của Lê Mê ❤️",
+    ctaTarget: "#reviews"
+  }
+];
+
+let currentStoryIdx = 0;
+let storyTimer = null;
+let storyProgressInterval = null;
+let storyProgressVal = 0;
+let isStoryMuted = true;
+
+function openStoryViewer(index = 0) {
+  const modal = document.getElementById("story-viewer-modal");
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  activateDialog(modal);
+  currentStoryIdx = index;
+  showStory(currentStoryIdx);
+}
+
+function closeStoryViewer() {
+  const modal = document.getElementById("story-viewer-modal");
+  if (!modal || modal.classList.contains("hidden")) return;
+  clearInterval(storyTimer);
+  clearInterval(storyProgressInterval);
+  const video = document.getElementById("active-story-video");
+  if (video) video.pause();
+  modal.classList.add("hidden");
+  deactivateDialog(modal);
+}
+
+function showStory(index) {
+  if (index < 0 || index >= STORIES_DATA.length) {
+    closeStoryViewer();
+    return;
+  }
+  currentStoryIdx = index;
+  const story = STORIES_DATA[index];
+
+  clearInterval(storyTimer);
+  clearInterval(storyProgressInterval);
+  storyProgressVal = 0;
+
+  // Update progress bars
+  const fills = document.querySelectorAll("#story-progress-container .story-progress-fill");
+  fills.forEach((fill, i) => {
+    if (i < index) fill.style.width = "100%";
+    else fill.style.width = "0%";
+  });
+
+  const mediaContainer = document.getElementById("story-media-container");
+  const caption = document.getElementById("story-caption-text");
+  const timeBadge = document.getElementById("story-time-badge");
+  const soundBtn = document.getElementById("story-sound-btn");
+
+  if (timeBadge) timeBadge.textContent = story.time;
+  if (caption) caption.textContent = story.caption;
+
+  if (story.type === "video") {
+    if (soundBtn) soundBtn.classList.remove("hidden");
+    mediaContainer.innerHTML = `
+      <video id="active-story-video" src="${story.src}" autoplay ${isStoryMuted ? "muted" : ""} loop playsinline class="w-full h-full object-cover"></video>
+    `;
+    const v = document.getElementById("active-story-video");
+    if (v) v.play().catch(() => {});
+  } else {
+    if (soundBtn) soundBtn.classList.add("hidden");
+    mediaContainer.innerHTML = `
+      <img src="${story.src}" alt="${story.title}" class="w-full h-full object-cover">
+    `;
+  }
+
+  // 5 seconds per story
+  const duration = 5000;
+  const interval = 50;
+  const step = (interval / duration) * 100;
+
+  storyProgressInterval = setInterval(() => {
+    storyProgressVal += step;
+    if (fills[index]) fills[index].style.width = `${Math.min(100, storyProgressVal)}%`;
+    if (storyProgressVal >= 100) {
+      clearInterval(storyProgressInterval);
+      nextStory();
+    }
+  }, interval);
+}
+
+function nextStory() {
+  if (currentStoryIdx < STORIES_DATA.length - 1) {
+    playTickSound();
+    showStory(currentStoryIdx + 1);
+  } else {
+    closeStoryViewer();
+  }
+}
+
+function prevStory() {
+  if (currentStoryIdx > 0) {
+    playTickSound();
+    showStory(currentStoryIdx - 1);
+  } else {
+    showStory(0);
+  }
+}
+
+function toggleStorySound() {
+  isStoryMuted = !isStoryMuted;
+  const video = document.getElementById("active-story-video");
+  const soundBtn = document.getElementById("story-sound-btn");
+  if (video) video.muted = isStoryMuted;
+  if (soundBtn) soundBtn.textContent = isStoryMuted ? "🔇" : "🔊";
+}
+
+function handleStoryCtaClick() {
+  const story = STORIES_DATA[currentStoryIdx];
+  closeStoryViewer();
+  if (story && story.ctaTarget) {
+    const target = document.querySelector(story.ctaTarget);
+    if (target && lenisInstance) {
+      lenisInstance.scrollTo(target, { offset: -70 });
+    } else if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+}
 
 // --- 10. INIT ---
 document.addEventListener("DOMContentLoaded", () => {
   renderMenu("all");
   loadCartFromStorage();
   loadOrderDraft();
+  initNightMode();
   document.querySelectorAll("#checkout-form input").forEach(input => {
     input.addEventListener("input", () => input.setCustomValidity(""));
   });
