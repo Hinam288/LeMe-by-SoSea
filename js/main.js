@@ -1104,6 +1104,29 @@ function closeCheckoutModal() {
 let lastGeneratedOrderMessage = "";
 let lastOrderDraft = null;
 const DRAFT_KEY = "leme_order_draft_v1";
+const MESSENGER_BASE_URL = "https://m.me/61590901593823";
+const ZALO_BASE_URL = "https://zalo.me/0869256962";
+
+function buildMessengerOrderUrl(message) {
+  if (!message) return MESSENGER_BASE_URL;
+  const maxEncodedLength = 1800;
+  let encoded = encodeURIComponent(message);
+  if (encoded.length > maxEncodedLength) {
+    let trimmed = message;
+    while (trimmed.length > 80 && encodeURIComponent(trimmed + "\n...").length > maxEncodedLength) {
+      trimmed = trimmed.slice(0, -25);
+    }
+    encoded = encodeURIComponent(trimmed + "\n...");
+  }
+  return `${MESSENGER_BASE_URL}?text=${encoded}`;
+}
+
+function syncOrderActionLinks(message) {
+  const messengerLink = document.getElementById("order-messenger-link");
+  if (messengerLink) {
+    messengerLink.href = buildMessengerOrderUrl(message);
+  }
+}
 
 function loadOrderDraft() {
   try {
@@ -1112,6 +1135,7 @@ function loadOrderDraft() {
         Number.isFinite(draft.subtotal) && draft.subtotal >= 0) {
       lastOrderDraft = draft;
       lastGeneratedOrderMessage = draft.message;
+      syncOrderActionLinks(draft.message);
       document.getElementById("resume-order-btn")?.classList.remove("hidden");
     }
   } catch { /* A blocked store must not stop ordering. */ }
@@ -1126,7 +1150,8 @@ function showOrderDraft() {
   document.getElementById("success-customer-address").textContent = draft.address;
   document.getElementById("success-order-total").textContent = formatVND(draft.subtotal);
   document.getElementById("generated-order-text").value = draft.message;
-  document.getElementById("copy-order-status").textContent = "Sao chép nội dung bên dưới, mở Zalo hoặc Messenger rồi dán và gửi cho quán.";
+  syncOrderActionLinks(draft.message);
+  document.getElementById("copy-order-status").textContent = "Messenger sẽ điền sẵn đơn vào khung chat. Với Zalo, web tự sao chép đơn để bạn chỉ cần Dán & Gửi.";
   const modal = document.getElementById("order-success-modal");
   modal.classList.remove("hidden");
   activateDialog(modal);
@@ -1136,6 +1161,7 @@ function discardOrderDraft() {
   closeSuccessModal();
   lastOrderDraft = null;
   lastGeneratedOrderMessage = "";
+  syncOrderActionLinks("");
   try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* Optional storage. */ }
   document.getElementById("resume-order-btn")?.classList.add("hidden");
   document.getElementById("checkout-form")?.reset();
@@ -1156,9 +1182,8 @@ function validateCheckout() {
   return document.getElementById("checkout-form").reportValidity();
 }
 
-function handleCheckoutSubmit(e) {
-  e.preventDefault();
-  if (cart.length === 0 || !validateCheckout()) return;
+function createOrderDraftFromForm() {
+  if (cart.length === 0 || !validateCheckout()) return null;
 
   const name = document.getElementById("order-name")?.value.trim() || "Khách hàng";
   const phone = document.getElementById("order-phone")?.value.trim() || "";
@@ -1195,6 +1220,26 @@ Quán xác nhận đơn giúp em nhé!`;
   playChimeSound();
   if (!saved) showToast("Không lưu được bản soạn. Bạn sao chép và gửi cho quán trước khi tải lại trang nhé.");
   copyGeneratedOrderText();
+  return {
+    message: lastGeneratedOrderMessage,
+    messengerUrl: buildMessengerOrderUrl(lastGeneratedOrderMessage),
+    zaloUrl: ZALO_BASE_URL
+  };
+}
+
+function handleCheckoutSubmit(e) {
+  e.preventDefault();
+  createOrderDraftFromForm();
+}
+
+function submitCheckoutAndOpen(channel) {
+  const created = createOrderDraftFromForm();
+  if (!created) return;
+  const targetUrl = channel === "messenger" ? created.messengerUrl : created.zaloUrl;
+  const opened = window.open(targetUrl, "_blank", "noopener,noreferrer");
+  if (!opened) {
+    showToast("Trình duyệt đang chặn mở tab mới. Bạn bấm nút mở Messenger hoặc Zalo ngay trên màn hình nhé.", "info");
+  }
 }
 
 async function copyGeneratedOrderText() {
@@ -1205,10 +1250,10 @@ async function copyGeneratedOrderText() {
     if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
     await navigator.clipboard.writeText(message);
     if (message !== lastGeneratedOrderMessage) return;
-    status.textContent = "Đã sao chép. Bạn mở Zalo hoặc Messenger, dán nội dung rồi bấm gửi cho quán nhé.";
+    status.textContent = "Đã sao chép sẵn. Messenger tự điền nội dung đơn; với Zalo bạn chỉ cần Dán & Gửi.";
   } catch {
     if (message !== lastGeneratedOrderMessage) return;
-    status.textContent = "Chưa sao chép tự động được. Bạn chọn nội dung bên dưới để sao chép thủ công rồi gửi cho quán.";
+    status.textContent = "Chưa sao chép tự động được. Bạn mở Messenger (đã điền sẵn đơn) hoặc sao chép thủ công bên dưới để gửi Zalo.";
     const field = document.getElementById("generated-order-text");
     if (!document.getElementById("order-success-modal").classList.contains("hidden")) {
       field.focus();

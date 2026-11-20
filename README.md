@@ -6,7 +6,7 @@ Website tĩnh giới thiệu quán, xem menu chính thức (**Làn Gió Hương 
 
 - **Menu 16 món** theo bảng menu tại quán (4 nhóm: *Hương trà nguyên bản*, *Vị trà cao cấp & Sữa tươi*, *Trà vị hoa quả*, *Cốt trà đóng chai*), lọc theo danh mục, chọn **Size M / L**, **Đá / Nóng**, mức đường/đá (`0%–100%`), **7 loại topping thủ công** và số lượng.
 - **Giỏ hàng** lưu bằng `localStorage`; dữ liệu khôi phục luôn được kiểm tra và tính lại đơn giá trực tiếp từ bảng giá & topping trong `js/main.js`.
-- **Soạn đơn & Bản nháp:** Không tự xóa giỏ khi soạn đơn hoặc mở ứng dụng nhắn tin. Bản soạn gần nhất lưu trong `sessionStorage` của tab để mở lại sau khi tải trang. Sao chép đơn có báo kết quả kèm ô văn bản sao chép thủ công khi trình duyệt chặn Clipboard API.
+- **Đặt đơn nhanh qua Messenger & Zalo:** Nút **Gửi qua Messenger** tự động truyền sẵn toàn bộ nội dung đơn qua link `m.me/61590901593823?text=...` để điền trực tiếp vào khung chat (khách chỉ cần bấm Gửi). Với **Zalo**, do giới hạn của `zalo.me` cá nhân không hỗ trợ tham số `?text=`, web tự sao chép sẵn đơn ngay khi bấm và mở thẳng khung chat Zalo để khách Dán & Gửi. Bản soạn gần nhất lưu trong `sessionStorage` của tab để mở lại sau khi tải trang.
 - **Lê Mê Story, Randomizer ("Hôm nay uống gì?"), Chế độ "Quán lên đèn" (Night Mode) & Trạng thái mở cửa theo giờ Việt Nam.**
 - **Hiệu năng & Trợ năng:** Video chỉ tải khi khách bấm xem; ảnh không gian quán đã nén WebP (~70 KB); các hộp thoại hỗ trợ phím Escape, giữ focus bàn phím và khóa cuộn nền.
 

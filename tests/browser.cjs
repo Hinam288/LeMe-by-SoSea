@@ -91,16 +91,19 @@ async function main() {
       await page.locator('#order-name').fill('Khách kiểm thử');
       await page.locator('#order-phone').fill('abc');
       await page.locator('#order-address').fill('Địa chỉ kiểm thử, không gửi đơn');
-      await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
+      await page.getByRole('button', { name: 'Xem trước nội dung đơn', exact: true }).click();
       assert.equal(await page.locator('#order-phone').evaluate(el => el.validity.valid), false);
       assert.equal(await page.locator('#order-success-modal').isVisible(), false);
       await page.locator('#order-phone').fill('+84 869 256 962');
       await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async () => { throw new Error('Denied'); } } }));
-      await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
+      await page.getByRole('button', { name: 'Xem trước nội dung đơn', exact: true }).click();
       await page.waitForFunction(() => document.getElementById('copy-order-status').textContent.includes('Chưa sao chép'));
       const message = await page.locator('#generated-order-text').inputValue();
       assert.match(message, /Size L • 50% đường • 0% đá • \+ Kem cheese tươi/);
       assert.match(message, /139\.000/);
+      const messengerHref = await page.locator('#order-messenger-link').getAttribute('href');
+      assert.ok(messengerHref.startsWith('https://m.me/61590901593823?text='), 'Messenger link prefills text');
+      assert.equal(new URL(messengerHref).searchParams.get('text'), message);
       assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('leme_cart_v2')).length), 2);
       assert.equal(await page.evaluate(() => document.body.style.overflow), 'hidden');
       const panel = await page.locator('#order-success-modal > div').boundingBox();
@@ -117,6 +120,7 @@ async function main() {
       await page.locator('#cart-toggle-btn').click();
       await page.locator('#resume-order-btn').click();
       assert.equal(await page.locator('#generated-order-text').inputValue(), message);
+      assert.equal(await page.locator('#order-messenger-link').getAttribute('href'), messengerHref);
       await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: undefined }));
       await page.getByRole('button', { name: 'Sao chép lại', exact: true }).click();
       assert.match(await page.locator('#copy-order-status').innerText(), /Chưa sao chép/);
@@ -125,6 +129,7 @@ async function main() {
       await page.waitForFunction(() => document.getElementById('copy-order-status').textContent.startsWith('Đã sao chép'));
       assert.equal(await page.evaluate(() => window.copiedOrder), message);
       await page.getByRole('button', { name: 'Xóa bản soạn này', exact: true }).click();
+      assert.equal(await page.locator('#order-messenger-link').getAttribute('href'), 'https://m.me/61590901593823');
       assert.equal(await page.evaluate(() => sessionStorage.getItem('leme_order_draft_v1')), null);
       assert.equal(await page.evaluate(() => document.body.style.overflow), '');
       assert.equal(await page.evaluate(() => document.querySelector('header').inert), false);
@@ -172,9 +177,16 @@ async function main() {
     await page.locator('#order-name').fill('Test');
     await page.locator('#order-phone').fill('0869256962');
     await page.locator('#order-address').fill('Test address');
-    await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
+    await page.evaluate(() => {
+      window.openedUrls = [];
+      window.open = (u) => { window.openedUrls.push(u); return {}; };
+    });
+    await page.getByRole('button', { name: 'Gửi qua Messenger (tự điền sẵn đơn)', exact: true }).click();
     assert.equal(await page.locator('#order-success-modal').isVisible(), true);
     assert.match(await page.locator('#toast-container').innerText(), /Không lưu được bản soạn/);
+    const opened = await page.evaluate(() => window.openedUrls);
+    assert.equal(opened.length, 1);
+    assert.ok(opened[0].startsWith('https://m.me/61590901593823?text='), 'Direct Messenger checkout button opens prefilled chat');
     await context.close();
     assert.deepEqual(errors, [], 'no uncaught JavaScript errors');
     console.log('PASS: malformed/tampered cart, blocked storage, no uncaught errors');
