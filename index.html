@@ -3,17 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi</title>
+  <title>Lê Mê — Trà Sữa Đậm Vị • Ngọc Hồi</title>
 
-  <meta name="description" content="Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi. Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai. Mở cửa 9:00 - 22:00 hàng ngày.">
-  <meta name="keywords" content="Lê Mê, trà sữa lê mê, trà sữa ngọc hồi, trà sữa đậm vị, cốt trà sữa đóng chai">
+  <meta name="description" content="Lê Mê - Trà Sữa Đậm Vị tại Ngọc Hồi. Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha phân tầng và cốt trà sữa đóng chai. Mở cửa 9:00 – 22:00 hàng ngày, freeship bán kính 2km.">
+  <meta name="keywords" content="Lê Mê, trà sữa Lê Mê, trà sữa Ngọc Hồi, trà sữa đậm vị, cốt trà sữa đóng chai, matcha phân tầng, LeMe by SoSea">
+  <meta name="theme-color" content="#3a5a40">
+  <link rel="canonical" href="https://hinam288.github.io/LeMe-by-SoSea/">
 
   <!-- Open Graph / Facebook / Zalo -->
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="vi_VN">
+  <meta property="og:site_name" content="Lê Mê — Trà Sữa Đậm Vị">
   <meta property="og:url" content="https://hinam288.github.io/LeMe-by-SoSea/">
-  <meta property="og:title" content="Lê Mê - Trà Sữa Đậm Vị">
-  <meta property="og:description" content="Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai tại Ngọc Hồi.">
+  <meta property="og:title" content="Lê Mê — Trà Sữa Đậm Vị • Ngọc Hồi">
+  <meta property="og:description" content="Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai tại Ngọc Hồi. Freeship trong bán kính 2km.">
   <meta property="og:image" content="https://hinam288.github.io/LeMe-by-SoSea/assets/open.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lê Mê — Trà Sữa Đậm Vị • Ngọc Hồi">
+  <meta name="twitter:description" content="Thơm trà đậm vị, ngọt ngào vừa ý. Ghé quán chill hoặc đặt giao tận nơi tại Ngọc Hồi.">
+  <meta name="twitter:image" content="https://hinam288.github.io/LeMe-by-SoSea/assets/open.jpg">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/logo.png">
@@ -25,28 +35,50 @@
 
   <link rel="stylesheet" href="css/tailwind.css">
   <link rel="stylesheet" href="css/custom.css">
-  <!-- Lenis Smooth Inertial Scroll -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Structured Data (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi",
+    "url": "https://hinam288.github.io/LeMe-by-SoSea/",
+    "image": "https://hinam288.github.io/LeMe-by-SoSea/assets/open.jpg",
+    "logo": "https://hinam288.github.io/LeMe-by-SoSea/assets/logo.png",
+    "description": "Thơm trà đậm vị, ngọt ngào vừa ý. Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai tại Ngọc Hồi.",
+    "telephone": "+84362126184",
+    "email": "vuhaiyen067@gmail.com",
+    "servesCuisine": ["Bubble Tea", "Milk Tea", "Matcha", "Fruit Tea"],
+    "openingHours": "Mo-Su 09:00-22:00",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61590901593823",
+      "https://shopeefood.shopee.vn/u/frCAhCm"
+    ]
+  }
+  </script>
+
+  <!-- Lenis Smooth Inertial Scroll (non-blocking) -->
+  <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
-<body class="bg-[#fbfbf9] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-[#3a5a40] selection:text-[#e9edc9]">
+<body class="bg-[#fbfbf9] text-slate-800 font-sans antialiased selection:bg-[#3a5a40] selection:text-[#e9edc9]">
 
   <div id="toast-container" role="status" aria-live="polite"></div>
 
   <!-- ========================================================
-       1. HEADER - logo chính giữa, menu chia 2 bên
+       1. HEADER - logo chính giữa, điều hướng cân đối 2 bên
        ======================================================== -->
   <header id="main-header" class="fixed top-0 left-0 right-0 z-40 bg-[#3a5a40] border-b-2 border-[#d4b872] py-2.5 px-4 sm:px-8">
     <div class="max-w-7xl mx-auto grid grid-cols-3 items-center">
 
       <!-- Trái -->
       <div class="flex items-center justify-start">
-        <nav class="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#fbfbf9]">
-          <a href="#hero" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Trang chủ</a>
-          <a href="#stories" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Story</a>
-          <a href="#menu" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Menu</a>
-          <a href="#about" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Về Lê Mê</a>
+        <nav aria-label="Điều hướng chính" class="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#fbfbf9]">
+          <a href="#hero" data-nav-section="hero" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Trang chủ</a>
+          <a href="#stories" data-nav-section="stories" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Story</a>
+          <a href="#menu" data-nav-section="menu" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Menu</a>
+          <a href="#about" data-nav-section="about" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Về Lê Mê</a>
         </nav>
-        <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-menu">
+        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="w-5 h-5 text-[#e9edc9]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -55,364 +87,415 @@
 
       <!-- Giữa: Logo -->
       <div class="flex justify-center">
-        <a href="#hero" title="Lê Mê - Trà Sữa Đậm Vị">
+        <a href="#hero" title="Lê Mê — Trà Sữa Đậm Vị" class="block">
           <img src="assets/logo.png" alt="Lê Mê Logo"
-               class="header-logo h-16 sm:h-20 w-auto rounded-2xl border-2 border-[#d4b872] shadow-md">
+               class="header-logo h-14 sm:h-18 md:h-20 w-auto rounded-2xl border-2 border-[#d4b872] shadow-md">
         </a>
       </div>
 
       <!-- Phải -->
       <div class="flex items-center justify-end gap-1.5 sm:gap-2">
-        <nav class="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#fbfbf9]">
-          <a href="#reviews" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Góc "Mê"</a>
-          <a href="#contact" class="px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Liên hệ</a>
+        <nav aria-label="Điều hướng phụ" class="hidden lg:flex items-center gap-1 text-sm font-semibold text-[#fbfbf9]">
+          <a href="#reviews" data-nav-section="reviews" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Góc "Mê"</a>
+          <a href="#contact" data-nav-section="contact" class="desktop-nav-link px-3 py-2 rounded-full hover:bg-white/10 hover:text-[#e9edc9] transition">Liên hệ</a>
         </nav>
+
         <!-- Nút Quán Lên Đèn (Night Mode) -->
-        <button id="theme-toggle-btn" onclick="toggleNightMode()"
+        <button id="theme-toggle-btn" type="button" onclick="toggleNightMode()"
                 class="p-2 sm:p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-[#e9edc9] transition active:scale-95"
-                title="Quán lên đèn (Bật/Tắt chế độ tối ấm cúng)" aria-label="Quán lên đèn">
-          <span id="theme-toggle-icon" class="text-base select-none">💡</span>
+                title="Quán lên đèn (Bật/Tắt chế độ tối ấm cúng)" aria-label="Quán lên đèn" aria-pressed="false">
+          <span id="theme-toggle-icon" class="text-base leading-none block select-none">💡</span>
         </button>
+
         <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
-           class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold text-sm transition"
+           class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold text-sm transition shadow-sm"
            title="Đặt món trên ShopeeFood">
           <span class="xl:hidden">ShopeeFood</span><span class="hidden xl:inline">Đặt ShopeeFood</span>
         </a>
-        <button id="cart-toggle-btn" onclick="toggleCartDrawer(true)"
-                class="relative p-2.5 rounded-full bg-white hover:bg-[#f0f2eb] transition active:scale-95"
+
+        <button id="cart-toggle-btn" type="button" onclick="toggleCartDrawer(true)"
+                class="relative p-2.5 rounded-full bg-white hover:bg-[#f0f2eb] transition active:scale-95 shadow-sm"
                 aria-label="Giỏ hàng">
           <svg class="w-5 h-5 text-[#3a5a40]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
           </svg>
-          <span class="cart-counter-badge hidden absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">0</span>
+          <span class="cart-counter-badge hidden absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center shadow">0</span>
         </button>
       </div>
     </div>
 
     <!-- Menu mobile -->
-    <div id="mobile-menu" class="hidden lg:hidden mt-3 max-w-7xl mx-auto bg-white rounded-2xl p-4 shadow-xl">
-      <nav class="flex flex-col gap-1 font-quicksand font-bold text-slate-800">
-        <a href="#hero" class="px-3 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40]">Trang chủ</a>
-        <a href="#menu" class="px-3 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40]">Menu</a>
-        <a href="#about" class="px-3 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40]">Về Lê Mê</a>
-        <a href="#reviews" class="px-3 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40]">Góc "Mê"</a>
-        <a href="#contact" class="px-3 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40]">Liên hệ</a>
-        <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
-           class="mt-2 text-center py-3 bg-orange-500 text-white rounded-xl text-sm">Đặt trên ShopeeFood</a>
+    <div id="mobile-menu" class="hidden lg:hidden mt-3 max-w-7xl mx-auto bg-white rounded-2xl p-4 shadow-xl border border-[#e4e8d8]">
+      <nav aria-label="Menu di động" class="flex flex-col gap-1 font-quicksand font-bold text-slate-800">
+        <a href="#hero" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Trang chủ</a>
+        <a href="#stories" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Lê Mê Story</a>
+        <a href="#menu" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Menu</a>
+        <a href="#about" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Về Lê Mê</a>
+        <a href="#reviews" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Góc "Mê"</a>
+        <a href="#contact" class="px-3.5 py-2.5 rounded-xl hover:bg-[#f0f2eb] hover:text-[#3a5a40] transition">Liên hệ</a>
+        <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-[#e4e8d8]">
+          <a href="tel:0362126184" class="text-center py-2.5 bg-[#f0f2eb] text-[#3a5a40] rounded-xl text-sm">Gọi quán</a>
+          <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
+             class="text-center py-2.5 bg-orange-500 text-white rounded-xl text-sm">ShopeeFood</a>
+        </div>
       </nav>
     </div>
   </header>
 
-  <!-- ========================================================
-       2. HERO
-       ======================================================== -->
-  <section id="hero" class="relative pt-32 sm:pt-36 pb-16 sm:pb-24 overflow-hidden">
-    <div class="absolute top-10 right-0 w-96 h-96 bg-[#a3b18a]/20 rounded-full blur-3xl pointer-events-none -mr-24"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#d4b872]/20 rounded-full blur-3xl pointer-events-none -ml-24"></div>
+  <main>
+    <!-- ========================================================
+         2. HERO
+         ======================================================== -->
+    <section id="hero" class="relative pt-28 sm:pt-36 pb-14 sm:pb-20 overflow-hidden">
+      <div class="absolute top-10 right-0 w-96 h-96 bg-[#a3b18a]/20 rounded-full blur-3xl pointer-events-none -mr-24"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#d4b872]/20 rounded-full blur-3xl pointer-events-none -ml-24"></div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
-      <!-- Nội dung -->
-      <div class="space-y-6 text-center lg:text-left">
-        <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40]">Trà Sữa Đậm Vị • Ngọc Hồi</p>
+        <!-- Nội dung -->
+        <div class="space-y-6 text-center lg:text-left">
+          <div class="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0f2eb] border border-[#e4e8d8] text-xs font-bold tracking-wider uppercase text-[#3a5a40]">
+              Trà Sữa Đậm Vị • Ngọc Hồi
+            </span>
+            <span id="store-open-status" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#e4e8d8] text-xs font-semibold text-slate-700 shadow-sm">
+              <span id="store-status-dot" class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span id="store-status-text">Mở cửa 9:00 – 22:00</span>
+            </span>
+          </div>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-quicksand text-slate-900 leading-tight">
-          Thơm trà đậm vị,<br>
-          <span class="text-[#3a5a40]">ngọt ngào vừa ý</span>
-        </h1>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-quicksand text-slate-900 leading-[1.12] tracking-tight">
+            Thơm trà đậm vị,<br>
+            <span class="text-[#3a5a40]">ngọt ngào vừa ý</span>
+          </h1>
 
-        <p class="text-base sm:text-lg text-slate-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-          Trà sữa, trà hoa quả, matcha và cốt trà sữa đóng chai mang về. Ghé quán chill hoặc đặt giao tận nơi.
-        </p>
+          <p class="text-base sm:text-lg text-slate-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+            Trà sữa, trà hoa quả, matcha phân tầng và cốt trà sữa đóng chai mang về. Ghé quán chill hoặc đặt giao tận nơi nhanh chóng.
+          </p>
 
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-          <a href="#menu" class="px-7 py-3.5 rounded-2xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition active:scale-95 shadow-md">
-            Xem menu
-          </a>
-          <button type="button" onclick="openRandomizerModal()" class="px-5 py-3.5 rounded-2xl bg-[#f0f2eb] hover:bg-[#e4e8d8] text-[#3a5a40] font-quicksand font-bold transition active:scale-95 border border-[#d4b872]/50 shadow-sm inline-flex items-center gap-2">
-            <span class="animate-dice-shake text-base">🎲</span> Hôm nay uống gì?
-          </button>
-          <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
-             class="px-6 py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold transition active:scale-95">
-            ShopeeFood
-          </a>
-        </div>
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+            <a href="#menu" class="px-7 py-3.5 rounded-2xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition active:scale-95 shadow-md inline-flex items-center gap-2">
+              <span>Xem menu</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+            </a>
+            <button type="button" onclick="openRandomizerModal()" class="px-5 py-3.5 rounded-2xl bg-[#f0f2eb] hover:bg-[#e4e8d8] text-[#3a5a40] font-quicksand font-bold transition active:scale-95 border border-[#d4b872]/60 shadow-sm inline-flex items-center gap-2">
+              <span class="animate-dice-shake text-base">🎲</span> Hôm nay uống gì?
+            </button>
+            <a href="https://shopeefood.shopee.vn/u/frCAhCm" target="_blank" rel="noopener noreferrer"
+               class="px-6 py-3.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-quicksand font-bold transition active:scale-95 shadow-sm">
+              ShopeeFood
+            </a>
+          </div>
 
-        <p class="text-sm text-slate-500">Mở cửa <b class="text-slate-700">9:00 – 22:00</b> hàng ngày</p>
-      </div>
-
-      <!-- Ảnh + motion -->
-      <div class="relative flex items-center justify-center">
-        <div class="relative z-10 w-full max-w-sm animate-float">
-          <div class="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
-            <img src="assets/open.jpg" alt="Quán Lê Mê - Trà Sữa Đậm Vị" fetchpriority="high" class="w-full aspect-[4/5] object-cover">
+          <!-- Trust highlights -->
+          <div class="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm text-slate-600">
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#3a5a40] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              Ủ trà mới mỗi ngày
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#3a5a40] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              Freeship trong 2km
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#3a5a40] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Mở cửa <b class="text-slate-700">9:00 – 22:00</b>
+            </span>
           </div>
         </div>
 
-        <!-- Badge 1 -->
-        <div class="absolute top-6 left-0 sm:left-6 lg:-left-2 z-20 animate-float-badge-1">
-          <div class="bg-white/95 backdrop-blur px-3 py-2.5 rounded-2xl shadow-lg flex items-center gap-2.5">
-            <img src="assets/single-bottle.jpg" alt="Chai cốt trà sữa" class="w-10 h-10 rounded-xl object-cover">
-            <div>
-              <p class="text-sm font-bold text-slate-900">Cốt trà đóng chai</p>
-              <p class="text-xs text-[#3a5a40] font-semibold">Mua về uống tại nhà</p>
+        <!-- Ảnh Hero + Floating Badges -->
+        <div class="relative flex items-center justify-center px-2 sm:px-6 lg:px-0">
+          <div class="relative z-10 w-full max-w-[340px] sm:max-w-sm animate-float">
+            <div class="rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-white">
+              <img src="assets/open.jpg" alt="Ly Trà Sữa Lê Mê bên khung cửa sổ gỗ" fetchpriority="high" class="w-full aspect-[4/5] object-cover">
             </div>
           </div>
-        </div>
 
-        <!-- Badge 2 -->
-        <div class="absolute bottom-8 right-0 sm:right-6 lg:-right-2 z-20 animate-float-badge-2">
-          <div class="bg-white/95 backdrop-blur px-4 py-2.5 rounded-2xl shadow-lg">
-            <p class="text-sm font-bold text-orange-600">Freeship dưới 2km</p>
-            <p class="text-xs text-slate-500">Giao tận nơi</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       2.5. LÊ MÊ STORIES (Instagram Highlights)
-       ======================================================== -->
-  <section id="stories" class="pt-4 pb-8 max-w-7xl mx-auto px-4 sm:px-8">
-    <div class="flex items-center justify-between mb-3 px-1">
-      <div class="flex items-center gap-2">
-        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <h3 class="font-quicksand font-bold text-sm sm:text-base text-slate-800 tracking-wide uppercase">Lê Mê Story</h3>
-      </div>
-      <span class="text-xs text-slate-500 font-medium">Chạm để xem video & ảnh quán 📸</span>
-    </div>
-
-    <div class="flex items-center gap-4 sm:gap-6 overflow-x-auto no-scrollbar py-2 px-1">
-      <!-- Story 0: Pha trà -->
-      <button onclick="openStoryViewer(0)" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Pha trà tại quán">
-        <div class="story-ring">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-900 relative">
-            <video src="assets/make-tea.webm" muted playsinline class="w-full h-full object-cover"></video>
-            <span class="absolute inset-0 flex items-center justify-center bg-black/25 text-white text-xs font-bold">▶</span>
-          </div>
-        </div>
-        <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[76px] truncate text-center">Pha trà tươi</span>
-      </button>
-
-      <!-- Story 1: Không gian -->
-      <button onclick="openStoryViewer(1)" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Góc quán chill">
-        <div class="story-ring">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
-            <img src="assets/store-interior.png" alt="Không gian quán" class="w-full h-full object-cover">
-          </div>
-        </div>
-        <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[76px] truncate text-center">Góc quán chill</span>
-      </button>
-
-      <!-- Story 2: Chai cốt trà -->
-      <button onclick="openStoryViewer(2)" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Cốt trà đóng chai">
-        <div class="story-ring">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
-            <img src="assets/bottles-lineup.jpg" alt="Set cốt trà sữa" class="w-full h-full object-cover">
-          </div>
-        </div>
-        <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[76px] truncate text-center">Set 4 chai</span>
-      </button>
-
-      <!-- Story 3: Freeship -->
-      <button onclick="openStoryViewer(3)" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Freeship 2km">
-        <div class="story-ring">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
-            <img src="assets/open.jpg" alt="Giao hàng tận nơi" class="w-full h-full object-cover">
-          </div>
-        </div>
-        <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[76px] truncate text-center">Freeship 2km</span>
-      </button>
-
-      <!-- Story 4: Góc Mê -->
-      <button onclick="openStoryViewer(4)" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Khách khen quán">
-        <div class="story-ring">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
-            <img src="assets/facebook-reviews.png" alt="Đánh giá Fanpage" class="w-full h-full object-cover">
-          </div>
-        </div>
-        <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[76px] truncate text-center">Feedback</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       3. MENU
-       ======================================================== -->
-  <section id="menu" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-8">
-    <div class="text-center max-w-xl mx-auto mb-6">
-      <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Menu</p>
-      <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Món ngon tại Lê Mê</h2>
-      <p class="text-slate-600">Chọn món, soạn đơn rồi gửi cho quán qua Zalo hoặc Messenger để xác nhận.</p>
-      <p class="text-sm text-slate-500 mt-2">Giá tham khảo; quán sẽ xác nhận món, giá và phí giao hàng trước khi nhận đơn.</p>
-    </div>
-
-    <!-- Thanh lọc danh mục Sticky -->
-    <div id="sticky-tabs-container" class="sticky-menu-tabs flex justify-center mb-8">
-      <div class="inline-flex flex-wrap justify-center gap-1 p-1.5 bg-white/95 border border-[#e4e8d8] rounded-2xl shadow-sm">
-        <button data-filter="all" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm bg-[#3a5a40] text-[#e9edc9] transition active:scale-95">Tất cả</button>
-        <button data-filter="milktea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà sữa & Matcha</button>
-        <button data-filter="fruittea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà hoa quả</button>
-        <button data-filter="bottle" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Cốt trà đóng chai</button>
-      </div>
-    </div>
-
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-    <noscript><p>Bạn bật JavaScript để xem menu và soạn đơn, hoặc <a href="https://shopeefood.shopee.vn/u/frCAhCm" class="underline">đặt trên ShopeeFood</a>.</p></noscript>
-  </section>
-
-  <!-- ========================================================
-       4. VỀ LÊ MÊ - video dọc + không gian quán
-       ======================================================== -->
-  <section id="about" class="py-16 sm:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8">
-
-      <div class="text-center max-w-xl mx-auto mb-12">
-        <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Về Lê Mê</p>
-        <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Không gian & cốt trà</h2>
-        <p class="text-slate-600">Trà pha tại quán mỗi ngày, trong một góc nhỏ ấm áp để bạn ngồi chill cùng bạn bè.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-
-        <!-- Video dọc 9:16 -->
-        <div class="lg:col-span-5 flex flex-col items-center">
-          <button type="button" onclick="openVideoModal()" aria-label="Xem video pha trà"
-                  class="relative w-full max-w-[300px] aspect-[9/16] rounded-[2.25rem] p-1.5 bg-gradient-to-b from-[#d4b872] to-[#3a5a40] shadow-xl group hover:-translate-y-1 transition-transform duration-300">
-            <div class="relative w-full h-full rounded-[1.9rem] overflow-hidden bg-slate-950">
-              <img src="assets/single-bottle.jpg" alt="Cốt trà Lê Mê — mở video pha trà" loading="lazy" decoding="async" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 pointer-events-none"></div>
-
-              <div class="absolute inset-0 flex items-center justify-center">
-                <span class="w-16 h-16 rounded-full bg-white/90 text-[#3a5a40] flex items-center justify-center text-2xl pl-1 shadow-xl group-hover:scale-110 transition-transform duration-300">▶</span>
+          <!-- Badge 1 -->
+          <div class="absolute top-4 left-0 sm:left-4 lg:-left-4 z-20 animate-float-badge-1">
+            <div class="surface-card bg-white/95 backdrop-blur px-3 py-2 rounded-2xl shadow-lg border border-[#e4e8d8] flex items-center gap-2.5">
+              <img src="assets/single-bottle.jpg" alt="Chai cốt trà sữa Lê Mê" class="w-10 h-10 rounded-xl object-cover flex-shrink-0">
+              <div class="text-left">
+                <p class="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Cốt trà đóng chai</p>
+                <p class="text-[11px] sm:text-xs text-[#3a5a40] font-semibold">Rót ra đá uống tại nhà</p>
               </div>
-
-              <p class="absolute bottom-4 left-4 right-4 text-left font-quicksand font-bold text-sm text-white">Pha trà tại quán</p>
             </div>
+          </div>
+
+          <!-- Badge 2 -->
+          <div class="absolute bottom-6 right-0 sm:right-4 lg:-right-3 z-20 animate-float-badge-2">
+            <div class="surface-card bg-white/95 backdrop-blur px-3.5 py-2.5 rounded-2xl shadow-lg border border-[#e4e8d8] text-left">
+              <p class="text-xs sm:text-sm font-bold text-orange-600 leading-tight">Freeship dưới 2km</p>
+              <p class="text-[11px] sm:text-xs text-slate-500">Giao tận nơi tại Ngọc Hồi</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         2.5. LÊ MÊ STORIES (Instagram Highlights)
+         ======================================================== -->
+    <section id="stories" class="pt-2 pb-10 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="bg-white rounded-3xl border border-[#e4e8d8] p-4 sm:p-5 shadow-sm">
+        <div class="flex items-center justify-between gap-2 mb-3.5 px-1">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <h2 class="font-quicksand font-bold text-sm sm:text-base text-slate-800 tracking-wide uppercase">Lê Mê Story</h2>
+          </div>
+          <span class="text-xs text-slate-500 font-medium">Chạm để xem nhanh quán & sản phẩm</span>
+        </div>
+
+        <div class="flex items-center gap-4 sm:gap-7 overflow-x-auto no-scrollbar py-1 px-1">
+          <!-- Story 0: Pha trà (dùng ảnh tĩnh để không tự tải video 2.6MB lúc mở trang) -->
+          <button onclick="openStoryViewer(0)" data-story-index="0" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Pha trà tại quán">
+            <div class="story-ring">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-900 relative">
+                <img src="assets/single-bottle.jpg" alt="Pha trà tươi tại quán" loading="lazy" decoding="async" class="w-full h-full object-cover">
+                <span class="absolute inset-0 flex items-center justify-center bg-black/30 text-white text-sm font-bold pl-0.5">▶</span>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[78px] truncate text-center">Pha trà tươi</span>
           </button>
-          <p class="mt-3 text-sm text-slate-500">Bấm vào video để xem lớn</p>
+
+          <!-- Story 1: Không gian -->
+          <button onclick="openStoryViewer(1)" data-story-index="1" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Góc quán chill">
+            <div class="story-ring">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
+                <img src="assets/store-interior.png" alt="Không gian quán" loading="lazy" decoding="async" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[78px] truncate text-center">Góc quán chill</span>
+          </button>
+
+          <!-- Story 2: Chai cốt trà -->
+          <button onclick="openStoryViewer(2)" data-story-index="2" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Cốt trà đóng chai">
+            <div class="story-ring">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
+                <img src="assets/bottles-lineup.jpg" alt="Set cốt trà sữa" loading="lazy" decoding="async" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[78px] truncate text-center">Set 4 chai</span>
+          </button>
+
+          <!-- Story 3: Freeship -->
+          <button onclick="openStoryViewer(3)" data-story-index="3" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Freeship 2km">
+            <div class="story-ring">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-slate-100">
+                <img src="assets/open.jpg" alt="Giao hàng tận nơi" loading="lazy" decoding="async" class="w-full h-full object-cover">
+              </div>
+            </div>
+            <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[78px] truncate text-center">Freeship 2km</span>
+          </button>
+
+          <!-- Story 4: Feedback (thumbnail rõ nét thay vì ảnh nền đen thu nhỏ) -->
+          <button onclick="openStoryViewer(4)" data-story-index="4" type="button" class="flex flex-col items-center gap-1.5 flex-shrink-0 group focus:outline-none" aria-label="Xem story Khách khen quán">
+            <div class="story-ring">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-white bg-[#3a5a40] flex flex-col items-center justify-center text-[#e9edc9]">
+                <span class="text-lg sm:text-xl leading-none text-[#d4b872]">★</span>
+                <span class="text-[10px] sm:text-xs font-quicksand font-bold tracking-tight mt-0.5">Góc Mê</span>
+              </div>
+            </div>
+            <span class="text-xs font-bold font-quicksand text-slate-700 max-w-[78px] truncate text-center">Feedback</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         3. MENU
+         ======================================================== -->
+    <section id="menu" class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-xl mx-auto mb-6">
+        <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Menu</p>
+        <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Món ngon tại Lê Mê</h2>
+        <p class="text-slate-600">Chọn món, tùy chỉnh độ ngọt &amp; lượng đá, rồi soạn đơn gửi qua Zalo hoặc Messenger.</p>
+        <p class="text-xs sm:text-sm text-slate-500 mt-2">Giá tham khảo; quán sẽ xác nhận món, giá và phí giao hàng trước khi nhận đơn.</p>
+      </div>
+
+      <!-- Thanh lọc danh mục Sticky -->
+      <div id="sticky-tabs-container" class="sticky-menu-tabs flex justify-center mb-8">
+        <div class="inline-flex flex-wrap justify-center gap-1 p-1.5 bg-white/95 border border-[#e4e8d8] rounded-2xl shadow-sm">
+          <button type="button" data-filter="all" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm bg-[#3a5a40] text-[#e9edc9] transition active:scale-95">Tất cả</button>
+          <button type="button" data-filter="milktea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà sữa &amp; Matcha</button>
+          <button type="button" data-filter="fruittea" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Trà hoa quả</button>
+          <button type="button" data-filter="bottle" class="menu-tab-btn px-4 py-2 rounded-xl font-quicksand font-bold text-sm text-slate-600 hover:text-[#3a5a40] transition active:scale-95">Cốt trà đóng chai</button>
+        </div>
+      </div>
+
+      <div id="product-grid" class="flex flex-wrap justify-center gap-5 sm:gap-6"></div>
+      <noscript><p class="text-center text-sm text-slate-600 mt-4">Bạn bật JavaScript để xem menu và soạn đơn, hoặc <a href="https://shopeefood.shopee.vn/u/frCAhCm" class="underline font-semibold">đặt trên ShopeeFood</a>.</p></noscript>
+    </section>
+
+    <!-- ========================================================
+         4. VỀ LÊ MÊ - video dọc + không gian quán
+         ======================================================== -->
+    <section id="about" class="py-16 sm:py-24 bg-white border-y border-[#e4e8d8]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-8">
+
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Về Lê Mê</p>
+          <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Không gian &amp; cốt trà</h2>
+          <p class="text-slate-600">Trà pha tại quán mỗi ngày, trong một góc nhỏ ấm áp để bạn ngồi chill cùng bạn bè.</p>
         </div>
 
-        <!-- Ảnh quán + 3 điểm nổi bật -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="rounded-3xl overflow-hidden shadow-lg">
-            <img src="assets/store-interior.png" alt="Không gian quán Lê Mê" loading="lazy" decoding="async" class="w-full h-[300px] sm:h-[380px] object-cover">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+          <!-- Video dọc 9:16 -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            <button type="button" onclick="openVideoModal()" aria-label="Xem video pha trà"
+                    class="relative w-full max-w-[290px] aspect-[9/16] rounded-[2.25rem] p-1.5 bg-gradient-to-b from-[#d4b872] via-[#8ea382] to-[#3a5a40] shadow-xl group hover:-translate-y-1 transition-transform duration-300">
+              <div class="relative w-full h-full rounded-[1.9rem] overflow-hidden bg-slate-950">
+                <img src="assets/single-bottle.jpg" alt="Cốt trà Lê Mê — mở video pha trà" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 pointer-events-none"></div>
+
+                <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[11px] font-semibold tracking-wide">
+                  VIDEO • REEL
+                </span>
+
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="w-16 h-16 rounded-full bg-white/95 text-[#3a5a40] flex items-center justify-center text-2xl pl-1 shadow-xl ring-4 ring-white/30 group-hover:scale-110 transition-transform duration-300">▶</span>
+                </div>
+
+                <div class="absolute bottom-4 left-4 right-4 text-left">
+                  <p class="font-quicksand font-bold text-base text-white">Pha trà tại quán</p>
+                  <p class="text-xs text-white/80 mt-0.5">Chạm để xem video toàn màn hình</p>
+                </div>
+              </div>
+            </button>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="p-4 rounded-2xl bg-[#f0f2eb]">
-              <h3 class="font-quicksand font-bold text-slate-900 mb-1">Đậm vị trà</h3>
-              <p class="text-sm text-slate-600 leading-relaxed">Vị trà rõ ràng, ngọt vừa phải, không lấn át.</p>
+          <!-- Ảnh quán + 3 điểm nổi bật -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="rounded-3xl overflow-hidden shadow-lg border border-[#e4e8d8]">
+              <img src="assets/store-interior.png" alt="Không gian quán Lê Mê Ngọc Hồi" loading="lazy" decoding="async" class="w-full h-[260px] sm:h-[380px] object-cover">
             </div>
-            <div class="p-4 rounded-2xl bg-[#f0f2eb]">
-              <h3 class="font-quicksand font-bold text-slate-900 mb-1">Không gian chill</h3>
-              <p class="text-sm text-slate-600 leading-relaxed">Tone gỗ và xanh, ánh đèn ấm, hợp ngồi học hay hẹn bạn.</p>
-            </div>
-            <div class="p-4 rounded-2xl bg-[#f0f2eb]">
-              <h3 class="font-quicksand font-bold text-slate-900 mb-1">Cốt trà mang về</h3>
-              <p class="text-sm text-slate-600 leading-relaxed">Đóng chai thủy tinh, để tủ lạnh, rót ra ly đá là uống.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-4 sm:p-5 rounded-2xl bg-[#f0f2eb] border border-[#e4e8d8]">
+                <div class="w-9 h-9 rounded-xl bg-white text-[#3a5a40] flex items-center justify-center mb-3 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                </div>
+                <h3 class="font-quicksand font-bold text-slate-900 mb-1">Đậm vị trà</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Vị trà rõ ràng, hậu ngọt dịu, không bị ngấy hay lấn át.</p>
+              </div>
+              <div class="p-4 sm:p-5 rounded-2xl bg-[#f0f2eb] border border-[#e4e8d8]">
+                <div class="w-9 h-9 rounded-xl bg-white text-[#3a5a40] flex items-center justify-center mb-3 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </div>
+                <h3 class="font-quicksand font-bold text-slate-900 mb-1">Không gian chill</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Tone gỗ ấm và ánh đèn dịu, hợp ngồi học bài hay hẹn bạn.</p>
+              </div>
+              <div class="p-4 sm:p-5 rounded-2xl bg-[#f0f2eb] border border-[#e4e8d8]">
+                <div class="w-9 h-9 rounded-xl bg-white text-[#3a5a40] flex items-center justify-center mb-3 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                </div>
+                <h3 class="font-quicksand font-bold text-slate-900 mb-1">Cốt trà mang về</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Đóng chai thủy tinh gọn đẹp, bảo quản lạnh, rót ra đá là uống.</p>
+              </div>
             </div>
           </div>
+
         </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         5. GÓC "MÊ" - Polaroid Photo Wall Check-in
+         ======================================================== -->
+    <section id="reviews" class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-8">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Góc "Mê"</p>
+        <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Khoảnh khắc &amp; Feedback</h2>
+        <p class="text-slate-600">Những góc nhỏ quen thuộc và lời nhắn thật của khách hàng trên Fanpage Lê Mê.</p>
+      </div>
+
+      <!-- Polaroid Photo Wall -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 sm:gap-6 items-start pt-4 pb-6">
+
+        <!-- Polaroid 1: Real Facebook Review -->
+        <button type="button" class="polaroid-card -rotate-2 hover:rotate-0" onclick="openStoryViewer(1)" aria-label="Xem ảnh Không gian quán — đánh giá của Hoa Thanh">
+          <div class="washi-tape"></div>
+          <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3">
+            <img src="assets/store-interior.png" alt="Không gian quán Lê Mê" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          </div>
+          <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-2 polaroid-text">“Trà sữa ngon mà không gian quán còn đẹp và chill nữa, sẽ quay lại shop hihi 🥰”</p>
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-1.5 border-t border-slate-100 polaroid-divider">
+            <span class="font-semibold text-slate-700 polaroid-author">Hoa Thanh</span>
+            <span class="polaroid-meta">Đánh giá FB</span>
+          </div>
+        </button>
+
+        <!-- Polaroid 2: Real Facebook Review -->
+        <button type="button" class="polaroid-card rotate-2 hover:rotate-0 sm:translate-y-3" onclick="openStoryViewer(0)" aria-label="Xem video pha trà — đánh giá của Hoàng Minh Đức">
+          <div class="washi-tape washi-tape-alt"></div>
+          <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3">
+            <img src="assets/open.jpg" alt="Ly Trà Sữa Lê Mê đậm vị" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          </div>
+          <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-2 polaroid-text">“siêu đậm vị trà 🍃”</p>
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-1.5 border-t border-slate-100 polaroid-divider">
+            <span class="font-semibold text-slate-700 polaroid-author">Hoàng Minh Đức</span>
+            <span class="polaroid-meta">Đánh giá FB</span>
+          </div>
+        </button>
+
+        <!-- Polaroid 3: Bottles -->
+        <button type="button" class="polaroid-card -rotate-2 hover:rotate-0" onclick="openStoryViewer(2)" aria-label="Xem story Set 4 chai cốt trà sữa">
+          <div class="washi-tape"></div>
+          <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3">
+            <img src="assets/bottles-lineup.jpg" alt="Set 4 chai cốt trà sữa Lê Mê" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          </div>
+          <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-2 polaroid-text">“Set 4 chai cốt trà bảo quản lạnh, rót ra ly đá là uống ngay 🧋”</p>
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-1.5 border-t border-slate-100 polaroid-divider">
+            <span class="font-semibold text-slate-700 polaroid-author">Cốt trà đóng chai</span>
+            <span class="polaroid-meta">Mang về</span>
+          </div>
+        </button>
+
+        <!-- Polaroid 4: Single bottle / Opening hours -->
+        <button type="button" class="polaroid-card rotate-2 hover:rotate-0 sm:translate-y-3" onclick="openStoryViewer(3)" aria-label="Xem story giờ mở cửa và Freeship 2km">
+          <div class="washi-tape washi-tape-alt"></div>
+          <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3">
+            <img src="assets/single-bottle.jpg" alt="Chai cốt trà sữa nguyên bản Lê Mê" loading="lazy" decoding="async" class="w-full h-full object-cover">
+          </div>
+          <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-2 polaroid-text">“Mở cửa 9:00 – 22:00 hàng ngày, Freeship bán kính 2km 🛵”</p>
+          <div class="flex items-center justify-between text-xs text-slate-500 pt-1.5 border-t border-slate-100 polaroid-divider">
+            <span class="font-semibold text-slate-700 polaroid-author">Ngọc Hồi, Hà Nội</span>
+            <span class="polaroid-meta">Lê Mê</span>
+          </div>
+        </button>
 
       </div>
-    </div>
-  </section>
+
+      <div class="text-center mt-10">
+        <a href="https://www.facebook.com/profile.php?id=61590901593823" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 border-[#3a5a40] text-[#3a5a40] hover:bg-[#3a5a40] hover:text-[#e9edc9] font-quicksand font-bold transition active:scale-95 shadow-sm">
+          <span>Xem thêm feedback trên Fanpage</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <!-- ========================================================
-       5. GÓC "MÊ" - Polaroid Photo Wall Check-in
+       6. FOOTER & LIÊN HỆ
        ======================================================== -->
-  <section id="reviews" class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-8">
-    <div class="text-center max-w-xl mx-auto mb-12">
-      <p class="text-sm font-bold tracking-widest uppercase text-[#3a5a40] mb-2">Góc "Mê"</p>
-      <h2 class="text-3xl sm:text-4xl font-bold font-quicksand text-slate-900 mb-3">Khoảnh khắc & Feedback</h2>
-      <p class="text-slate-600">Những bức ảnh kỷ niệm và lời nhắn dễ thương của khách hàng tại Lê Mê.</p>
-    </div>
-
-    <!-- Polaroid Photo Wall -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-start pt-4 pb-6">
-
-      <!-- Polaroid 1 -->
-      <div class="polaroid-card -rotate-2 hover:rotate-0" onclick="openStoryViewer(1)">
-        <div class="washi-tape"></div>
-        <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3.5">
-          <img src="assets/store-interior.png" alt="Không gian quán" class="w-full h-full object-cover">
-        </div>
-        <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-1.5 polaroid-text">“Không gian quán đẹp và chill lắm 🥰”</p>
-        <div class="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-100">
-          <span class="font-semibold text-slate-700">Hoa Thanh</span>
-          <span>Facebook</span>
-        </div>
-      </div>
-
-      <!-- Polaroid 2 -->
-      <div class="polaroid-card rotate-3 hover:rotate-0 sm:translate-y-3" onclick="openStoryViewer(0)">
-        <div class="washi-tape washi-tape-alt"></div>
-        <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3.5">
-          <img src="assets/drinks.jpg" alt="Trà sữa Lê Mê" style="object-position: 70% 35%;" class="w-full h-full object-cover">
-        </div>
-        <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-1.5 polaroid-text">“siêu đậm vị trà 🍃 Uống là dính”</p>
-        <div class="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-100">
-          <span class="font-semibold text-slate-700">Hoàng Minh Đức</span>
-          <span>Facebook</span>
-        </div>
-      </div>
-
-      <!-- Polaroid 3 -->
-      <div class="polaroid-card -rotate-3 hover:rotate-0" onclick="openStoryViewer(2)">
-        <div class="washi-tape"></div>
-        <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3.5">
-          <img src="assets/bottles-lineup.jpg" alt="Set 4 chai cốt trà" class="w-full h-full object-cover">
-        </div>
-        <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-1.5 polaroid-text">“Set 4 chai để tủ lạnh rót đá là uống 🧋”</p>
-        <div class="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-100">
-          <span class="font-semibold text-slate-700">Cốt trà đóng chai</span>
-          <span>Mang về</span>
-        </div>
-      </div>
-
-      <!-- Polaroid 4 -->
-      <div class="polaroid-card rotate-2 hover:rotate-0 sm:translate-y-3" onclick="openStoryViewer(3)">
-        <div class="washi-tape washi-tape-alt"></div>
-        <div class="aspect-[4/5] rounded-md overflow-hidden bg-slate-100 mb-3.5">
-          <img src="assets/open.jpg" alt="Quán Lê Mê Ngọc Hồi" class="w-full h-full object-cover">
-        </div>
-        <p class="font-quicksand font-bold text-sm text-slate-800 leading-snug mb-1.5 polaroid-text">“Mở cửa 9:00 - 22:00, Freeship 2km 🛵”</p>
-        <div class="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-100">
-          <span class="font-semibold text-slate-700">Ngọc Hồi, Hà Nội</span>
-          <span>Lê Mê</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="text-center mt-10">
-      <a href="https://www.facebook.com/profile.php?id=61590901593823" target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl border-2 border-[#3a5a40] text-[#3a5a40] hover:bg-[#3a5a40] hover:text-[#e9edc9] font-quicksand font-bold transition active:scale-95 shadow-sm">
-        Xem thêm feedback trên Fanpage ↗
-      </a>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       6. FOOTER
-       ======================================================== -->
-  <footer id="contact" class="bg-[#283e2c] text-[#fbfbf9] pt-14 pb-8">
+  <footer id="contact" class="bg-[#283e2c] text-[#fbfbf9] pt-14 pb-28 lg:pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/15 text-sm">
 
-        <!-- Cột 1 -->
+        <!-- Cột 1: Thương hiệu -->
         <div class="space-y-4">
           <div class="flex items-center gap-3">
-            <img src="assets/logo.png" alt="Lê Mê Logo" class="h-14 w-auto rounded-xl border-2 border-[#e9edc9]">
+            <img src="assets/logo.png" alt="Lê Mê Logo" loading="lazy" decoding="async" class="h-14 w-auto rounded-xl border-2 border-[#e9edc9]">
             <div>
               <p class="font-quicksand font-bold text-2xl text-[#e9edc9] leading-none">Lê Mê</p>
               <p class="text-sm text-[#e9edc9]/80 mt-1">Trà Sữa Đậm Vị</p>
             </div>
           </div>
-          <p class="text-[#e9edc9]/80 leading-relaxed">Thơm trà đậm vị, ngọt ngào vừa ý.</p>
+          <p class="text-[#e9edc9]/85 leading-relaxed">Thơm trà đậm vị, ngọt ngào vừa ý. Ghé quán chill tại Ngọc Hồi hoặc đặt giao tận nơi mỗi ngày.</p>
           <div class="flex flex-wrap gap-2">
             <a href="https://www.facebook.com/profile.php?id=61590901593823" target="_blank" rel="noopener noreferrer"
                class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 font-semibold transition">Facebook</a>
@@ -421,54 +504,79 @@
           </div>
         </div>
 
-        <!-- Cột 2 -->
+        <!-- Cột 2: Liên hệ & Chỉ đường -->
         <div class="space-y-3">
           <p class="font-bold text-[#e9edc9] uppercase tracking-wider">Liên hệ</p>
           <ul class="space-y-2.5 text-[#fbfbf9]/90">
-            <li>📍 Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi</li>
-            <li><a href="https://maps.app.goo.gl/WT7h43BGyJvyZQHWA" target="_blank" rel="noopener noreferrer" class="inline-block rounded-xl bg-white/10 px-4 py-2.5 font-semibold hover:bg-white/20">Chỉ đường trên Google Maps ↗</a></li>
-            <li>📞 <a href="tel:0362126184" class="hover:text-[#e9edc9] font-semibold">036 212 6184</a> · <a href="tel:0869256962" class="hover:text-[#e9edc9] font-semibold">0869 256 962</a></li>
-            <li>✉️ <a href="mailto:vuhaiyen067@gmail.com" class="hover:text-[#e9edc9]">vuhaiyen067@gmail.com</a></li>
+            <li>📍 Lê Mê — Trà Sữa Đậm Vị — Ngọc Hồi</li>
+            <li>
+              <a href="https://maps.app.goo.gl/WT7h43BGyJvyZQHWA" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1.5 rounded-xl bg-white/10 px-4 py-2.5 font-semibold hover:bg-white/20 transition">
+                <span>Chỉ đường trên Google Maps</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li class="flex flex-wrap items-center gap-2">
+              <span>📞 <a href="tel:0362126184" class="hover:text-[#e9edc9] font-semibold">036 212 6184</a> · <a href="tel:0869256962" class="hover:text-[#e9edc9] font-semibold">0869 256 962</a></span>
+              <button type="button" onclick="copyHotline('0362126184')" class="text-xs px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[#e9edc9] transition">Sao chép</button>
+            </li>
+            <li>✉️ <a href="mailto:vuhaiyen067@gmail.com" class="hover:text-[#e9edc9] transition">vuhaiyen067@gmail.com</a></li>
             <li>⏰ 9:00 – 22:00 hàng ngày</li>
           </ul>
         </div>
 
-        <!-- Cột 3 -->
+        <!-- Cột 3: Giao hàng & Đặt nhanh -->
         <div class="space-y-3">
           <p class="font-bold text-[#e9edc9] uppercase tracking-wider">Giao hàng</p>
           <p class="text-[#fbfbf9]/90 leading-relaxed">Freeship trong bán kính 2km. Xa hơn, quán sẽ báo phí ship khi xác nhận đơn.</p>
-          <a href="https://zalo.me/0362126184" target="_blank" rel="noopener noreferrer"
-             class="inline-block px-4 py-2.5 rounded-xl bg-[#d4b872] hover:bg-amber-200 text-slate-900 font-quicksand font-bold transition">
-            Đặt qua Zalo
-          </a>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <a href="https://zalo.me/0362126184" target="_blank" rel="noopener noreferrer"
+               class="inline-block px-4 py-2.5 rounded-xl bg-[#d4b872] hover:bg-amber-200 text-slate-900 font-quicksand font-bold transition">
+              Đặt qua Zalo
+            </a>
+            <a href="https://m.me/61590901593823" target="_blank" rel="noopener noreferrer"
+               class="inline-block px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-quicksand font-bold transition">
+              Nhắn Messenger
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-[#e9edc9]/70">
-        <p>© 2026 Lê Mê - Trà Sữa Đậm Vị.</p>
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-[#e9edc9]/75">
+        <p>© 2026 Lê Mê — Trà Sữa Đậm Vị.</p>
         <p class="font-bold text-[#e9edc9]">LeMe by SoSea.</p>
       </div>
     </div>
   </footer>
 
   <!-- ========================================================
-       GIỎ HÀNG
+       GIỎ HÀNG (CART DRAWER)
        ======================================================== -->
-  <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="drawer-backdrop fixed inset-0 bg-black/40 z-50"></div>
+  <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="drawer-backdrop fixed inset-0 bg-black/45 backdrop-blur-[2px] z-50"></div>
 
-  <div id="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng" aria-hidden="true" tabindex="-1" inert class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[390px] bg-white z-50 shadow-2xl flex flex-col">
+  <div id="cart-drawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng" aria-hidden="true" tabindex="-1" inert class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[400px] bg-white z-50 shadow-2xl flex flex-col">
     <div class="p-4 border-b border-[#e4e8d8] flex items-center justify-between">
-      <h3 class="font-bold font-quicksand text-lg text-slate-900">Giỏ hàng</h3>
-      <button onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng giỏ hàng">✕</button>
+      <div class="flex items-center gap-2">
+        <h3 class="font-bold font-quicksand text-lg text-slate-900">Giỏ hàng</h3>
+        <span id="cart-header-count" class="hidden px-2 py-0.5 rounded-full text-xs font-bold bg-[#f0f2eb] text-[#3a5a40]">0</span>
+      </div>
+      <button type="button" onclick="toggleCartDrawer(false)" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition" aria-label="Đóng giỏ hàng">✕</button>
     </div>
 
-    <div class="px-4 py-2.5 bg-[#f0f2eb] text-sm text-slate-700">Freeship trong bán kính 2km</div>
-    <button id="resume-order-btn" onclick="showOrderDraft()" class="hidden m-4 p-3 rounded-xl border border-[#3a5a40] text-[#3a5a40] font-semibold text-sm">Mở lại bản soạn đơn gần nhất</button>
+    <div class="px-4 py-2.5 bg-[#f0f2eb] text-xs sm:text-sm text-slate-700 flex items-center gap-2">
+      <span>🛵</span>
+      <span>Freeship trong bán kính 2km</span>
+    </div>
+    <button id="resume-order-btn" type="button" onclick="showOrderDraft()" class="hidden mx-4 mt-3 p-3 rounded-xl border border-[#3a5a40] text-[#3a5a40] hover:bg-[#f0f2eb] font-semibold text-sm transition">
+      Mở lại bản soạn đơn gần nhất
+    </button>
 
     <div class="flex-1 overflow-y-auto p-4 space-y-2.5">
       <div id="cart-empty-state" class="py-14 text-center space-y-3">
+        <div class="w-14 h-14 mx-auto rounded-2xl bg-[#f0f2eb] flex items-center justify-center text-2xl">🧋</div>
         <p class="font-bold font-quicksand text-slate-800">Giỏ hàng đang trống</p>
-        <button onclick="toggleCartDrawer(false); window.location.href='#menu'" class="px-5 py-2.5 bg-[#3a5a40] text-[#e9edc9] rounded-full font-bold text-sm hover:bg-[#283e2c] transition">
+        <p class="text-xs text-slate-500 max-w-[220px] mx-auto">Chọn một ly trà đậm vị hoặc cốt trà đóng chai mang về nhé!</p>
+        <button type="button" onclick="toggleCartDrawer(false); scrollToSection('#menu')" class="px-5 py-2.5 bg-[#3a5a40] text-[#e9edc9] rounded-full font-bold text-sm hover:bg-[#283e2c] transition">
           Xem menu
         </button>
       </div>
@@ -480,63 +588,67 @@
         <span>Tạm tính</span>
         <span id="cart-subtotal">0đ</span>
       </div>
-      <p class="text-xs text-slate-500">Ngoài 2km quán sẽ báo thêm phí ship.</p>
-      <button onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition">
+      <p class="text-xs text-slate-500">Ngoài 2km quán sẽ báo thêm phí ship khi xác nhận đơn.</p>
+      <button type="button" onclick="openCheckoutModal()" class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition shadow-sm">
         Soạn đơn giao hàng
       </button>
-      <button onclick="clearCart()" class="w-full py-2 text-sm text-slate-500 underline">Xóa các món trong giỏ</button>
+      <button type="button" onclick="clearCart()" class="w-full py-1.5 text-sm text-slate-500 hover:text-red-500 underline transition">Xóa các món trong giỏ</button>
     </div>
   </div>
 
   <!-- ========================================================
-       POP-UP CHỌN ĐƯỜNG / ĐÁ
+       POP-UP CHỌN ĐƯỜNG / ĐÁ & SỐ LƯỢNG
        ======================================================== -->
-  <div id="product-detail-modal" role="dialog" aria-modal="true" aria-label="Chọn đường và đá" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeProductModal()">
-    <div class="relative bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl">
-      <button onclick="closeProductModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng">✕</button>
+  <div id="product-detail-modal" role="dialog" aria-modal="true" aria-label="Chọn đường và đá" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/55 backdrop-blur-[2px] flex items-center justify-center p-4" onclick="if(event.target===this) closeProductModal()">
+    <div class="relative bg-white rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-[#e4e8d8]">
+      <button type="button" onclick="closeProductModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition" aria-label="Đóng">✕</button>
       <div id="product-modal-content"></div>
     </div>
   </div>
 
   <!-- ========================================================
-       POP-UP ĐẶT HÀNG
+       POP-UP ĐẶT HÀNG (BƯỚC 1/2)
        ======================================================== -->
-  <div id="checkout-modal" role="dialog" aria-modal="true" aria-label="Soạn đơn giao hàng" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4" onclick="if(event.target===this) closeCheckoutModal()">
-    <div class="relative bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl">
-      <button onclick="closeCheckoutModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center" aria-label="Đóng">✕</button>
+  <div id="checkout-modal" role="dialog" aria-modal="true" aria-label="Soạn đơn giao hàng" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/55 backdrop-blur-[2px] flex items-center justify-center p-4" onclick="if(event.target===this) closeCheckoutModal()">
+    <div class="relative bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-[#e4e8d8]">
+      <button type="button" onclick="closeCheckoutModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition" aria-label="Đóng">✕</button>
 
+      <p class="text-xs font-bold uppercase tracking-wider text-[#3a5a40] mb-1">Bước 1/2 • Thông tin nhận hàng</p>
       <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-4">Soạn đơn giao hàng</h3>
 
-      <div class="p-3.5 bg-[#f0f2eb] rounded-xl text-sm mb-4 space-y-1">
-        <div class="flex justify-between">
-          <span class="text-slate-500">Số món</span>
-          <span id="checkout-summary-items" class="font-bold text-slate-800">0</span>
+      <div class="p-3.5 bg-[#f0f2eb] rounded-2xl text-sm mb-4 space-y-2 border border-[#e4e8d8]">
+        <div id="checkout-summary-list" class="space-y-1 text-xs text-slate-700 max-h-28 overflow-y-auto pr-1"></div>
+        <div class="pt-2 border-t border-[#d4d9c7] space-y-1">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Số món</span>
+            <span id="checkout-summary-items" class="font-bold text-slate-800">0</span>
+          </div>
+          <div class="flex justify-between font-bold text-[#3a5a40]">
+            <span>Tạm tính</span>
+            <span id="checkout-summary-subtotal">0đ</span>
+          </div>
         </div>
-        <div class="flex justify-between font-bold text-[#3a5a40]">
-          <span>Tạm tính</span>
-          <span id="checkout-summary-subtotal">0đ</span>
-        </div>
-        <p class="text-xs text-slate-500 pt-1">Freeship trong 2km. Xa hơn quán sẽ báo phí khi xác nhận.</p>
+        <p class="text-xs text-slate-500">Freeship trong 2km. Xa hơn quán sẽ báo phí khi xác nhận.</p>
       </div>
 
       <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-3 text-sm">
         <div>
           <label for="order-name" class="block font-semibold text-slate-700 mb-1">Họ tên *</label>
-          <input type="text" id="order-name" autocomplete="name" maxlength="100" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-name" autocomplete="name" maxlength="100" required placeholder="Nguyễn Văn A" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-phone" class="block font-semibold text-slate-700 mb-1">Số điện thoại *</label>
-          <input type="tel" id="order-phone" autocomplete="tel" inputmode="tel" maxlength="25" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="tel" id="order-phone" autocomplete="tel" inputmode="tel" maxlength="25" required placeholder="09xx xxx xxx" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-address" class="block font-semibold text-slate-700 mb-1">Địa chỉ nhận hàng *</label>
-          <input type="text" id="order-address" autocomplete="street-address" maxlength="300" required placeholder="Số nhà, ngõ, đường..." class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-address" autocomplete="street-address" maxlength="300" required placeholder="Số nhà, ngõ, đường..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
         <div>
           <label for="order-note" class="block font-semibold text-slate-700 mb-1">Ghi chú</label>
-          <input type="text" id="order-note" maxlength="500" placeholder="Không bắt buộc" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
+          <input type="text" id="order-note" maxlength="500" placeholder="Ví dụ: ít đá riêng, giao trước 16h..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#3a5a40]/40">
         </div>
-        <button type="submit" class="w-full mt-2 py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition">
+        <button type="submit" class="w-full mt-2 py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold transition shadow-sm">
           Soạn nội dung đơn
         </button>
         <p class="text-xs text-slate-500">Bước tiếp theo: sao chép, dán và gửi cho quán qua Zalo hoặc Messenger. Bản soạn được giữ trong tab này khi tải lại trang; bạn có thể xóa sau khi gửi.</p>
@@ -545,33 +657,36 @@
   </div>
 
   <!-- ========================================================
-       POP-UP ĐƠN ĐÃ TẠO
+       POP-UP ĐƠN ĐÃ TẠO (BƯỚC 2/2)
+       Lưu ý: #generated-order-text là control focus đầu tiên,
+       nút "Xóa bản soạn này" là control focus cuối cùng.
        ======================================================== -->
-  <div id="order-success-modal" role="dialog" aria-modal="true" aria-label="Nội dung đơn chờ gửi" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/50 flex items-center justify-center p-4">
-    <div class="relative bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl text-center">
+  <div id="order-success-modal" role="dialog" aria-modal="true" aria-label="Nội dung đơn chờ gửi" tabindex="-1" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/55 backdrop-blur-[2px] flex items-center justify-center p-4">
+    <div class="relative bg-white rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl text-center border border-[#e4e8d8]">
+      <p class="text-xs font-bold uppercase tracking-wider text-[#3a5a40] mb-1">Bước 2/2 • Gửi đơn cho quán</p>
       <h3 class="text-2xl font-bold font-quicksand text-slate-900 mb-1">Đơn đang chờ bạn gửi</h3>
       <p class="text-sm text-slate-600 mb-4">Quán chưa nhận được đơn. Bạn gửi nội dung qua Zalo hoặc Messenger và chờ quán xác nhận nhé.</p>
 
-      <div class="bg-[#f0f2eb] rounded-2xl p-4 text-left text-sm mb-4 space-y-1.5">
+      <div class="bg-[#f0f2eb] rounded-2xl p-4 text-left text-sm mb-4 space-y-1.5 border border-[#e4e8d8]">
         <div class="flex justify-between gap-4"><span class="text-slate-500">Khách hàng</span><span id="success-customer-name" class="font-semibold text-slate-800"></span></div>
         <div class="flex justify-between gap-4"><span class="text-slate-500">SĐT</span><span id="success-customer-phone" class="font-semibold text-slate-800"></span></div>
         <div class="flex justify-between gap-4"><span class="text-slate-500">Địa chỉ</span><span id="success-customer-address" class="font-semibold text-slate-800 text-right break-words min-w-0"></span></div>
         <div class="flex justify-between gap-4 pt-1.5 border-t border-[#d4d9c7] font-bold text-[#3a5a40]"><span>Tạm tính</span><span id="success-order-total"></span></div>
       </div>
 
-      <label for="generated-order-text" class="block text-left text-sm font-semibold mb-2">Nội dung gửi cho quán</label>
-      <textarea id="generated-order-text" readonly rows="6" class="w-full rounded-xl border border-slate-200 p-3 text-sm text-left"></textarea>
+      <label for="generated-order-text" class="block text-left text-sm font-semibold text-slate-700 mb-2">Nội dung gửi cho quán</label>
+      <textarea id="generated-order-text" readonly rows="6" class="w-full rounded-xl border border-slate-200 p-3 text-sm text-left font-sans"></textarea>
       <p id="copy-order-status" role="status" aria-live="polite" class="text-sm text-slate-600 my-3"></p>
       <div class="space-y-2">
         <a href="https://zalo.me/0362126184" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-3 rounded-xl bg-[#0068ff] hover:bg-[#0052cc] text-white font-quicksand font-bold transition">Mở Zalo để dán và gửi</a>
+           class="block w-full py-3 rounded-xl bg-[#0068ff] hover:bg-[#0052cc] text-white font-quicksand font-bold transition shadow-sm">Mở Zalo để dán và gửi</a>
         <a href="https://m.me/61590901593823" target="_blank" rel="noopener noreferrer"
-           class="block w-full py-3 rounded-xl bg-[#0084ff] hover:bg-[#0070db] text-white font-quicksand font-bold transition">Mở Messenger để dán và gửi</a>
+           class="block w-full py-3 rounded-xl bg-[#0084ff] hover:bg-[#0070db] text-white font-quicksand font-bold transition shadow-sm">Mở Messenger để dán và gửi</a>
         <div class="flex gap-2 pt-1">
-          <button onclick="copyGeneratedOrderText()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Sao chép lại</button>
-          <button onclick="closeSuccessModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Đóng</button>
+          <button type="button" onclick="copyGeneratedOrderText()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Sao chép lại</button>
+          <button type="button" onclick="closeSuccessModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition">Đóng</button>
         </div>
-        <button onclick="discardOrderDraft()" class="w-full py-2 text-sm text-slate-500 underline">Xóa bản soạn này</button>
+        <button type="button" onclick="discardOrderDraft()" class="w-full py-2 text-sm text-slate-500 hover:text-red-500 underline transition">Xóa bản soạn này</button>
       </div>
     </div>
   </div>
@@ -581,7 +696,7 @@
        ======================================================== -->
   <div id="video-modal" role="dialog" aria-modal="true" aria-label="Video pha trà tại quán" tabindex="-1" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" onclick="handleVideoModalBackdropClick(event)">
     <div class="relative w-full max-w-sm rounded-3xl overflow-hidden bg-black border-2 border-[#d4b872] shadow-2xl">
-      <button onclick="closeVideoModal()" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center text-sm font-bold border border-white/20 transition shadow-lg" aria-label="Đóng video">✕</button>
+      <button type="button" onclick="closeVideoModal()" class="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/70 hover:bg-red-600 text-white flex items-center justify-center text-sm font-bold border border-white/20 transition shadow-lg" aria-label="Đóng video">✕</button>
       <div class="w-full aspect-[9/16] max-h-[82vh] bg-black flex items-center justify-center">
         <video id="modal-tea-video" controls playsinline preload="none" class="w-full h-full object-contain bg-black">
           <source src="assets/make-tea.webm" type="video/webm">
@@ -598,11 +713,10 @@
        class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
        onclick="if(event.target===this) closeRandomizerModal()">
     <div class="relative bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center border-2 border-[#d4b872]/60 overflow-hidden">
-      <!-- Background subtle glow -->
       <div class="absolute -top-12 -right-12 w-32 h-32 bg-[#e9edc9]/50 rounded-full blur-2xl pointer-events-none"></div>
       <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-[#3a5a40]/10 rounded-full blur-2xl pointer-events-none"></div>
 
-      <button onclick="closeRandomizerModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold transition" aria-label="Đóng">✕</button>
+      <button type="button" onclick="closeRandomizerModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-sm font-bold transition" aria-label="Đóng">✕</button>
 
       <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#f0f2eb] text-3xl mb-3 shadow-inner">
         <span id="randomizer-dice-icon" class="animate-dice-shake">🎲</span>
@@ -614,12 +728,14 @@
       <!-- Slot result card -->
       <div id="randomizer-card" class="bg-[#fbfbf9] rounded-2xl p-3.5 border border-[#e4e8d8] mb-5 shadow-sm text-left">
         <div class="flex items-center gap-3">
-          <img id="randomizer-img" src="assets/drinks.jpg" alt="Món gợi ý" class="w-16 h-16 rounded-xl object-cover border border-[#d4b872]/40 shadow-sm flex-shrink-0" style="object-position: center;">
+          <div class="w-16 h-16 rounded-xl overflow-hidden border border-[#d4b872]/40 shadow-sm flex-shrink-0 bg-[#f0f2eb]">
+            <img id="randomizer-img" src="assets/open.jpg" alt="Món gợi ý" class="w-full h-full object-cover">
+          </div>
           <div class="min-w-0 flex-1">
             <span id="randomizer-mood" class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#3a5a40]/10 text-[#3a5a40] mb-1">⚡ Nạp năng lượng</span>
             <h4 id="randomizer-name" class="font-bold font-quicksand text-slate-900 text-base truncate">Trà Sữa Lê Mê</h4>
             <p id="randomizer-spec" class="text-xs text-slate-500">70% đường • 70% đá</p>
-            <p id="randomizer-price" class="text-sm font-bold font-quicksand text-[#3a5a40] mt-0.5">35.000đ</p>
+            <p id="randomizer-price" class="text-sm font-bold font-quicksand text-[#3a5a40] mt-0.5">35.000 ₫</p>
           </div>
         </div>
       </div>
@@ -629,12 +745,12 @@
         <button id="randomizer-add-btn" onclick="addRandomizerDrinkToCart()" type="button"
                 class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-sm transition active:scale-95 shadow-md flex items-center justify-center gap-2">
           <span>Uống luôn món này</span>
-          <span class="text-base">🛒</span>
+          <span class="text-base" aria-hidden="true">🛒</span>
         </button>
         <button onclick="spinRandomizer()" type="button"
                 class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-quicksand font-bold text-sm transition active:scale-95 flex items-center justify-center gap-1.5">
           <span>Quay lại ly khác</span>
-          <span>🎲</span>
+          <span aria-hidden="true">🎲</span>
         </button>
       </div>
     </div>
@@ -659,18 +775,19 @@
           <div class="story-progress-bar"><div class="story-progress-fill"></div></div>
         </div>
 
-        <!-- Author info + Close -->
+        <!-- Author info + Controls -->
         <div class="flex items-center justify-between text-white">
-          <div class="flex items-center gap-2.5">
-            <img src="assets/logo.png" alt="Lê Mê" class="w-8 h-8 rounded-full border border-[#d4b872] object-cover">
-            <div>
-              <p class="font-quicksand font-bold text-sm leading-none text-white">Lê Mê • Trà Sữa</p>
-              <p id="story-time-badge" class="text-[11px] text-white/70 mt-0.5">Vừa đăng</p>
+          <div class="flex items-center gap-2.5 min-w-0">
+            <img src="assets/logo.png" alt="Lê Mê" class="w-8 h-8 rounded-full border border-[#d4b872] object-cover flex-shrink-0">
+            <div class="min-w-0">
+              <p id="story-title-text" class="font-quicksand font-bold text-sm leading-none text-white truncate">Lê Mê • Trà Sữa</p>
+              <p id="story-time-badge" class="text-[11px] text-white/75 mt-0.5">Vừa đăng</p>
             </div>
           </div>
-          <div class="flex items-center gap-2">
-            <button id="story-sound-btn" onclick="toggleStorySound()" class="w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center text-xs transition" aria-label="Bật/Tắt âm thanh">🔊</button>
-            <button onclick="closeStoryViewer()" class="w-8 h-8 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center text-sm font-bold transition" aria-label="Đóng story">✕</button>
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <button id="story-pause-btn" type="button" onclick="toggleStoryPause()" class="w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-xs transition" aria-label="Tạm dừng story">⏸</button>
+            <button id="story-sound-btn" type="button" onclick="toggleStorySound()" class="w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-xs transition" aria-label="Bật âm thanh">🔇</button>
+            <button type="button" onclick="closeStoryViewer()" class="w-8 h-8 rounded-full bg-black/50 hover:bg-black/75 text-white flex items-center justify-center text-sm font-bold transition" aria-label="Đóng story">✕</button>
           </div>
         </div>
       </div>
@@ -679,14 +796,15 @@
       <div id="story-media-container" class="w-full h-full flex items-center justify-center relative overflow-hidden bg-black"></div>
 
       <!-- Tap navigation overlays (Left: Prev, Right: Next) -->
-      <div class="absolute inset-y-16 left-0 w-1/3 z-20 cursor-pointer" onclick="prevStory()" title="Story trước"></div>
-      <div class="absolute inset-y-16 right-0 w-2/3 z-20 cursor-pointer" onclick="nextStory()" title="Story tiếp theo"></div>
+      <div class="absolute inset-y-20 left-0 w-1/3 z-20 cursor-pointer" onclick="prevStory()" title="Story trước"></div>
+      <div class="absolute inset-y-20 right-0 w-2/3 z-20 cursor-pointer" onclick="nextStory()" title="Story tiếp theo"></div>
 
       <!-- Bottom Story Bar & Action Button -->
-      <div class="absolute bottom-0 left-0 right-0 z-30 p-4 pb-6 sm:pb-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col gap-2.5">
-        <p id="story-caption-text" class="text-white text-sm font-medium drop-shadow"></p>
-        <button id="story-cta-btn" onclick="handleStoryCtaClick()" class="w-full py-2.5 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-xs shadow-lg transition active:scale-95 flex items-center justify-center gap-1.5 border border-[#d4b872]/40">
-          <span>Xem Menu & Đặt món này</span> <span>🛒</span>
+      <div class="absolute bottom-0 left-0 right-0 z-30 p-4 pb-6 sm:pb-4 bg-gradient-to-t from-black/90 via-black/55 to-transparent flex flex-col gap-2.5">
+        <p id="story-caption-text" class="text-white text-sm font-medium drop-shadow leading-relaxed"></p>
+        <button id="story-cta-btn" type="button" onclick="handleStoryCtaClick()" class="w-full py-2.5 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-xs shadow-lg transition active:scale-95 flex items-center justify-center gap-1.5 border border-[#d4b872]/50">
+          <span id="story-cta-label">Xem Menu &amp; Đặt món</span>
+          <span aria-hidden="true">→</span>
         </button>
       </div>
     </div>
@@ -696,39 +814,39 @@
        MOBILE BOTTOM DOCK (Thanh điều hướng nhanh ngón tay cái)
        ======================================================== -->
   <aside id="mobile-dock" aria-label="Thao tác nhanh"
-         class="lg:hidden fixed bottom-3 left-3 right-3 z-40 max-w-md mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-[#e4e8d8] p-2 flex items-center justify-between mobile-bottom-dock transition-transform duration-300">
-    <a href="#menu" class="flex flex-col items-center justify-center px-3 py-1.5 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition" title="Xem menu">
+         class="lg:hidden fixed bottom-3 left-2.5 right-2.5 z-40 max-w-md mx-auto bg-white/95 backdrop-blur-md rounded-2xl border border-[#e4e8d8] px-2 py-1.5 flex items-center justify-between gap-1 mobile-bottom-dock transition-transform duration-300">
+    <a href="#menu" class="flex flex-col items-center justify-center px-2 py-1 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition min-w-[50px]" title="Xem menu">
       <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-      <span class="text-[11px] font-bold font-quicksand">Menu</span>
+      <span class="text-[11px] font-bold font-quicksand leading-none">Menu</span>
     </a>
 
-    <button onclick="openRandomizerModal()" type="button" class="flex flex-col items-center justify-center px-3 py-1.5 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition" title="Lê Mê chọn hộ">
+    <button onclick="openRandomizerModal()" type="button" class="flex flex-col items-center justify-center px-2 py-1 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition min-w-[54px]" title="Lê Mê chọn hộ">
       <span class="text-base leading-tight mb-0.5">🎲</span>
-      <span class="text-[11px] font-bold font-quicksand">Uống gì?</span>
+      <span class="text-[11px] font-bold font-quicksand leading-none">Uống gì?</span>
     </button>
 
-    <button onclick="toggleNightMode()" type="button" class="flex flex-col items-center justify-center px-3 py-1.5 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition" title="Bật đèn quán">
+    <button id="mobile-theme-btn" onclick="toggleNightMode()" type="button" class="flex flex-col items-center justify-center px-2 py-1 rounded-xl text-slate-600 hover:text-[#3a5a40] active:scale-95 transition min-w-[54px]" title="Bật đèn quán" aria-pressed="false">
       <span id="mobile-theme-icon" class="text-base leading-tight mb-0.5">💡</span>
-      <span class="text-[11px] font-bold font-quicksand">Bật đèn</span>
+      <span id="mobile-theme-label" class="text-[11px] font-bold font-quicksand leading-none">Bật đèn</span>
     </button>
 
     <button id="mobile-dock-cart" onclick="toggleCartDrawer(true)" type="button"
-            class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#3a5a40] text-[#e9edc9] font-quicksand font-bold text-xs shadow-md active:scale-95 transition"
+            class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[#3a5a40] text-[#e9edc9] font-quicksand font-bold text-xs shadow-md active:scale-95 transition min-w-0 flex-1 max-w-[168px]"
             aria-label="Xem giỏ hàng">
-      <div class="relative flex items-center justify-center">
+      <div class="relative flex items-center justify-center flex-shrink-0">
         <svg class="w-4 h-4 text-[#e9edc9]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
         </svg>
         <span class="cart-counter-badge hidden absolute -top-2 -right-2.5 min-w-[16px] h-[16px] px-1 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">0</span>
       </div>
-      <span id="mobile-dock-cart-text">Giỏ hàng (0đ)</span>
+      <span id="mobile-dock-cart-text" class="truncate">Giỏ (0đ)</span>
     </button>
   </aside>
 
   <!-- ========================================================
-       NÚT LIÊN HỆ NỔI
+       NÚT LIÊN HỆ NỔI (Desktop — không đè thanh Mobile Dock)
        ======================================================== -->
-  <div class="fixed bottom-20 left-4 sm:bottom-5 sm:left-5 z-40 flex items-center gap-2">
+  <div class="hidden lg:flex fixed bottom-5 left-5 z-40 items-center gap-2.5">
     <a href="tel:0362126184" title="Gọi 036 212 6184" aria-label="Gọi cho quán"
        class="w-12 h-12 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg flex items-center justify-center text-lg transition hover:scale-105 active:scale-95">📞</a>
     <a href="https://m.me/61590901593823" target="_blank" rel="noopener noreferrer" title="Nhắn tin Facebook" aria-label="Nhắn tin Facebook"

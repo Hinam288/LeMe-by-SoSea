@@ -1,127 +1,197 @@
-/* Lê Mê - Trà Sữa Đậm Vị | Blue #3a5a40 & Butter Yellow #e9edc9 */
+/* Lê Mê - Trà Sữa Đậm Vị | Matcha Sage #3a5a40, Cream #e9edc9 & Warm Gold #d4b872 */
 
 :root {
-  --brand-blue: #3a5a40;
-  --brand-blue-dark: #283e2c;
-  --brand-yellow: #e9edc9;
+  --brand-primary: #3a5a40;
+  --brand-primary-dark: #283e2c;
+  --brand-cream: #e9edc9;
+  --brand-gold: #d4b872;
   --bg-warm: #fbfbf9;
+  /* Legacy aliases */
+  --brand-blue: var(--brand-primary);
+  --brand-blue-dark: var(--brand-primary-dark);
+  --brand-yellow: var(--brand-cream);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  scroll-padding-top: 92px;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-warm);
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
 }
 
 .font-quicksand {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand', 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* Scrollbar */
+/* Hide scrollbars cleanly where horizontal scrolling is used */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom page scrollbar */
 ::-webkit-scrollbar { width: 9px; }
 ::-webkit-scrollbar-track { background: #e4e8d8; }
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-blue);
+  background: var(--brand-primary);
   border-radius: 9999px;
   border: 2px solid #e4e8d8;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--brand-blue-dark); }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-primary-dark); }
 
 /* ========================================================
-   HEADER - thu nhỏ logo khi cuộn trang
+   HEADER - thu nhỏ logo mượt mà khi cuộn trang
    ======================================================== */
 #main-header {
-  transition: padding 0.3s ease, box-shadow 0.3s ease;
+  transition: padding 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 .header-logo {
-  transition: height 0.3s ease;
+  transition: height 0.3s ease, transform 0.3s ease;
 }
 #main-header.is-scrolled {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
-  box-shadow: 0 6px 20px -6px rgba(40, 62, 44, 0.45);
+  box-shadow: 0 8px 24px -6px rgba(24, 38, 27, 0.45);
 }
 #main-header.is-scrolled .header-logo {
   height: 3rem;
 }
 
+/* Active desktop nav link */
+.nav-link-active {
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #e9edc9 !important;
+}
+
 /* ========================================================
-   MOTION - nhẹ nhàng, chỉ dùng ở Hero
+   MOTION - nhẹ nhàng ở Hero
    ======================================================== */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-14px); }
+  50% { transform: translateY(-10px); }
 }
 @keyframes float-badge-1 {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-7px); }
 }
 @keyframes float-badge-2 {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+  50% { transform: translateY(7px); }
 }
 
-.animate-float { animation: float 4.5s ease-in-out infinite; }
-.animate-float-badge-1 { animation: float-badge-1 3.4s ease-in-out infinite; }
-.animate-float-badge-2 { animation: float-badge-2 3.8s ease-in-out infinite; }
+.animate-float { animation: float 4.8s ease-in-out infinite; }
+.animate-float-badge-1 { animation: float-badge-1 3.6s ease-in-out infinite; }
+.animate-float-badge-2 { animation: float-badge-2 4s ease-in-out infinite; }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-float,
-  .animate-float-badge-1,
-  .animate-float-badge-2 { animation: none; }
-}
-
-/* Card */
+/* ========================================================
+   PRODUCT CARDS & CROPPED DRINK FRAMING
+   ======================================================== */
 .card-soft {
-  box-shadow: 0 2px 12px -4px rgba(58, 90, 64, 0.10);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 2px 14px -4px rgba(58, 90, 64, 0.10);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .card-soft:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px -8px rgba(58, 90, 64, 0.18);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px -10px rgba(58, 90, 64, 0.20);
+  border-color: rgba(212, 184, 114, 0.7);
 }
 
-/* Toast */
+/* Clean custom zoom framing for drinks.jpg cups without colliding with hover scale */
+.product-img-frame {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .product-img-frame {
+  transform: scale(1.06);
+}
+
+/* ========================================================
+   TOAST NOTIFICATIONS
+   ======================================================== */
 #toast-container {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  top: 84px;
+  right: 12px;
+  left: 12px;
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   pointer-events: none;
+}
+@media (min-width: 1024px) {
+  #toast-container {
+    top: auto;
+    left: auto;
+    bottom: 24px;
+    right: 24px;
+    align-items: flex-end;
+    max-width: min(380px, calc(100vw - 3rem));
+  }
 }
 .toast-item {
   pointer-events: auto;
+  width: 100%;
+  max-width: 360px;
   animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes toastSlideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from { transform: translateY(-14px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 @keyframes toastSlideOut {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(120%); opacity: 0; }
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-10px); opacity: 0; }
+}
+@media (min-width: 1024px) {
+  @keyframes toastSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes toastSlideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(120%); opacity: 0; }
+  }
 }
 
-/* Cart drawer */
+/* ========================================================
+   CART DRAWER & DIALOGS
+   ======================================================== */
 .drawer-backdrop {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease-in-out;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
 }
 .drawer-backdrop.open {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
+  transition: opacity 0.3s ease-in-out, visibility 0s linear 0s;
 }
 .cart-drawer {
+  height: 100dvh;
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0.35s;
 }
 .cart-drawer.open {
   transform: translateX(0%);
+  visibility: visible;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear 0s;
+}
+.cart-drawer > .overflow-y-auto {
+  min-height: 0;
 }
 
 /* Keep dialog content reachable on short screens and with the keyboard open. */
@@ -130,11 +200,8 @@ html {
   overflow-y: auto;
   overscroll-behavior: contain;
 }
-.cart-drawer { height: 100dvh; }
-.cart-drawer > .overflow-y-auto { min-height: 0; }
 :focus-visible { outline: 3px solid #b58935; outline-offset: 3px; }
 #success-customer-name, #success-customer-phone { min-width: 0; overflow-wrap: anywhere; }
-#toast-container { max-width: calc(100vw - 3rem); }
 @media (max-width: 639px) {
   input, textarea { font-size: 16px !important; }
 }
@@ -177,44 +244,44 @@ html.lenis, html.lenis body {
    ======================================================== */
 .sticky-menu-tabs {
   position: sticky;
-  top: 68px;
+  top: 62px;
   z-index: 30;
-  padding: 0.6rem 0;
-  background: rgba(251, 251, 249, 0.94);
+  padding: 0.65rem 0;
+  background: rgba(251, 251, 249, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: all 0.25s ease;
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 .sticky-menu-tabs.is-stuck {
-  box-shadow: 0 8px 20px -8px rgba(40, 62, 44, 0.12);
-  border-bottom: 1px solid rgba(228, 232, 216, 0.8);
+  box-shadow: 0 10px 24px -10px rgba(40, 62, 44, 0.14);
+  border-bottom: 1px solid rgba(228, 232, 216, 0.9);
 }
 
 /* ========================================================
    MOBILE BOTTOM DOCK
    ======================================================== */
 .mobile-bottom-dock {
-  box-shadow: 0 8px 32px rgba(40, 62, 44, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 10px 32px rgba(40, 62, 44, 0.22), 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding-bottom: calc(0.45rem + env(safe-area-inset-bottom, 0px));
 }
 
 /* ========================================================
-   RANDOMIZER ANIMATIONS
+   RANDOMIZER & CART BOUNCE ANIMATIONS
    ======================================================== */
 @keyframes shakeDice {
   0%, 100% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(-15deg) scale(1.15); }
-  50% { transform: rotate(15deg) scale(1.2); }
-  75% { transform: rotate(-8deg) scale(1.1); }
+  25% { transform: rotate(-14deg) scale(1.12); }
+  50% { transform: rotate(14deg) scale(1.16); }
+  75% { transform: rotate(-6deg) scale(1.06); }
 }
 .animate-dice-shake {
   display: inline-block;
-  animation: shakeDice 0.4s ease-in-out infinite;
+  animation: shakeDice 2.2s ease-in-out infinite;
 }
 
 @keyframes slotSpin {
-  0% { transform: translateY(12px) scale(0.95); opacity: 0.3; filter: blur(2px); }
-  50% { transform: translateY(-4px) scale(1.02); opacity: 0.8; filter: blur(0.5px); }
+  0% { transform: translateY(10px) scale(0.96); opacity: 0.35; filter: blur(1.5px); }
+  50% { transform: translateY(-3px) scale(1.01); opacity: 0.85; filter: blur(0.4px); }
   100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
 }
 .animate-slot-item {
@@ -223,8 +290,8 @@ html.lenis, html.lenis body {
 
 @keyframes cartBounce {
   0% { transform: scale(1); }
-  35% { transform: scale(1.28) rotate(-6deg); }
-  65% { transform: scale(1.18) rotate(4deg); }
+  35% { transform: scale(1.24) rotate(-5deg); }
+  65% { transform: scale(1.14) rotate(4deg); }
   100% { transform: scale(1) rotate(0); }
 }
 .cart-bounce-effect {
@@ -232,77 +299,18 @@ html.lenis, html.lenis body {
 }
 
 /* ========================================================
-   QUÁN LÊN ĐÈN (NIGHT AMBIENCE MODE)
-   ======================================================== */
-body.night-mode {
-  --brand-blue: #233928;
-  --brand-blue-dark: #152218;
-  --brand-yellow: #fde68a;
-  --bg-warm: #131d16;
-  background-color: #131d16 !important;
-  color: #f0f3eb !important;
-}
-body.night-mode #main-header {
-  background-color: #162419 !important;
-  border-bottom-color: #d4b872 !important;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5) !important;
-}
-body.night-mode .bg-white {
-  background-color: #1c2a1f !important;
-  color: #f0f3eb !important;
-}
-body.night-mode .text-slate-900,
-body.night-mode .text-slate-800 {
-  color: #f7faf3 !important;
-}
-body.night-mode .text-slate-600,
-body.night-mode .text-slate-500 {
-  color: #b8c2ad !important;
-}
-body.night-mode .bg-\[\#fbfbf9\],
-body.night-mode .bg-\[\#FEF9E7\],
-body.night-mode .bg-slate-50 {
-  background-color: #17241a !important;
-}
-body.night-mode .bg-\[\#f0f2eb\],
-body.night-mode .bg-amber-50 {
-  background-color: #233426 !important;
-  color: #f0f3eb !important;
-}
-body.night-mode .border-\[\#e4e8d8\],
-body.night-mode .border-amber-100,
-body.night-mode .border-slate-200 {
-  border-color: #2b3e30 !important;
-}
-body.night-mode .sticky-menu-tabs {
-  background: rgba(19, 29, 22, 0.95) !important;
-  border-bottom-color: #2b3e30 !important;
-}
-body.night-mode .mobile-bottom-dock {
-  background-color: rgba(22, 34, 25, 0.96) !important;
-  border-color: #314837 !important;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5) !important;
-}
-body.night-mode .polaroid-card {
-  background-color: #f9f9f5 !important;
-}
-body.night-mode .polaroid-card .polaroid-text {
-  color: #1e293b !important;
-}
-
-/* ========================================================
    LÊ MÊ STORIES
    ======================================================== */
 .story-ring {
-  background: linear-gradient(135deg, #d4b872 0%, #3a5a40 50%, #e9edc9 100%);
+  background: linear-gradient(135deg, #d4b872 0%, #3a5a40 52%, #e9edc9 100%);
   padding: 2.5px;
   border-radius: 9999px;
   display: inline-block;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.3s ease;
 }
 .story-ring:hover {
   transform: scale(1.06);
-  box-shadow: 0 0 16px rgba(212, 184, 114, 0.55);
+  box-shadow: 0 0 18px rgba(212, 184, 114, 0.55);
 }
 .story-ring.watched {
   background: #cbd5e1;
@@ -310,8 +318,8 @@ body.night-mode .polaroid-card .polaroid-text {
 
 .story-progress-bar {
   height: 3px;
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.32);
+  border-radius: 9999px;
   overflow: hidden;
   flex: 1;
 }
@@ -319,7 +327,7 @@ body.night-mode .polaroid-card .polaroid-text {
   height: 100%;
   width: 0%;
   background: #ffffff;
-  border-radius: 2px;
+  border-radius: 9999px;
   transition: width 0.05s linear;
 }
 
@@ -328,37 +336,218 @@ body.night-mode .polaroid-card .polaroid-text {
    ======================================================== */
 .polaroid-card {
   background: #ffffff;
-  padding: 12px 12px 28px 12px;
-  border-radius: 8px;
-  box-shadow: 0 12px 30px -8px rgba(40, 62, 44, 0.16), 0 4px 10px rgba(0, 0, 0, 0.04);
+  padding: 12px 12px 22px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(228, 232, 216, 0.9);
+  box-shadow: 0 12px 28px -10px rgba(40, 62, 44, 0.16), 0 4px 10px rgba(0, 0, 0, 0.04);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   position: relative;
   cursor: pointer;
+  text-align: left;
+  width: 100%;
 }
-.polaroid-card:hover {
-  transform: translateY(-8px) scale(1.03) rotate(0deg) !important;
-  box-shadow: 0 20px 40px -10px rgba(40, 62, 44, 0.28), 0 6px 16px rgba(0, 0, 0, 0.08);
+.polaroid-card:hover,
+.polaroid-card:focus-visible {
+  transform: translateY(-8px) scale(1.025) rotate(0deg) !important;
+  box-shadow: 0 22px 42px -12px rgba(40, 62, 44, 0.28), 0 6px 16px rgba(0, 0, 0, 0.08);
   z-index: 20;
 }
 .washi-tape {
   position: absolute;
-  top: -10px;
+  top: -11px;
   left: 50%;
-  transform: translateX(-50%) rotate(-1deg);
-  width: 80px;
-  height: 22px;
-  background: rgba(212, 184, 114, 0.55);
-  border-left: 2px dashed rgba(255, 255, 255, 0.5);
-  border-right: 2px dashed rgba(255, 255, 255, 0.5);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 78px;
+  height: 21px;
+  background: rgba(212, 184, 114, 0.62);
+  border-left: 2px dashed rgba(255, 255, 255, 0.6);
+  border-right: 2px dashed rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
   pointer-events: none;
   z-index: 10;
 }
 .washi-tape-alt {
-  background: rgba(163, 177, 138, 0.6);
+  background: rgba(163, 177, 138, 0.66);
   transform: translateX(-50%) rotate(2deg);
 }
 
+/* ========================================================
+   QUÁN LÊN ĐÈN (COZY NIGHT AMBIENCE MODE)
+   WCAG AA+ contrast across all surfaces, cards, inputs & badges
+   ======================================================== */
+body.night-mode {
+  --brand-primary: #233928;
+  --brand-primary-dark: #152218;
+  --brand-cream: #f5f0d6;
+  --bg-warm: #111a14;
+  background-color: #111a14 !important;
+  color: #f2f5ed !important;
+}
+
+body.night-mode #main-header {
+  background-color: #16241a !important;
+  border-bottom-color: #d4b872 !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.52) !important;
+}
+
+/* Primary elevated surfaces */
+body.night-mode .bg-white,
+body.night-mode .bg-white\/95,
+body.night-mode .bg-white\/90,
+body.night-mode .surface-card {
+  background-color: #1a281e !important;
+  color: #f2f5ed !important;
+}
+
+/* Secondary tinted surfaces */
+body.night-mode .bg-\[\#fbfbf9\],
+body.night-mode .bg-slate-50 {
+  background-color: #152119 !important;
+  color: #f2f5ed !important;
+}
+
+body.night-mode .bg-\[\#f0f2eb\],
+body.night-mode .bg-slate-100 {
+  background-color: #233528 !important;
+  color: #edf2e6 !important;
+}
+
+body.night-mode .hover\:bg-slate-100:hover,
+body.night-mode .hover\:bg-slate-200:hover,
+body.night-mode .hover\:bg-\[\#f0f2eb\]:hover,
+body.night-mode .hover\:bg-\[\#e4e8d8\]:hover {
+  background-color: #2d4434 !important;
+}
+
+/* Borders */
+body.night-mode .border-\[\#e4e8d8\],
+body.night-mode .border-\[\#d4d9c7\],
+body.night-mode .border-slate-200,
+body.night-mode .border-slate-100,
+body.night-mode .border-white {
+  border-color: #2d4233 !important;
+}
+
+/* High-contrast text colors */
+body.night-mode .text-slate-900,
+body.night-mode .text-slate-800 {
+  color: #f7faf3 !important;
+}
+
+body.night-mode .text-slate-700 {
+  color: #dde5d5 !important;
+}
+
+body.night-mode .text-slate-600 {
+  color: #c2cdb8 !important;
+}
+
+body.night-mode .text-slate-500,
+body.night-mode .text-slate-400 {
+  color: #9ba892 !important;
+}
+
+/* Lighten brand green text & outlines for dark backgrounds */
+body.night-mode .text-\[\#3a5a40\] {
+  color: #d6e4be !important;
+}
+
+body.night-mode .border-\[\#3a5a40\] {
+  border-color: #a9c48c !important;
+}
+
+body.night-mode .bg-\[\#3a5a40\]\/10 {
+  background-color: rgba(212, 184, 114, 0.16) !important;
+}
+
+/* Keep solid dark-green buttons crisp with cream text */
+body.night-mode .bg-\[\#3a5a40\] {
+  background-color: #3a5a40 !important;
+  color: #e9edc9 !important;
+}
+body.night-mode .bg-\[\#3a5a40\]:hover {
+  background-color: #486f50 !important;
+}
+
+/* Keep header cart button icon dark on white OR make it dark-mode friendly */
+body.night-mode #cart-toggle-btn {
+  background-color: #25382a !important;
+  border: 1px solid rgba(212, 184, 114, 0.45);
+}
+body.night-mode #cart-toggle-btn svg {
+  color: #e9edc9 !important;
+}
+
+/* Hero badges & accent text in night mode */
+body.night-mode .text-orange-600 {
+  color: #fdba74 !important;
+}
+
+/* Sticky Menu Tabs */
+body.night-mode .sticky-menu-tabs {
+  background: rgba(17, 26, 20, 0.94) !important;
+  border-bottom-color: #2b3e30 !important;
+}
+body.night-mode .sticky-menu-tabs > div {
+  background-color: #1a281e !important;
+  border-color: #2d4233 !important;
+}
+
+/* Form inputs & textareas */
+body.night-mode input,
+body.night-mode textarea {
+  background-color: #121c15 !important;
+  color: #f7faf3 !important;
+  border-color: #344c3b !important;
+}
+body.night-mode input::placeholder,
+body.night-mode textarea::placeholder {
+  color: #7d8f76 !important;
+}
+
+/* Story ring watched state in night mode */
+body.night-mode .story-ring.watched {
+  background: #3e5244;
+}
+
+/* Mobile bottom dock */
+body.night-mode .mobile-bottom-dock {
+  background-color: rgba(22, 34, 25, 0.96) !important;
+  border-color: #314837 !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Polaroid cards stay warm vintage paper with guaranteed dark ink */
+body.night-mode .polaroid-card {
+  background-color: #f8f5ec !important;
+  border-color: #e2dcc8 !important;
+}
+body.night-mode .polaroid-card .polaroid-text,
+body.night-mode .polaroid-card .polaroid-author {
+  color: #1e293b !important;
+}
+body.night-mode .polaroid-card .polaroid-meta {
+  color: #475569 !important;
+}
+body.night-mode .polaroid-card .polaroid-divider {
+  border-color: #e2dfd3 !important;
+}
+
+/* Footer remains deep forest green */
+body.night-mode footer#contact {
+  background-color: #0c140f !important;
+  border-top: 1px solid #233528;
+}
+
+/* Soft cards shadow in night mode */
+body.night-mode .card-soft {
+  box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.35);
+}
+body.night-mode .card-soft:hover {
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.52);
+}
+
+/* Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   *, *::before, *::after {
@@ -367,6 +556,3 @@ body.night-mode .polaroid-card .polaroid-text {
     scroll-behavior: auto !important;
   }
 }
-
-
-
