@@ -5,7 +5,16 @@ const http = require('node:http');
 const { chromium } = require('playwright');
 
 const root = path.resolve(__dirname, '..');
-const mime = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.png': 'image/png', '.jpg': 'image/jpeg', '.webm': 'video/webm' };
+const mime = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.svg': 'image/svg+xml',
+  '.webm': 'video/webm'
+};
 const server = http.createServer(async (req, res) => {
   try {
     const file = path.resolve(root, '.' + decodeURIComponent(new URL(req.url, 'http://localhost').pathname === '/' ? '/index.html' : new URL(req.url, 'http://localhost').pathname));
@@ -32,11 +41,11 @@ async function main() {
       const videos = [];
       page.on('request', req => { if (req.url().endsWith('.webm')) videos.push(req.url()); });
       await page.goto(url);
-      assert.equal(await page.locator('#product-grid > div').count(), 5);
+      assert.equal(await page.locator('#product-grid > div').count(), 16);
       assert.equal(await page.locator('#cart-drawer').evaluate(el => el.inert), true);
       assert.equal(await page.locator('#main-header').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(58, 90, 64)');
       assert.equal(videos.length, 0, 'video should not download on page load');
-      assert.equal(await page.locator('a[href="https://maps.app.goo.gl/WT7h43BGyJvyZQHWA"]').count(), 1);
+      assert.equal(await page.locator('a[href="https://maps.app.goo.gl/PAmnJUQ9Nv922P2A6"]').count(), 1);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, 'no horizontal page overflow');
       for (const img of await page.locator('img:visible').all()) {
         await img.scrollIntoViewIfNeeded();
@@ -46,24 +55,38 @@ async function main() {
       await page.screenshot({ path: path.join(root, `test-results/home-${viewport.width}.png`), fullPage: true });
       await page.screenshot({ path: path.join(root, `test-results/hero-${viewport.width}.png`) });
 
+      // Category filtering
       await page.locator('[data-filter="bottle"]').click();
       assert.equal(await page.locator('#product-grid > div').count(), 2);
+      await page.locator('[data-filter="original"]').click();
+      assert.equal(await page.locator('#product-grid > div').count(), 4);
       await page.locator('[data-filter="all"]').click();
-      await page.getByRole('button', { name: 'Thêm Trà Sữa Lê Mê vào giỏ', exact: true }).click();
+      assert.equal(await page.locator('#product-grid > div').count(), 16);
+
+      // Order Vấn Vương: Size L (37k) + 50% đường + 0% đá + Kem cheese tươi (+10k) = 47k
+      await page.getByRole('button', { name: 'Thêm Vấn Vương vào giỏ', exact: true }).click();
+      await page.locator('#option-size-group button[data-val="L"]').click();
       await page.getByRole('button', { name: '50% đường', exact: true }).click();
-      await page.getByRole('button', { name: 'Không đá', exact: true }).click();
+      await page.getByRole('button', { name: '0% đá', exact: true }).click();
+      await page.locator('#option-topping-group button[data-topping-id="kem-cheese"]').click();
       await page.locator('#product-detail-modal').getByRole('button', { name: 'Thêm vào giỏ', exact: true }).click();
+
+      // Add bottle (45k) -> total 92k
       await page.getByRole('button', { name: 'Thêm Cốt Trà Sữa Đóng Chai vào giỏ', exact: true }).click();
       await page.locator('#cart-toggle-btn').click();
-      assert.match(await page.locator('#cart-items-list').innerText(), /50% đường • Không đá/);
-      assert.match(await page.locator('#cart-subtotal').innerText(), /80\.000/);
+      assert.match(await page.locator('#cart-items-list').innerText(), /Size L • 50% đường • 0% đá • \+ Kem cheese tươi/);
+      assert.match(await page.locator('#cart-subtotal').innerText(), /92\.000/);
+
+      // Increase first item qty (+47k) -> 139k
       await page.locator('#cart-items-list').getByRole('button', { name: 'Thêm', exact: true }).first().click();
-      assert.match(await page.locator('#cart-subtotal').innerText(), /115\.000/);
+      assert.match(await page.locator('#cart-subtotal').innerText(), /139\.000/);
       await page.keyboard.press('Escape');
       assert.equal(await page.evaluate(() => document.activeElement.id), 'cart-toggle-btn');
+
+      // Persist across reload
       await page.reload();
       await page.locator('#cart-toggle-btn').click();
-      assert.match(await page.locator('#cart-subtotal').innerText(), /115\.000/);
+      assert.match(await page.locator('#cart-subtotal').innerText(), /139\.000/);
       await page.getByRole('button', { name: 'Soạn đơn giao hàng', exact: true }).click();
       await page.locator('#order-name').fill('Khách kiểm thử');
       await page.locator('#order-phone').fill('abc');
@@ -71,13 +94,13 @@ async function main() {
       await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
       assert.equal(await page.locator('#order-phone').evaluate(el => el.validity.valid), false);
       assert.equal(await page.locator('#order-success-modal').isVisible(), false);
-      await page.locator('#order-phone').fill('+84 362 126 184');
+      await page.locator('#order-phone').fill('+84 869 256 962');
       await page.evaluate(() => Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async () => { throw new Error('Denied'); } } }));
       await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
       await page.waitForFunction(() => document.getElementById('copy-order-status').textContent.includes('Chưa sao chép'));
       const message = await page.locator('#generated-order-text').inputValue();
-      assert.match(message, /50% đường, Không đá/);
-      assert.match(message, /115\.000/);
+      assert.match(message, /Size L • 50% đường • 0% đá • \+ Kem cheese tươi/);
+      assert.match(message, /139\.000/);
       assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('leme_cart_v2')).length), 2);
       assert.equal(await page.evaluate(() => document.body.style.overflow), 'hidden');
       const panel = await page.locator('#order-success-modal > div').boundingBox();
@@ -118,6 +141,7 @@ async function main() {
       console.log(`PASS: ordering, clipboard, persistence, focus and layout ${viewport.width}px`);
     }
 
+    // Tampered storage & blocked storage resilience
     const context = await browser.newContext();
     await context.route(/https:\/\//, route => route.abort());
     const page = await context.newPage();
@@ -129,10 +153,12 @@ async function main() {
       await page.locator('[data-filter="bottle"]').click();
       assert.equal(await page.locator('#product-grid > div').count(), 2);
     }
-    await page.evaluate(() => localStorage.setItem('leme_cart_v2', JSON.stringify([{ id: 1, quantity: 2, name: '<img onerror=alert(1)>', price: 1, sugar: '<script>' }])));
+    // Tampered price=1 and XSS strings must be ignored; product id=1 (Vấn Vương M=27k) * 2 = 54.000
+    await page.evaluate(() => localStorage.setItem('leme_cart_v2', JSON.stringify([{ id: 1, quantity: 2, name: '<img onerror=alert(1)>', price: 1, sugar: '<script>', toppings: ['<script>', 'kem-cheese'] }])));
     await page.reload();
     await page.locator('#cart-toggle-btn').click();
-    assert.match(await page.locator('#cart-subtotal').innerText(), /70\.000/);
+    // 27k + 10k (kem-cheese) = 37k * 2 = 74.000
+    assert.match(await page.locator('#cart-subtotal').innerText(), /74\.000/);
     assert.doesNotMatch(await page.locator('#cart-items-list').innerHTML(), /onerror|<script>/);
     await page.keyboard.press('Escape');
     await page.evaluate(() => {
@@ -140,10 +166,11 @@ async function main() {
     });
     await page.getByRole('button', { name: 'Thêm Cốt Trà Sữa Đóng Chai vào giỏ', exact: true }).click();
     await page.locator('#cart-toggle-btn').click();
-    assert.match(await page.locator('#cart-subtotal').innerText(), /115\.000/);
+    // 74k + 45k = 119.000
+    assert.match(await page.locator('#cart-subtotal').innerText(), /119\.000/);
     await page.getByRole('button', { name: 'Soạn đơn giao hàng', exact: true }).click();
     await page.locator('#order-name').fill('Test');
-    await page.locator('#order-phone').fill('0362126184');
+    await page.locator('#order-phone').fill('0869256962');
     await page.locator('#order-address').fill('Test address');
     await page.getByRole('button', { name: 'Soạn nội dung đơn', exact: true }).click();
     assert.equal(await page.locator('#order-success-modal').isVisible(), true);

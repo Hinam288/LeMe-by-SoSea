@@ -1,58 +1,40 @@
 # Lê Mê — Trà Sữa Đậm Vị — Ngọc Hồi
 
-Website tĩnh giới thiệu quán, xem menu và soạn nội dung đặt món để khách tự gửi qua Zalo/Messenger. Website chưa có máy chủ nhận đơn, thanh toán hay trạng thái xác nhận từ quán.
+Website tĩnh giới thiệu quán, xem menu chính thức (**Làn Gió Hương Trà**) và soạn nội dung đặt món để khách gửi qua Zalo hoặc Messenger. Website chưa tích hợp thanh toán trực tuyến tự động; quán sẽ xác nhận đơn qua tin nhắn.
 
 ## Chức năng hiện có
 
-- Menu 5 sản phẩm, lọc theo nhóm, chọn đường/đá và điều chỉnh số lượng.
-- Giỏ hàng lưu bằng localStorage; dữ liệu khôi phục được kiểm tra và lấy giá từ menu hiện tại.
-- Không tự xóa giỏ khi soạn đơn hoặc mở ứng dụng nhắn tin.
-- Sao chép đơn có báo kết quả; nếu trình duyệt chặn, khách có thể sao chép thủ công từ ô nội dung.
-- Bản soạn gần nhất lưu trong sessionStorage của tab để mở lại sau khi tải trang. Nút mở lại nằm trong giỏ hàng, kể cả khi giỏ trống. Khách có thể xóa bản soạn; đóng tab kết thúc phiên lưu thông thường.
-- Kiểm tra họ tên, địa chỉ và định dạng số điện thoại; chưa xác minh chủ sở hữu số điện thoại.
-- Popup hỗ trợ Escape, giữ focus bàn phím và khóa cuộn nền; menu điện thoại có trạng thái mở/đóng.
-- Video chỉ tải/phát khi khách bấm xem; ảnh menu và không gian dùng lazy loading.
+- **Menu 16 món** theo bảng menu tại quán (4 nhóm: *Hương trà nguyên bản*, *Vị trà cao cấp & Sữa tươi*, *Trà vị hoa quả*, *Cốt trà đóng chai*), lọc theo danh mục, chọn **Size M / L**, **Đá / Nóng**, mức đường/đá (`0%–100%`), **7 loại topping thủ công** và số lượng.
+- **Giỏ hàng** lưu bằng `localStorage`; dữ liệu khôi phục luôn được kiểm tra và tính lại đơn giá trực tiếp từ bảng giá & topping trong `js/main.js`.
+- **Soạn đơn & Bản nháp:** Không tự xóa giỏ khi soạn đơn hoặc mở ứng dụng nhắn tin. Bản soạn gần nhất lưu trong `sessionStorage` của tab để mở lại sau khi tải trang. Sao chép đơn có báo kết quả kèm ô văn bản sao chép thủ công khi trình duyệt chặn Clipboard API.
+- **Lê Mê Story, Randomizer ("Hôm nay uống gì?"), Chế độ "Quán lên đèn" (Night Mode) & Trạng thái mở cửa theo giờ Việt Nam.**
+- **Hiệu năng & Trợ năng:** Video chỉ tải khi khách bấm xem; ảnh không gian quán đã nén WebP (~70 KB); các hộp thoại hỗ trợ phím Escape, giữ focus bàn phím và khóa cuộn nền.
 
-## Thông tin cửa hàng
+## Thông tin cửa hàng (đã đối chiếu Google Maps & Fanpage)
 
-- Hotline/Zalo: 036 212 6184 · 0869 256 962.
-- Email: vuhaiyen067@gmail.com.
-- [Google Maps do chủ website cung cấp](https://maps.app.goo.gl/WT7h43BGyJvyZQHWA).
-- [ShopeeFood](https://shopeefood.shopee.vn/u/frCAhCm).
-- [Facebook](https://www.facebook.com/profile.php?id=61590901593823).
-- Giờ đang hiển thị: 9:00–22:00 mỗi ngày, cần quán xác nhận.
-- Chính sách đang hiển thị: miễn phí giao trong 2km; xa hơn quán báo phí khi xác nhận.
-- Tên món và giá trong `js/main.js` vẫn là dữ liệu tham khảo, cần quán xác nhận trước khi bán chính thức. Trang đã hiển thị rõ giá tham khảo.
-- Chưa có địa chỉ dạng văn bản đầy đủ; dùng link Maps được cung cấp, không tự suy đoán địa chỉ.
+- **Địa chỉ:** Số 2, ngách 298/31 đường Ngọc Hồi, Yên Ngưu, Đại Thanh, Hà Nội.
+- **Google Maps:** [Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi](https://maps.app.goo.gl/PAmnJUQ9Nv922P2A6) (`5.0 ★`).
+- **Hotline / Zalo:** `0869 256 962` · `036 212 6184`.
+- **Email:** `vuhaiyen067@gmail.com`.
+- **ShopeeFood:** [shopeefood.shopee.vn/u/frCAhCm](https://shopeefood.shopee.vn/u/frCAhCm).
+- **Facebook:** [Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi](https://www.facebook.com/profile.php?id=61590901593823).
+- **Giờ mở cửa:** `9:00 – 22:00` hàng ngày (Thứ 2 – Chủ Nhật).
+- **Giao hàng:** Freeship trong bán kính 2km; xa hơn quán báo phí khi xác nhận đơn.
 
 ## Giao diện và tài nguyên
 
-Màu chính: xanh rêu `#3a5a40`, kem `#e9edc9`, vàng `#d4b872`, nền `#fbfbf9`.
-Ảnh/video ở `assets/`. Giữ nguyên tài nguyên gốc. CSS Tailwind biên dịch vào `css/tailwind.css`; trang không cần tải Tailwind/AOS từ CDN. Font Google có font hệ thống dự phòng.
+- Màu chính: xanh rêu `#3a5a40`, kem `#e9edc9`, vàng `#d4b872`, nền `#fbfbf9`.
+- Ảnh/video ở `assets/`: đã loại bỏ bản video trùng lặp (`Lê Mê - Make Tea2.webm`) và nén ảnh không gian quán sang `store-interior.webp` (~70 KB).
+- CSS Tailwind biên dịch sẵn vào `css/tailwind.css`.
 
-## Xem và cập nhật
+## Cập nhật & Kiểm thử
 
-Mở `index.html` để xem nhanh, hoặc phục vụ thư mục qua HTTP localhost khi kiểm thử. Khi triển khai, dùng HTTPS để hỗ trợ clipboard; luôn có ô nội dung để sao chép thủ công.
-
-Sau khi thay đổi các class trong HTML/JavaScript, tạo lại CSS bằng Node.js và pnpm:
-
-```sh
-pnpm install --frozen-lockfile
-pnpm run build:css
-pnpm run check
-```
-
-Triển khai `index.html`, `css/tailwind.css`, `css/custom.css`, `js/` và `assets/`. Không cần đưa node_modules lên hosting.
-
-## Kiểm tra trước khi phát hành
-
-Kiểm thử tự động dùng Playwright với dữ liệu giả, không gửi tin nhắn hay đơn thật:
+Sau khi thay đổi class trong HTML/JavaScript:
 
 ```sh
-pnpm exec playwright install chromium
-pnpm test
+npm run build:css
+npm run check
+BROWSER_CHANNEL=msedge npm test
 ```
 
-Nếu dùng Microsoft Edge đã cài, đặt biến môi trường `BROWSER_CHANNEL=msedge` trước khi chạy test. Ảnh kiểm thử được ghi vào `test-results/` (không đưa lên Git).
-
-Kiểm tra chọn món, đường/đá, số lượng, tải lại giỏ, soạn đơn và mở lại bản soạn; thử clipboard thành công, bị chặn và không có API; kiểm tra bàn phím, màn hình hẹp và liên kết Maps. Chỉ gửi đơn thật khi đã xác nhận món, giá và thông tin cửa hàng.
+Triển khai `index.html`, `css/tailwind.css`, `css/custom.css`, `js/` và `assets/` lên GitHub Pages (`https://hinam288.github.io/LeMe-by-SoSea/`).

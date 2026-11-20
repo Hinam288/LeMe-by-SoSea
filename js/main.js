@@ -1,5 +1,6 @@
 /**
- * Lê Mê - Trà Sữa Đậm Vị
+ * Lê Mê - Trà Sữa Đậm Vị - Ngọc Hồi
+ * Địa chỉ: Số 2, ngách 298/31 đường Ngọc Hồi, Yên Ngưu, Đại Thanh, Hà Nội
  * Theme: Matcha Sage (#3a5a40), Cream (#e9edc9) & Warm Gold (#d4b872)
  */
 
@@ -17,85 +18,289 @@ function prefersReducedMotion() {
   return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
 }
 
-// --- 1. MENU ---
-// LƯU Ý: Tên món và giá đang là tạm tính, cần quán xác nhận lại trước khi chạy chính thức.
-// imageZoom/imageOrigin: căn khung gọn từng ly từ ảnh chụp chung drinks.jpg để không dính chữ chú thích.
+// --- 1. MENU CHÍNH THỨC — LÊ MÊ: LÀN GIÓ HƯƠNG TRÀ ---
+// Bảng giá M / L và Topping đối chiếu theo bảng menu tại quán trên Google Maps & sản phẩm đóng chai của quán.
 const PRODUCTS = [
+  // HƯƠNG TRÀ NGUYÊN BẢN
   {
     id: 1,
-    name: "Trà Sữa Lê Mê",
-    category: "milktea",
-    categoryName: "Trà sữa",
-    price: 35000,
+    name: "Vấn Vương",
+    category: "original",
+    categoryName: "Hương trà nguyên bản",
+    price: 27000,
+    priceL: 37000,
     badge: "Signature",
-    description: "Ly xanh đặc trưng của quán. Vị trà đậm, hậu ngọt dịu.",
+    description: "Ô long, sữa, trân châu. Thơm đậm hương trà ô long, hậu vị dịu ngọt.",
     image: "assets/open.jpg",
     imagePos: "center 58%",
     imageZoom: "",
     imageOrigin: "center center",
-    hasOptions: true
+    hasOptions: true,
+    hasHotOption: true
   },
   {
     id: 2,
-    name: "Matcha Phân Tầng",
-    category: "milktea",
-    categoryName: "Matcha",
-    price: 42000,
+    name: "Đậm Hương",
+    category: "original",
+    categoryName: "Hương trà nguyên bản",
+    price: 27000,
+    priceL: 37000,
+    badge: "Đậm trà",
+    description: "Hồng trà, sữa, trân châu. Vị hồng trà đậm đà truyền thống dễ ghiền.",
+    image: "assets/open.jpg",
+    imagePos: "center 52%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+  {
+    id: 3,
+    name: "Thơm Dịu",
+    category: "original",
+    categoryName: "Hương trà nguyên bản",
+    price: 29000,
+    priceL: 39000,
+    badge: "",
+    description: "Ô long nhài, sữa, trân châu. Hương hoa nhài thanh nhẹ, béo dịu vừa phải.",
+    image: "assets/open.jpg",
+    imagePos: "center 62%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+  {
+    id: 4,
+    name: "Hồng Trà Cacao",
+    category: "original",
+    categoryName: "Hương trà nguyên bản",
+    price: 29000,
+    priceL: 39000,
+    badge: "",
+    description: "Hồng trà, sữa, trân châu, cacao. Hòa quyện vị cacao thơm ấm cùng hồng trà.",
+    image: "assets/open.jpg",
+    imagePos: "center 56%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+
+  // VỊ TRÀ CAO CẤP & SỮA TƯƠI THỦ CÔNG
+  {
+    id: 5,
+    name: "Olong Lá Dứa",
+    category: "premium",
+    categoryName: "Vị trà cao cấp",
+    price: 49000,
+    priceL: 59000,
     badge: "Best Seller",
-    description: "Matcha và sữa tươi chia tầng đẹp mắt, khuấy đều trước khi uống.",
+    description: "Ô long, sữa, lá dứa, trân châu, thạch lá dứa, kem cheese tươi.",
     image: "assets/drinks.jpg",
     imagePos: "72% 78%",
     imageZoom: "scale(2.2)",
     imageOrigin: "70% 80%",
-    hasOptions: true
+    hasOptions: true,
+    hasHotOption: false
   },
   {
-    id: 3,
-    name: "Trà Hoa Quả",
+    id: 6,
+    name: "Vị Hạnh Trà",
+    category: "premium",
+    categoryName: "Vị trà cao cấp",
+    price: 42000,
+    priceL: 52000,
+    badge: "",
+    description: "Hồng trà, sữa, hạnh nhân, trân châu, kem cheese tươi béo mịn.",
+    image: "assets/open.jpg",
+    imagePos: "center 55%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+  {
+    id: 7,
+    name: "Hồng Trà Kem Mây",
+    category: "premium",
+    categoryName: "Vị trà cao cấp",
+    price: 42000,
+    priceL: 52000,
+    badge: "Kem trứng",
+    description: "Hồng trà, sữa, trân châu, phủ lớp kem trứng sánh mịn thơm béo.",
+    image: "assets/open.jpg",
+    imagePos: "center 50%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+  {
+    id: 8,
+    name: "Hồng Trà Đường Nâu",
+    category: "premium",
+    categoryName: "Vị trà cao cấp",
+    price: 52000,
+    priceL: 62000,
+    badge: "",
+    description: "Hồng trà, sữa, trân châu, đường nâu thơm ngọt và lớp kem trứng.",
+    image: "assets/open.jpg",
+    imagePos: "center 60%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+  {
+    id: 9,
+    name: "Sữa Tươi Trân Châu Đường Nâu",
+    category: "premium",
+    categoryName: "Sữa tươi thủ công",
+    price: 52000,
+    priceL: 62000,
+    badge: "Thủ công",
+    description: "Sữa tươi, đường nâu, trân châu đường nâu nấu dẻo thơm.",
+    image: "assets/single-bottle.jpg",
+    imagePos: "center 66%",
+    imageZoom: "",
+    imageOrigin: "center center",
+    hasOptions: true,
+    hasHotOption: true
+  },
+
+  // TRÀ VỊ HOA QUẢ
+  {
+    id: 10,
+    name: "Trà Cam Đào",
     category: "fruittea",
-    categoryName: "Trà hoa quả",
-    price: 38000,
+    categoryName: "Trà vị hoa quả",
+    price: 39000,
+    priceL: 49000,
     badge: "Thanh mát",
-    description: "Trà kết hợp hoa quả tươi, vị thanh nhẹ, giải nhiệt dễ uống.",
+    description: "Hồng trà, đào miếng, cam vàng tươi, nước cốt sả thơm dịu.",
     image: "assets/drinks.jpg",
     imagePos: "38% 60%",
     imageZoom: "scale(1.85)",
     imageOrigin: "36% 62%",
-    hasOptions: true
+    hasOptions: true,
+    hasHotOption: false
   },
   {
-    id: 4,
+    id: 11,
+    name: "Trà Xoài Lá Dứa",
+    category: "fruittea",
+    categoryName: "Trà vị hoa quả",
+    price: 42000,
+    priceL: 52000,
+    badge: "",
+    description: "Ô long nhài, xoài cát chín ngọt, thạch lá dứa thanh mát.",
+    image: "assets/drinks.jpg",
+    imagePos: "38% 58%",
+    imageZoom: "scale(1.85)",
+    imageOrigin: "36% 60%",
+    hasOptions: true,
+    hasHotOption: false
+  },
+  {
+    id: 12,
+    name: "Mộc Tê Hoa Vải",
+    category: "fruittea",
+    categoryName: "Trà vị hoa quả",
+    price: 35000,
+    priceL: 45000,
+    badge: "",
+    description: "Hồng trà, hương quế hoa mộc tê, vải ngọt và chanh vàng tươi.",
+    image: "assets/drinks.jpg",
+    imagePos: "38% 62%",
+    imageZoom: "scale(1.85)",
+    imageOrigin: "36% 64%",
+    hasOptions: true,
+    hasHotOption: false
+  },
+  {
+    id: 13,
+    name: "Trà Chanh Vàng",
+    category: "fruittea",
+    categoryName: "Trà vị hoa quả",
+    price: 15000,
+    priceL: 25000,
+    badge: "Giải nhiệt",
+    description: "Hồng trà pha tươi cùng chanh vàng thơm thanh, giải khát tức thì.",
+    image: "assets/drinks.jpg",
+    imagePos: "38% 56%",
+    imageZoom: "scale(1.85)",
+    imageOrigin: "36% 58%",
+    hasOptions: true,
+    hasHotOption: false
+  },
+  {
+    id: 14,
+    name: "Trà Sen Olong",
+    category: "fruittea",
+    categoryName: "Trà vị hoa quả",
+    price: 49000,
+    priceL: 59000,
+    badge: "",
+    description: "Ô long nhài, hạt sen bùi, hạt củ năng nổ giòn và kem cheese tươi.",
+    image: "assets/drinks.jpg",
+    imagePos: "72% 78%",
+    imageZoom: "scale(2.2)",
+    imageOrigin: "70% 80%",
+    hasOptions: true,
+    hasHotOption: false
+  },
+
+  // CỐT TRÀ ĐÓNG CHAI MANG VỀ
+  {
+    id: 15,
     name: "Cốt Trà Sữa Đóng Chai",
     category: "bottle",
     categoryName: "Cốt trà đóng chai",
     price: 45000,
+    priceL: 45000,
     badge: "Mang về",
     description: "Cốt trà sữa đóng chai thủy tinh 500ml, bảo quản lạnh, rót ra ly đá là uống.",
     image: "assets/single-bottle.jpg",
     imagePos: "center 65%",
     imageZoom: "",
     imageOrigin: "center center",
-    hasOptions: false
+    hasOptions: false,
+    hasHotOption: false
   },
   {
-    id: 5,
+    id: 16,
     name: "Set 4 Chai Cốt Trà Sữa",
     category: "bottle",
     categoryName: "Cốt trà đóng chai",
     price: 165000,
+    priceL: 165000,
     badge: "Làm quà",
-    description: "Bộ 4 chai cốt trà sữa nhiều vị, hợp để biếu tặng hoặc thưởng thức cùng gia đình.",
+    description: "Bộ 4 chai cốt trà sữa nhiều vị, hợp biếu tặng hoặc thưởng thức cùng gia đình.",
     image: "assets/bottles-lineup.jpg",
     imagePos: "center 68%",
     imageZoom: "",
     imageOrigin: "center center",
-    hasOptions: false
+    hasOptions: false,
+    hasHotOption: false
   }
 ];
 
+const TOPPINGS = [
+  { id: "pudding", name: "Thạch pudding", price: 5000 },
+  { id: "moc-te", name: "Thạch hoa mộc tê", price: 5000 },
+  { id: "tc-den", name: "Trân châu đen", price: 7000 },
+  { id: "tc-olong", name: "Trân châu ô long", price: 7000 },
+  { id: "kem-trung", name: "Kem trứng", price: 10000 },
+  { id: "kem-cheese", name: "Kem cheese tươi", price: 10000 },
+  { id: "kem-muoi", name: "Kem muối", price: 10000 }
+];
+
 const SHIPPING_NOTE = "Freeship trong bán kính 2km. Xa hơn quán sẽ báo phí khi xác nhận đơn.";
-const SUGAR_OPTIONS = ["100% đường", "70% đường", "50% đường", "30% đường", "Không đường"];
-const ICE_OPTIONS = ["100% đá", "70% đá", "50% đá", "Ít đá", "Không đá"];
+const SIZE_OPTIONS = ["M", "L"];
+const TEMP_OPTIONS = ["Đá", "Nóng"];
+const SUGAR_OPTIONS = ["100% đường", "70% đường", "50% đường", "30% đường", "0% đường"];
+const ICE_OPTIONS = ["100% đá", "70% đá", "50% đá", "30% đá", "0% đá"];
 
 function buildImgStyle(product) {
   const parts = [`object-position: ${product.imagePos || "center"}`];
@@ -104,6 +309,43 @@ function buildImgStyle(product) {
     parts.push(`transform-origin: ${product.imageOrigin || "center center"}`);
   }
   return parts.join("; ");
+}
+
+function normalizeToppingIds(ids) {
+  if (!Array.isArray(ids)) return [];
+  const validSet = new Set(TOPPINGS.map(t => t.id));
+  return [...new Set(ids.filter(id => typeof id === "string" && validSet.has(id)))].sort();
+}
+
+function getToppingObjects(ids) {
+  return normalizeToppingIds(ids)
+    .map(id => TOPPINGS.find(t => t.id === id))
+    .filter(Boolean);
+}
+
+function calculateUnitPrice(product, size, toppingIds) {
+  if (!product) return 0;
+  const base = product.hasOptions && size === "L" ? product.priceL : product.price;
+  const toppingTotal = product.hasOptions
+    ? getToppingObjects(toppingIds).reduce((sum, t) => sum + t.price, 0)
+    : 0;
+  return base + toppingTotal;
+}
+
+function buildCartItemOptionsSummary(item) {
+  if (!item.size && !item.sugar) return "";
+  const parts = [];
+  if (item.size) parts.push(`Size ${item.size}`);
+  if (item.temp === "Nóng") {
+    parts.push("Nóng");
+    if (item.sugar) parts.push(item.sugar);
+  } else {
+    if (item.sugar) parts.push(item.sugar);
+    if (item.ice) parts.push(item.ice);
+  }
+  const toppingNames = getToppingObjects(item.toppings).map(t => t.name);
+  if (toppingNames.length > 0) parts.push(`+ ${toppingNames.join(", ")}`);
+  return parts.join(" • ");
 }
 
 // --- 2. CART STATE ---
@@ -117,12 +359,40 @@ function loadCartFromStorage() {
     if (Array.isArray(parsed)) parsed.forEach(item => {
       const product = PRODUCTS.find(p => p.id === item?.id);
       if (!product || !Number.isInteger(item.quantity) || item.quantity < 1) return;
+
+      const size = product.hasOptions ? (SIZE_OPTIONS.includes(item.size) ? item.size : "M") : "";
+      const temp = product.hasOptions
+        ? (product.hasHotOption && TEMP_OPTIONS.includes(item.temp) ? item.temp : "Đá")
+        : "";
       const sugar = product.hasOptions ? (SUGAR_OPTIONS.includes(item.sugar) ? item.sugar : "70% đường") : "";
-      const ice = product.hasOptions ? (ICE_OPTIONS.includes(item.ice) ? item.ice : "70% đá") : "";
-      const cartKey = `${product.id}-${sugar}-${ice}`;
+      const ice = product.hasOptions
+        ? (temp === "Nóng" ? "Không đá" : (ICE_OPTIONS.includes(item.ice) ? item.ice : "70% đá"))
+        : "";
+      const toppings = product.hasOptions ? normalizeToppingIds(item.toppings) : [];
+      const unitPrice = calculateUnitPrice(product, size, toppings);
+      const cartKey = `${product.id}|${size}|${temp}|${sugar}|${ice}|${toppings.join(",")}`;
+
       const existing = cart.find(entry => entry.cartKey === cartKey);
-      if (existing) existing.quantity = Math.min(99, existing.quantity + item.quantity);
-      else cart.push({ ...product, sugar, ice, cartKey, quantity: Math.min(99, item.quantity) });
+      if (existing) {
+        existing.quantity = Math.min(99, existing.quantity + item.quantity);
+      } else {
+        cart.push({
+          cartKey,
+          id: product.id,
+          name: product.name,
+          price: unitPrice,
+          size,
+          temp,
+          sugar,
+          ice,
+          toppings,
+          image: product.image,
+          imagePos: product.imagePos,
+          imageZoom: product.imageZoom || "",
+          imageOrigin: product.imageOrigin || "center center",
+          quantity: Math.min(99, item.quantity)
+        });
+      }
     });
   } catch {
     cart = [];
@@ -255,10 +525,18 @@ function addToCart(productId, options = {}, sourceEl = null, quantity = 1) {
   if (!product) return;
 
   const qty = Math.max(1, Math.min(99, Number.isInteger(quantity) ? quantity : 1));
+  const size = product.hasOptions ? (SIZE_OPTIONS.includes(options.size) ? options.size : "M") : "";
+  const temp = product.hasOptions
+    ? (product.hasHotOption && TEMP_OPTIONS.includes(options.temp) ? options.temp : "Đá")
+    : "";
   const sugar = product.hasOptions ? (SUGAR_OPTIONS.includes(options.sugar) ? options.sugar : "70% đường") : "";
-  const ice = product.hasOptions ? (ICE_OPTIONS.includes(options.ice) ? options.ice : "70% đá") : "";
+  const ice = product.hasOptions
+    ? (temp === "Nóng" ? "Không đá" : (ICE_OPTIONS.includes(options.ice) ? options.ice : "70% đá"))
+    : "";
+  const toppings = product.hasOptions ? normalizeToppingIds(options.toppings) : [];
+  const unitPrice = calculateUnitPrice(product, size, toppings);
 
-  const cartKey = `${product.id}-${sugar}-${ice}`;
+  const cartKey = `${product.id}|${size}|${temp}|${sugar}|${ice}|${toppings.join(",")}`;
   const existing = cart.find(item => item.cartKey === cartKey);
 
   if (existing) {
@@ -268,9 +546,12 @@ function addToCart(productId, options = {}, sourceEl = null, quantity = 1) {
       cartKey,
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: unitPrice,
+      size,
+      temp,
       sugar,
       ice,
+      toppings,
       image: product.image,
       imagePos: product.imagePos,
       imageZoom: product.imageZoom || "",
@@ -280,8 +561,9 @@ function addToCart(productId, options = {}, sourceEl = null, quantity = 1) {
   }
 
   saveCartToStorage();
-  const qtyText = qty > 1 ? ` (x${qty})` : "";
-  showToast(`Đã thêm ${product.name}${qtyText} vào giỏ`, "success");
+  const sizeLabel = size ? ` (${size})` : "";
+  const qtyText = qty > 1 ? ` ×${qty}` : "";
+  showToast(`Đã thêm ${product.name}${sizeLabel}${qtyText} vào giỏ`, "success");
 
   if (sourceEl) {
     triggerFlyToCart(sourceEl, product.image);
@@ -324,7 +606,7 @@ function getItemCount() {
   return cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
-// --- 3. MENU RENDERING ---
+// --- 3. MENU RENDERING (Compact Boutique Café Cards) ---
 function renderMenu(filter = "all") {
   const container = document.getElementById("product-grid");
   if (!container) return;
@@ -332,35 +614,40 @@ function renderMenu(filter = "all") {
   const filtered = filter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
 
   container.innerHTML = filtered.map(product => `
-    <div class="group bg-white rounded-3xl p-3.5 sm:p-4 border border-[#e4e8d8] card-soft flex flex-col w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" data-product-id="${product.id}">
-      <button type="button" aria-label="Chọn ${escapeHtml(product.name)}" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f0f2eb] mb-3.5 cursor-pointer block" onclick="handleProductClick(${product.id}, event)">
+    <div class="group bg-white rounded-3xl p-3.5 sm:p-4 border border-[#e4e8d8] card-soft flex items-center gap-3.5 sm:gap-4" data-product-id="${product.id}">
+      <button type="button" aria-label="Chọn ${escapeHtml(product.name)}" class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-[#f0f2eb] flex-shrink-0 cursor-pointer block" onclick="handleProductClick(${product.id}, event)">
         <div class="product-img-frame">
           <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" decoding="async"
                style="${buildImgStyle(product)}"
                class="product-card-img w-full h-full object-cover">
         </div>
-        ${product.badge ? `<span class="absolute top-2.5 left-2.5 text-xs font-bold px-2.5 py-1 rounded-full bg-white/95 text-[#3a5a40] shadow-sm border border-[#e4e8d8]/80">${escapeHtml(product.badge)}</span>` : ""}
+        ${product.badge ? `<span class="absolute top-1.5 left-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/95 text-[#3a5a40] shadow-sm border border-[#e4e8d8]/80">${escapeHtml(product.badge)}</span>` : ""}
       </button>
 
-      <div class="flex items-center justify-between gap-2 mb-1">
-        <span class="text-xs font-semibold text-[#3a5a40]">${escapeHtml(product.categoryName)}</span>
-        <span class="text-[11px] text-slate-500">${product.hasOptions ? "Tùy chọn đường/đá" : "Sẵn chai 500ml"}</span>
-      </div>
-      <h3 class="text-base sm:text-lg font-bold font-quicksand text-slate-900 mb-1">${escapeHtml(product.name)}</h3>
-      <p class="text-sm text-slate-500 leading-relaxed mb-4 line-clamp-2">${escapeHtml(product.description)}</p>
+      <div class="flex-1 min-w-0 flex flex-col self-stretch">
+        <div class="flex items-center justify-between gap-2 mb-0.5">
+          <span class="text-[11px] font-semibold text-[#3a5a40] truncate">${escapeHtml(product.categoryName)}</span>
+          ${product.hasHotOption ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#f0f2eb] text-[#3a5a40] flex-shrink-0">Đá / Nóng</span>` : ""}
+        </div>
 
-      <div class="mt-auto pt-3 border-t border-[#e4e8d8] flex items-center justify-between gap-2">
-        <span class="text-lg font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
-        <button type="button" onclick="handleProductClick(${product.id}, event)" title="Thêm vào giỏ" aria-label="Thêm ${escapeHtml(product.name)} vào giỏ"
-                class="w-10 h-10 rounded-full bg-[#3a5a40] hover:bg-[#d4b872] text-[#e9edc9] hover:text-slate-900 flex items-center justify-center font-bold text-xl transition active:scale-90 shadow-sm">
-          +
-        </button>
+        <h3 class="text-base sm:text-lg font-bold font-quicksand text-slate-900 leading-snug truncate">${escapeHtml(product.name)}</h3>
+        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed line-clamp-2 mt-0.5 mb-2.5">${escapeHtml(product.description)}</p>
+
+        <div class="mt-auto flex items-center justify-between gap-2 pt-2 border-t border-[#e4e8d8]/80">
+          <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 min-w-0">
+            <span class="text-base sm:text-lg font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
+            ${product.hasOptions ? `<span class="text-[11px] font-semibold text-slate-500">M · L ${formatVND(product.priceL)}</span>` : `<span class="text-[11px] font-semibold text-slate-500">Chai 500ml</span>`}
+          </div>
+          <button type="button" onclick="handleProductClick(${product.id}, event)" title="Thêm vào giỏ" aria-label="Thêm ${escapeHtml(product.name)} vào giỏ"
+                  class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#3a5a40] hover:bg-[#d4b872] text-[#e9edc9] hover:text-slate-900 flex items-center justify-center font-bold text-xl flex-shrink-0 transition active:scale-90 shadow-sm">
+            +
+          </button>
+        </div>
       </div>
     </div>
   `).join("");
 }
 
-// Món có tùy chọn (đường/đá) thì mở bảng chọn, món đóng chai thêm thẳng vào giỏ
 function handleProductClick(productId, event = null) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
@@ -416,27 +703,30 @@ function updateCartUI() {
     emptyCartState?.classList.add("hidden");
     cartFooter?.classList.remove("hidden");
 
-    cartList.innerHTML = cart.map(item => `
-      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-[#e4e8d8]/80">
-        <div class="w-14 h-14 rounded-xl overflow-hidden bg-[#f0f2eb] flex-shrink-0">
-          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" style="${buildImgStyle(item)}"
-               class="w-full h-full object-cover">
-        </div>
-        <div class="flex-1 min-w-0">
-          <h4 class="font-bold font-quicksand text-sm text-slate-800 truncate">${escapeHtml(item.name)}</h4>
-          ${item.sugar ? `<p class="text-xs text-slate-500">${escapeHtml(item.sugar)} • ${escapeHtml(item.ice)}</p>` : ""}
-          <div class="flex items-center justify-between mt-1.5">
-            <span class="text-sm font-bold text-[#3a5a40]">${formatVND(item.price)}</span>
-            <div class="flex items-center bg-white rounded-lg border border-slate-200 overflow-hidden">
-              <button type="button" onclick="updateItemQuantity('${escapeHtml(item.cartKey)}', -1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Bớt">−</button>
-              <span class="w-7 text-center text-sm font-bold text-slate-800">${item.quantity}</span>
-              <button type="button" onclick="updateItemQuantity('${escapeHtml(item.cartKey)}', 1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Thêm">+</button>
+    cartList.innerHTML = cart.map(item => {
+      const optSummary = buildCartItemOptionsSummary(item);
+      return `
+        <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-2xl border border-[#e4e8d8]/80">
+          <div class="w-14 h-14 rounded-xl overflow-hidden bg-[#f0f2eb] flex-shrink-0">
+            <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" style="${buildImgStyle(item)}"
+                 class="w-full h-full object-cover">
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-bold font-quicksand text-sm text-slate-800 truncate">${escapeHtml(item.name)}</h4>
+            ${optSummary ? `<p class="text-xs text-slate-500 leading-snug mt-0.5">${escapeHtml(optSummary)}</p>` : ""}
+            <div class="flex items-center justify-between mt-2">
+              <span class="text-sm font-bold text-[#3a5a40]">${formatVND(item.price)}</span>
+              <div class="flex items-center bg-white rounded-lg border border-slate-200 overflow-hidden">
+                <button type="button" onclick="updateItemQuantity('${escapeHtml(item.cartKey)}', -1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Bớt">−</button>
+                <span class="w-7 text-center text-sm font-bold text-slate-800">${item.quantity}</span>
+                <button type="button" onclick="updateItemQuantity('${escapeHtml(item.cartKey)}', 1)" class="w-7 h-7 text-slate-700 hover:bg-slate-100 font-bold active:scale-95 transition" aria-label="Thêm">+</button>
+              </div>
             </div>
           </div>
+          <button type="button" onclick="removeFromCart('${escapeHtml(item.cartKey)}')" title="Xóa món" aria-label="Xóa món" class="text-slate-400 hover:text-red-500 p-1 self-start transition">✕</button>
         </div>
-        <button type="button" onclick="removeFromCart('${escapeHtml(item.cartKey)}')" title="Xóa món" aria-label="Xóa món" class="text-slate-400 hover:text-red-500 p-1 self-start transition">✕</button>
-      </div>
-    `).join("");
+      `;
+    }).join("");
   }
 
   if (cartSubtotalEl) cartSubtotalEl.textContent = formatVND(subtotal);
@@ -490,16 +780,19 @@ function showToast(message, type = "info") {
   }, 3000);
 }
 
-// --- 5. PRODUCT OPTIONS MODAL (đường / đá / số lượng) ---
+// --- 5. PRODUCT OPTIONS MODAL (Size M/L, Đá/Nóng, Đường, Đá, Topping, Số lượng) ---
 let activeModalProduct = null;
 let activeModalQty = 1;
+let activeModalSize = "M";
+let activeModalTemp = "Đá";
+let activeModalToppings = new Set();
 
 function optionButtons(groupId, values, activeValue) {
   return `
-    <div class="flex flex-wrap gap-2" id="${groupId}">
+    <div class="flex flex-wrap gap-1.5" id="${groupId}">
       ${values.map(v => `
         <button type="button" data-val="${escapeHtml(v)}" aria-pressed="${v === activeValue}"
-                class="modal-opt-btn py-1.5 px-3 rounded-lg border text-sm transition ${v === activeValue ? "active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold" : "border-slate-200 text-slate-700 hover:border-[#3a5a40]/50"}">
+                class="modal-opt-btn py-1.5 px-3 rounded-lg border text-xs sm:text-sm transition ${v === activeValue ? "active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold" : "border-slate-200 text-slate-700 hover:border-[#3a5a40]/50"}">
           ${escapeHtml(v)}
         </button>
       `).join("")}
@@ -507,13 +800,21 @@ function optionButtons(groupId, values, activeValue) {
   `;
 }
 
+function refreshModalTotal() {
+  if (!activeModalProduct) return;
+  const unitPrice = calculateUnitPrice(activeModalProduct, activeModalSize, [...activeModalToppings]);
+  const qtyEl = document.getElementById("modal-qty-value");
+  const totalEl = document.getElementById("modal-line-total");
+  const unitEl = document.getElementById("modal-unit-price");
+  if (qtyEl) qtyEl.textContent = String(activeModalQty);
+  if (unitEl) unitEl.textContent = formatVND(unitPrice);
+  if (totalEl) totalEl.textContent = formatVND(unitPrice * activeModalQty);
+}
+
 function updateModalQty(delta) {
   if (!activeModalProduct) return;
   activeModalQty = Math.max(1, Math.min(99, activeModalQty + delta));
-  const qtyEl = document.getElementById("modal-qty-value");
-  const totalEl = document.getElementById("modal-line-total");
-  if (qtyEl) qtyEl.textContent = String(activeModalQty);
-  if (totalEl) totalEl.textContent = formatVND(activeModalProduct.price * activeModalQty);
+  refreshModalTotal();
   playTickSound();
 }
 
@@ -522,52 +823,102 @@ function openProductModal(productId) {
   if (!product) return;
   activeModalProduct = product;
   activeModalQty = 1;
+  activeModalSize = "M";
+  activeModalTemp = "Đá";
+  activeModalToppings = new Set();
 
   const modal = document.getElementById("product-detail-modal");
   const content = document.getElementById("product-modal-content");
   if (!modal || !content) return;
 
   content.innerHTML = `
-    <div class="flex flex-col sm:flex-row gap-5">
-      <div class="w-full sm:w-5/12">
-        <div class="aspect-square rounded-2xl overflow-hidden bg-[#f0f2eb] border border-[#e4e8d8]">
+    <div class="space-y-4">
+      <!-- Header sản phẩm -->
+      <div class="flex items-center gap-4 pr-7">
+        <div class="w-20 h-20 rounded-2xl overflow-hidden bg-[#f0f2eb] border border-[#e4e8d8] flex-shrink-0">
           <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" style="${buildImgStyle(product)}" class="w-full h-full object-cover">
         </div>
+        <div class="min-w-0">
+          <span class="text-xs font-semibold text-[#3a5a40]">${escapeHtml(product.categoryName)}</span>
+          <h3 class="text-lg sm:text-xl font-bold font-quicksand text-slate-900 leading-tight">${escapeHtml(product.name)}</h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5 line-clamp-2">${escapeHtml(product.description)}</p>
+          <div id="modal-unit-price" class="text-base font-bold font-quicksand text-[#3a5a40] mt-1">${formatVND(product.price)}</div>
+        </div>
       </div>
 
-      <div class="w-full sm:w-7/12 flex flex-col">
-        <span class="text-xs font-semibold text-[#3a5a40] mb-1">${escapeHtml(product.categoryName)}</span>
-        <h3 class="text-xl font-bold font-quicksand text-slate-900 mb-1">${escapeHtml(product.name)}</h3>
-        <p class="text-sm text-slate-500 mb-3">${escapeHtml(product.description)}</p>
-        <div class="text-xl font-bold font-quicksand text-[#3a5a40] mb-4">${formatVND(product.price)}</div>
-
-        <div class="space-y-4">
-          <div>
-            <span class="font-bold text-sm text-slate-800 block mb-1.5">Độ ngọt</span>
-            ${optionButtons("option-sugar-group", SUGAR_OPTIONS, "70% đường")}
-          </div>
-          <div>
-            <span class="font-bold text-sm text-slate-800 block mb-1.5">Lượng đá</span>
-            ${optionButtons("option-ice-group", ICE_OPTIONS, "70% đá")}
+      <!-- Chọn Size & Nhiệt độ -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2 border-t border-[#e4e8d8]">
+        <div>
+          <span class="font-bold text-xs sm:text-sm text-slate-800 block mb-1.5">Kích cỡ</span>
+          <div class="flex gap-2" id="option-size-group">
+            <button type="button" data-val="M" aria-pressed="true"
+                    class="modal-size-btn flex-1 py-2 px-3 rounded-xl border text-xs sm:text-sm transition active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold">
+              Size M (${formatVND(product.price)})
+            </button>
+            <button type="button" data-val="L" aria-pressed="false"
+                    class="modal-size-btn flex-1 py-2 px-3 rounded-xl border text-xs sm:text-sm transition border-slate-200 text-slate-700 hover:border-[#3a5a40]/50">
+              Size L (+10K)
+            </button>
           </div>
         </div>
 
-        <div class="mt-5 pt-3 border-t border-[#e4e8d8] flex items-center justify-between gap-3">
-          <div class="flex items-center bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
-            <button type="button" onclick="updateModalQty(-1)" class="w-9 h-9 text-slate-700 hover:bg-slate-200 font-bold transition" aria-label="Giảm số lượng">−</button>
-            <span id="modal-qty-value" class="w-9 text-center text-sm font-bold text-slate-900">1</span>
-            <button type="button" onclick="updateModalQty(1)" class="w-9 h-9 text-slate-700 hover:bg-slate-200 font-bold transition" aria-label="Tăng số lượng">+</button>
+        ${product.hasHotOption ? `
+        <div>
+          <span class="font-bold text-xs sm:text-sm text-slate-800 block mb-1.5">Nhiệt độ</span>
+          <div class="flex gap-2" id="option-temp-group">
+            <button type="button" data-val="Đá" aria-pressed="true"
+                    class="modal-temp-btn flex-1 py-2 px-3 rounded-xl border text-xs sm:text-sm transition active border-[#3a5a40] bg-[#f0f2eb] text-[#3a5a40] font-bold">
+              Uống đá
+            </button>
+            <button type="button" data-val="Nóng" aria-pressed="false"
+                    class="modal-temp-btn flex-1 py-2 px-3 rounded-xl border text-xs sm:text-sm transition border-slate-200 text-slate-700 hover:border-[#3a5a40]/50">
+              Uống nóng
+            </button>
           </div>
-          <div class="text-right">
-            <span class="block text-[11px] text-slate-500">Tạm tính</span>
-            <span id="modal-line-total" class="text-base font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
-          </div>
-        </div>
-
-        <button type="button" onclick="confirmModalAddToCart()" class="mt-3 w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-sm transition shadow-sm">
-          Thêm vào giỏ
-        </button>
+        </div>` : ""}
       </div>
+
+      <!-- Đường & Đá -->
+      <div class="space-y-3">
+        <div>
+          <span class="font-bold text-xs sm:text-sm text-slate-800 block mb-1.5">Độ ngọt</span>
+          ${optionButtons("option-sugar-group", SUGAR_OPTIONS, "70% đường")}
+        </div>
+        <div id="modal-ice-wrapper">
+          <span class="font-bold text-xs sm:text-sm text-slate-800 block mb-1.5">Lượng đá</span>
+          ${optionButtons("option-ice-group", ICE_OPTIONS, "70% đá")}
+        </div>
+      </div>
+
+      <!-- Topping thêm -->
+      <div>
+        <span class="font-bold text-xs sm:text-sm text-slate-800 block mb-1.5">Topping thêm <span class="font-normal text-slate-500">(chọn nhiều)</span></span>
+        <div class="flex flex-wrap gap-1.5" id="option-topping-group">
+          ${TOPPINGS.map(t => `
+            <button type="button" data-topping-id="${escapeHtml(t.id)}" aria-pressed="false"
+                    class="modal-topping-btn py-1.5 px-2.5 rounded-lg border border-slate-200 text-slate-700 hover:border-[#3a5a40]/50 text-xs transition">
+              ${escapeHtml(t.name)} <span class="font-bold text-[#3a5a40]">+${t.price / 1000}K</span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+
+      <!-- Số lượng + Tạm tính + Nút thêm -->
+      <div class="pt-3 border-t border-[#e4e8d8] flex items-center justify-between gap-3">
+        <div class="flex items-center bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+          <button type="button" onclick="updateModalQty(-1)" class="w-9 h-9 text-slate-700 hover:bg-slate-200 font-bold transition" aria-label="Giảm số lượng">−</button>
+          <span id="modal-qty-value" class="w-9 text-center text-sm font-bold text-slate-900">1</span>
+          <button type="button" onclick="updateModalQty(1)" class="w-9 h-9 text-slate-700 hover:bg-slate-200 font-bold transition" aria-label="Tăng số lượng">+</button>
+        </div>
+        <div class="text-right">
+          <span class="block text-[11px] text-slate-500">Tạm tính</span>
+          <span id="modal-line-total" class="text-lg font-bold font-quicksand text-[#3a5a40]">${formatVND(product.price)}</span>
+        </div>
+      </div>
+
+      <button type="button" onclick="confirmModalAddToCart()" class="w-full py-3 rounded-xl bg-[#3a5a40] hover:bg-[#283e2c] text-[#e9edc9] font-quicksand font-bold text-sm transition shadow-sm">
+        Thêm vào giỏ
+      </button>
     </div>
   `;
 
@@ -577,6 +928,56 @@ function openProductModal(productId) {
 }
 
 function setupModalOptionListeners() {
+  // Size buttons
+  const sizeGroup = document.getElementById("option-size-group");
+  if (sizeGroup) {
+    const btns = sizeGroup.querySelectorAll(".modal-size-btn");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        playTickSound();
+        activeModalSize = btn.getAttribute("data-val") || "M";
+        btns.forEach(b => {
+          const isActive = b === btn;
+          b.setAttribute("aria-pressed", String(isActive));
+          b.classList.toggle("active", isActive);
+          b.classList.toggle("border-[#3a5a40]", isActive);
+          b.classList.toggle("bg-[#f0f2eb]", isActive);
+          b.classList.toggle("text-[#3a5a40]", isActive);
+          b.classList.toggle("font-bold", isActive);
+          b.classList.toggle("border-slate-200", !isActive);
+          b.classList.toggle("text-slate-700", !isActive);
+        });
+        refreshModalTotal();
+      });
+    });
+  }
+
+  // Temp buttons (Đá / Nóng)
+  const tempGroup = document.getElementById("option-temp-group");
+  if (tempGroup) {
+    const btns = tempGroup.querySelectorAll(".modal-temp-btn");
+    const iceWrapper = document.getElementById("modal-ice-wrapper");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        playTickSound();
+        activeModalTemp = btn.getAttribute("data-val") || "Đá";
+        btns.forEach(b => {
+          const isActive = b === btn;
+          b.setAttribute("aria-pressed", String(isActive));
+          b.classList.toggle("active", isActive);
+          b.classList.toggle("border-[#3a5a40]", isActive);
+          b.classList.toggle("bg-[#f0f2eb]", isActive);
+          b.classList.toggle("text-[#3a5a40]", isActive);
+          b.classList.toggle("font-bold", isActive);
+          b.classList.toggle("border-slate-200", !isActive);
+          b.classList.toggle("text-slate-700", !isActive);
+        });
+        if (iceWrapper) iceWrapper.classList.toggle("hidden", activeModalTemp === "Nóng");
+      });
+    });
+  }
+
+  // Sugar & Ice groups
   ["option-sugar-group", "option-ice-group"].forEach(groupId => {
     const group = document.getElementById(groupId);
     if (!group) return;
@@ -595,6 +996,31 @@ function setupModalOptionListeners() {
       });
     });
   });
+
+  // Toppings multi-select
+  const toppingGroup = document.getElementById("option-topping-group");
+  if (toppingGroup) {
+    toppingGroup.querySelectorAll(".modal-topping-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        playTickSound();
+        const id = btn.getAttribute("data-topping-id");
+        if (!id) return;
+        const selected = !activeModalToppings.has(id);
+        if (selected) activeModalToppings.add(id);
+        else activeModalToppings.delete(id);
+
+        btn.setAttribute("aria-pressed", String(selected));
+        btn.classList.toggle("active", selected);
+        btn.classList.toggle("border-[#3a5a40]", selected);
+        btn.classList.toggle("bg-[#f0f2eb]", selected);
+        btn.classList.toggle("text-[#3a5a40]", selected);
+        btn.classList.toggle("font-bold", selected);
+        btn.classList.toggle("border-slate-200", !selected);
+        btn.classList.toggle("text-slate-700", !selected);
+        refreshModalTotal();
+      });
+    });
+  }
 }
 
 function confirmModalAddToCart() {
@@ -604,8 +1030,11 @@ function confirmModalAddToCart() {
   const modalImg = document.querySelector("#product-modal-content img");
 
   addToCart(activeModalProduct.id, {
+    size: activeModalSize,
+    temp: activeModalTemp,
     sugar: sugarBtn ? sugarBtn.getAttribute("data-val") : "70% đường",
-    ice: iceBtn ? iceBtn.getAttribute("data-val") : "70% đá"
+    ice: iceBtn ? iceBtn.getAttribute("data-val") : "70% đá",
+    toppings: [...activeModalToppings]
   }, modalImg, activeModalQty);
   closeProductModal();
 }
@@ -616,6 +1045,9 @@ function closeProductModal() {
   deactivateDialog(modal);
   activeModalProduct = null;
   activeModalQty = 1;
+  activeModalSize = "M";
+  activeModalTemp = "Đá";
+  activeModalToppings = new Set();
 }
 
 // --- 6. CART DRAWER ---
@@ -646,10 +1078,10 @@ function openCheckoutModal() {
   const listEl = document.getElementById("checkout-summary-list");
   if (listEl) {
     listEl.innerHTML = cart.map(item => {
-      const opt = item.sugar ? ` (${escapeHtml(item.sugar)}, ${escapeHtml(item.ice)})` : "";
+      const opt = buildCartItemOptionsSummary(item);
       return `
         <div class="flex items-start justify-between gap-2">
-          <span class="min-w-0 flex-1">${escapeHtml(item.name)}<span class="text-slate-500">${opt}</span> ×${item.quantity}</span>
+          <span class="min-w-0 flex-1">${escapeHtml(item.name)}${opt ? ` <span class="text-slate-500">(${escapeHtml(opt)})</span>` : ""} ×${item.quantity}</span>
           <span class="font-semibold text-slate-800 flex-shrink-0">${formatVND(item.price * item.quantity)}</span>
         </div>
       `;
@@ -735,11 +1167,11 @@ function handleCheckoutSubmit(e) {
   const subtotal = getSubtotal();
 
   const itemsText = cart.map((item, index) => {
-    const opt = item.sugar ? ` (${item.sugar}, ${item.ice})` : "";
-    return `${index + 1}. ${item.name}${opt} x${item.quantity} = ${formatVND(item.price * item.quantity)}`;
+    const opt = buildCartItemOptionsSummary(item);
+    return `${index + 1}. ${item.name}${opt ? ` (${opt})` : ""} x${item.quantity} = ${formatVND(item.price * item.quantity)}`;
   }).join("\n");
 
-  lastGeneratedOrderMessage = `ĐƠN HÀNG MỚI - LÊ MÊ
+  lastGeneratedOrderMessage = `ĐƠN HÀNG MỚI - LÊ MÊ (NGỌC HỒI)
 
 Khách: ${name}
 SĐT: ${phone}
@@ -832,31 +1264,49 @@ function handleVideoModalBackdropClick(event) {
 const RANDOMIZER_PRESETS = [
   {
     productId: 1,
-    mood: "⚡ Cần nạp năng lượng sau deadline",
+    mood: "⚡ Signature ô long đậm vị",
+    size: "M",
+    temp: "Đá",
     sugar: "70% đường",
     ice: "70% đá"
-  },
-  {
-    productId: 2,
-    mood: "🍃 Muốn một ngày nhẹ nhàng, bình yên",
-    sugar: "50% đường",
-    ice: "50% đá"
-  },
-  {
-    productId: 3,
-    mood: "🍊 Thanh mát giải nhiệt tức thì",
-    sugar: "70% đường",
-    ice: "70% đá"
-  },
-  {
-    productId: 4,
-    mood: "🏠 Thích chill một mình tại nhà",
-    sugar: "",
-    ice: ""
   },
   {
     productId: 5,
-    mood: "🎁 Chia sẻ cùng hội bạn thân",
+    mood: "🍃 Best Seller thơm lá dứa + kem cheese",
+    size: "M",
+    temp: "Đá",
+    sugar: "50% đường",
+    ice: "70% đá"
+  },
+  {
+    productId: 7,
+    mood: "☁️ Béo mịn lớp kem trứng thơm lừng",
+    size: "M",
+    temp: "Đá",
+    sugar: "70% đường",
+    ice: "70% đá"
+  },
+  {
+    productId: 10,
+    mood: "🍊 Thanh mát giải nhiệt tức thì",
+    size: "M",
+    temp: "Đá",
+    sugar: "70% đường",
+    ice: "70% đá"
+  },
+  {
+    productId: 12,
+    mood: "🌸 Nhẹ nhàng hương quế hoa & vải ngọt",
+    size: "M",
+    temp: "Đá",
+    sugar: "50% đường",
+    ice: "70% đá"
+  },
+  {
+    productId: 15,
+    mood: "🏠 Thích chill một mình tại nhà",
+    size: "",
+    temp: "",
     sugar: "",
     ice: ""
   }
@@ -943,7 +1393,7 @@ function renderRandomizerResult(preset) {
   }
   if (mood) mood.textContent = preset.mood;
   if (name) name.textContent = product.name;
-  if (spec) spec.textContent = preset.sugar ? `${preset.sugar} • ${preset.ice}` : "Rót ra đá là uống liền";
+  if (spec) spec.textContent = preset.sugar ? `Size ${preset.size} • ${preset.sugar} • ${preset.ice}` : "Rót ra đá là uống liền";
   if (price) price.textContent = formatVND(product.price);
 }
 
@@ -951,6 +1401,8 @@ function addRandomizerDrinkToCart() {
   if (!currentRandomDrink || isSpinning) return;
   const modalImg = document.getElementById("randomizer-img");
   addToCart(currentRandomDrink.productId, {
+    size: currentRandomDrink.size,
+    temp: currentRandomDrink.temp,
     sugar: currentRandomDrink.sugar,
     ice: currentRandomDrink.ice
   }, modalImg, 1);
@@ -1006,7 +1458,6 @@ function deactivateDialog(dialog) {
   dialogTrigger = null;
 }
 
-// Keep keyboard navigation inside the active dialog + story shortcuts.
 document.addEventListener("keydown", (e) => {
   if (activeDialog?.id === "story-viewer-modal") {
     if (e.key === "ArrowRight") {
@@ -1115,17 +1566,17 @@ const STORIES_DATA = [
     src: "assets/make-tea.webm",
     title: "Pha trà tươi tại quán",
     time: "Vừa đăng",
-    caption: "Cốt trà được ủ và nấu mới mỗi ngày theo công thức riêng của Lê Mê 🍵",
+    caption: "Cốt trà được ủ và nấu mới mỗi ngày cùng kem cheese tươi đánh thủ công 🍵",
     ctaLabel: "Xem Menu & Đặt món",
     ctaTarget: "#menu",
     fit: "cover"
   },
   {
     type: "image",
-    src: "assets/store-interior.png",
+    src: "assets/store-interior.webp",
     title: "Góc quán chill Ngọc Hồi",
-    time: "1 giờ trước",
-    caption: "Không gian ấm cúng, ánh đèn dịu và góc ngồi chill lý tưởng 🌿",
+    time: "Số 2, ngách 298/31 Ngọc Hồi",
+    caption: "Không gian ấm cúng, ánh đèn dịu và góc ngồi chill lý tưởng tại Yên Ngưu 🌿",
     ctaLabel: "Xem không gian quán",
     ctaTarget: "#about",
     fit: "cover"
@@ -1136,7 +1587,7 @@ const STORIES_DATA = [
     title: "Set 4 chai cốt trà sữa",
     time: "Hôm nay",
     caption: "Đóng chai thủy tinh tiện lợi, bảo quản lạnh uống dần hoặc làm quà biếu 🧋",
-    ctaLabel: "Xem Set 4 chai trong Menu",
+    ctaLabel: "Xem Cốt trà đóng chai",
     ctaTarget: "#menu",
     fit: "cover"
   },
@@ -1144,8 +1595,8 @@ const STORIES_DATA = [
     type: "image",
     src: "assets/open.jpg",
     title: "Freeship dưới 2km",
-    time: "Hôm nay",
-    caption: "Quán mở từ 9:00 – 22:00, nhận đơn và ship tận nhà nhanh chóng 🛵",
+    time: "9:00 – 22:00 hàng ngày",
+    caption: "Nhận đơn mỗi ngày qua Zalo 0869 256 962, ShopeeFood và freeship trong bán kính 2km 🛵",
     ctaLabel: "Chọn món giao tận nơi",
     ctaTarget: "#menu",
     fit: "cover"
@@ -1154,7 +1605,7 @@ const STORIES_DATA = [
     type: "image",
     src: "assets/facebook-reviews.png",
     title: "Feedback từ khách yêu",
-    time: "Fanpage Lê Mê",
+    time: "5.0 ★ Google Maps & Fanpage",
     caption: "Cảm ơn mọi người đã luôn ủng hộ vị trà đậm đà của Lê Mê ❤️",
     ctaLabel: "Xem thêm tại Góc \"Mê\"",
     ctaTarget: "#reviews",
@@ -1370,7 +1821,6 @@ document.addEventListener("DOMContentLoaded", () => {
     input.addEventListener("input", () => input.setCustomValidity(""));
   });
 
-  // Lenis Smooth Inertial Scroll (only when user does not prefer reduced motion)
   if (typeof Lenis !== "undefined" && !prefersReducedMotion()) {
     try {
       lenisInstance = new Lenis({
@@ -1404,7 +1854,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Sticky Category Tabs shadow trigger
   const stickyTabs = document.getElementById("sticky-tabs-container");
   if (stickyTabs) {
     window.addEventListener("scroll", () => {
@@ -1413,7 +1862,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 
-  // Active desktop nav link highlight via IntersectionObserver
   const navLinks = document.querySelectorAll(".desktop-nav-link[data-nav-section]");
   if (navLinks.length > 0 && "IntersectionObserver" in window) {
     const sections = [...navLinks]
@@ -1433,7 +1881,6 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach(sec => observer.observe(sec));
   }
 
-  // Tab lọc menu
   const filterTabs = document.querySelectorAll(".menu-tab-btn");
   filterTabs.forEach(btn => {
     btn.setAttribute("aria-pressed", String(btn.getAttribute("data-filter") === "all"));
@@ -1451,7 +1898,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Header thu nhỏ khi cuộn
   const header = document.getElementById("main-header");
   if (header) {
     const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
@@ -1459,7 +1905,6 @@ document.addEventListener("DOMContentLoaded", () => {
     onScroll();
   }
 
-  // Menu mobile
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   if (mobileMenuBtn && mobileMenu) {
